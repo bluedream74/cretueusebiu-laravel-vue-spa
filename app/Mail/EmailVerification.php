@@ -28,21 +28,21 @@ class EmailVerification extends Mailable
      */
     public function build()
     {
-        return $this->from(['address' => 'noreply@nizimari.jp', 'name' => 'NIZIMARI'])
+        return $this->from(['address' => 'noreply@hozyokin.jp', 'name' => 'HOZYOKIN'])
                     ->subject('仮登録完了のお知らせ 本登録を行ってください')
                     ->view('emails.verify-email')
                     ->with([
-                        'url' => 'https://nizimari.jp/account/activate?'.'email='.str_replace('+', '%2b', $this->user->email).'&token='.$this->user->token,
+                        'url' => 'http://localhost:8000/account/activate?'.'email='.str_replace('+', '%2b', $this->user->email).'&token='.$this->user->token,
                     ]);
     }
 
     public function render()
     {
-        return $this->from(['address' => 'noreply@nizimari.jp', 'name' => 'NIZIMARI'])
+        return $this->from(['address' => 'noreply@hozyokin.jp', 'name' => 'HOZYOKIN'])
                     ->subject('仮登録完了のお知らせ 本登録を行ってください')
                     ->view('emails.verify-email')
                     ->with([
-                        'url' => 'https://nizimari.jp/account/activate?'.'email='.str_replace('+', '%2b', $this->user->email).'&token='.$this->user->token,
+                        'url' => 'http://localhost:8000/account/activate?'.'email='.str_replace('+', '%2b', $this->user->email).'&token='.$this->user->token,
                     ]);
     }
 }

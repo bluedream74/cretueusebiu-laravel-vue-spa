@@ -525,7 +525,7 @@ a:hover img.opacity{
 }
 .common_btn2 a.blue{
 	background:#1c7de2;
-	color:#fff;
+	color:#fff !important;
 }
 .common_btn2 a span{
 	border:none;

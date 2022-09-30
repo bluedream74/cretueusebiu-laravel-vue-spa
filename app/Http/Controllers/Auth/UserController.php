@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function current(Request $request)
     {
-        $user = \App\User::where('id', $request->user()->id)->with('favorites', 'blocks', 'profile', 'avatars')->first();
+        $user = \App\User::where('id', $request->user()->id)->first();
         return response()->json($user);
     }
 }

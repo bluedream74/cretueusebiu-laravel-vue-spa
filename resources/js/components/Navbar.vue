@@ -1,9 +1,9 @@
 <template>
   <header id="fix_menu">
     <div class="menu_top block_link fix">
-      <div id="site_ttl"><a href="index.html"><img src="/assets/img/common/logo.png" alt="補助金活用.COMのロゴ"></a></div>
+      <div id="site_ttl"><router-link :to="{ name: 'home' }"><img src="/assets/img/common/logo.png" alt="補助金活用.COMのロゴ"></router-link></div>
       <div class="login_menu"><br>
-        <a href="register_form/" class="btn btn_ylw">支援者に<br>新規登録<br>する</a>
+        <router-link :to="{ name: 'register' }" class="btn btn_ylw">支援者に<br>新規登録<br>する</router-link>
         <a href="login/" class="btn">支援機関<br>ログイン</a>
       </div>
       <div class="menu_fix">
@@ -15,8 +15,8 @@
           </label>
           <nav id="NavWrap">
             <div class="login_menu">
-              <a href="register_form/" class="btn btn_ylw">支援者に<br>新規登録<br>する</a>
-              <a href="login/" class="btn">支援機関<br>ログイン</a>
+              <router-link :to="{ name: 'register' }" class="btn btn_ylw">支援者に<br>新規登録<br>する</router-link>
+              <router-link :to="{ name: 'login' }" href="login/" class="btn">支援機関<br>ログイン</router-link>
             </div>
             <ul>
               <li><a href="about/"><span>会社概要</span></a></li>

@@ -6,7 +6,11 @@ export default [
   { path: '/', name: 'home', component: page('home.vue') },
 
   { path: '/register', name: 'register', component: page('auth/register.vue') },
-  { path: '/password_reset', name: 'password_reset', component: page('auth/password_reset.vue') },
+  { path: '/register_confirm', name: 'register_confirm', component: page('auth/register_confirm.vue') },
+  { path: '/register_complete', name: 'register_complete', component: page('auth/register_complete.vue') },
+  { path: '/thanks', name: 'thanks', component: page('auth/thanks.vue') },
+
+  { path: '/password_reset', name: 'forget', component: page('auth/password_reset.vue') },
   { path: '/password_reset_form', name: 'password_reset_form', component: page('auth/password_reset_form.vue') },
   { path: '/login', name: 'login', component: page('auth/login.vue') },
   { path: '/complete', name: 'complete', component: page('auth/complete.vue') },

@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use App\Traits\FileUpload;
 use App\User;
-use App\Models\Profile;
+use App\Models\AvailableContent;
+use App\Models\AvailableJob;
+use App\Models\AvailablePrice;
+use App\Models\AvailableAmount;
 use App\Models\Avatar;
-use App\Models\DeletedUser;
 use Carbon\Carbon;
 use App\Jobs\EmailVerification;
 use App\Jobs\PasswordReset;
@@ -37,41 +39,55 @@ class ProfileController extends Controller
 
     User::where('email', $data['email'])->delete();
 
-    $deletedUser = DeletedUser::where('email', $data['email'])->where('created_at', '>=', Carbon::now()->subMonth())->orderByDesc('created_at')->first();
-
-    if (!is_null($deletedUser)) {
-      return response()->json([
-        'status' => 2
-      ]);
-    }
-
     $user = User::create([
       'email' => $data['email'],
       'password' => bcrypt($data['password']),
       'token' => $token,
-      'hash' => $token,
-      'token_at' => Carbon::now()->addDay()
+      'token_at' => Carbon::now()->addDay(),
+      'kikan_id' => $request->input('kikan_id'),
+      'com_name' => $request->input('com_name'),
+      'com_huri_name' => $request->input('com_huri_name'),
+      'tanto_name' => $request->input('tanto_name'),
+      'department_name' => $request->input('department_name'),
+      'role_name' => $request->input('role_name'),
+      'is_personal' => $request->input('is_personal'),
+      'kind' => $request->input('kind'),
+      'zipcode' => $request->input('zipcode'),
+      'prefecture' => $request->input('prefecture'),
+      'city' => $request->input('city'),
+      'building' => $request->input('building'),
+      'telephone' => $request->input('telephone'),
+      'fax' => $request->input('fax'),
+      'introduction' => $request->input('introduction'),
     ]);
-    $profile = Profile::create([
-      'user_id' => $user->id,
-      'nickname' => $data['nickname'],
-      'gender' => $data['gender'],
-      'age' => $data['age'],
-      'sexality' => $data['sexality'],
-      'area' => $data['area'],
-      'height' => !is_null($request->input('height')) && $request->input('height') != 'null' ? $request->input('height') : null,
-      'body_type' => !is_null($request->input('body_type')) && $request->input('body_type') != 'null' ? $request->input('body_type') : null,
-      'job' => !is_null($request->input('job')) && $request->input('job') != 'null' ? $request->input('job') : null,
-      'holiday' => !is_null($request->input('holiday')) && $request->input('holiday') != 'null' ? $request->input('holiday') : null,
-      'salary' => !is_null($request->input('salary')) && $request->input('salary') != 'null' ? $request->input('salary') : null,
-      'study' => !is_null($request->input('study')) && $request->input('study') != 'null' ? $request->input('study') : null,
-      'liquor' => !is_null($request->input('liquor')) && $request->input('liquor') != 'null' ? $request->input('liquor') : null,
-      'tobacco' => !is_null($request->input('tobacco')) && $request->input('tobacco') != 'null' ? $request->input('tobacco') : null,
-      'partner' => !is_null($request->input('partner')) && $request->input('partner') != 'null' ? $request->input('partner') : null,
-      'history' => !is_null($request->input('history')) && $request->input('history') != 'null' ? $request->input('history') : null,
-      'style' => !is_null($request->input('style')) && $request->input('style') != 'null' ? $request->input('style') : null,
-      'child' => !is_null($request->input('child')) && $request->input('child') != 'null' ? $request->input('child') : null,
-    ]);
+
+    foreach($request->input('available_contents') as $content_id) {
+      AvailableContent::create([
+        'user_id' => $user->id,
+        'content_id' => $content_id
+      ]);
+    }
+
+    foreach($request->input('available_jobs') as $job_id) {
+      AvailableJob::create([
+        'user_id' => $user->id,
+        'job_id' => $job_id
+      ]);
+    }
+
+    foreach($request->input('available_prices') as $price_id) {
+      AvailablePrice::create([
+        'user_id' => $user->id,
+        'price_id' => $price_id
+      ]);
+    }
+
+    foreach($request->input('available_amounts') as $amount_id) {
+      AvailableAmount::create([
+        'user_id' => $user->id,
+        'amount_id' => $amount_id
+      ]);
+    }
     
     try {
       EmailVerification::dispatch($user);

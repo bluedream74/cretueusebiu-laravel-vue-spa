@@ -11,7 +11,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Cashier\Billable;
 
-class User extends Authenticatable implements JWTSubject , MustVerifyEmail
+class User extends Authenticatable implements JWTSubject// , MustVerifyEmail
 {
     use Notifiable, Billable;
 
@@ -23,13 +23,24 @@ class User extends Authenticatable implements JWTSubject , MustVerifyEmail
     protected $fillable = [
         'email',
         'password',
-        'avatar',
+        'kikan_id',
+        'com_name',
+        'com_huri_name',
+        'tanto_name',
+        'department_name',
+        'role_name',
+        'is_personal',
+        'kind',
+        'zipcode',
+        'prefecture',
+        'city',
+        'building',
+        'telephone',
+        'fax',
+        'introduction',
         'is_email_authenticated',
         'token',
-        'token_at',
-        'role',
-        'plan',
-        'blocked'
+        'token_at'
     ];
 
     /**
@@ -123,25 +134,5 @@ class User extends Authenticatable implements JWTSubject , MustVerifyEmail
     public function getJWTCustomClaims()
     {
         return [];
-    }
-
-    public function profile()
-    {
-        return $this->belongsTo('\App\Models\Profile', 'id', 'user_id');
-    }
-
-    public function avatars()
-    {
-        return $this->hasMany('\App\Models\Avatar', 'user_id')->orderBy('id');
-    }
-
-    public function favorites()
-    {
-        return $this->hasMany('\App\Models\Favorite', 'user_id')->with('target');
-    }
-
-    public function blocks()
-    {
-        return $this->hasMany('\App\Models\Block', 'user_id')->with('target');
     }
 }
