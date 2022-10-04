@@ -1,17 +1,16 @@
 $(window).on("resize orientationchange", function (e) {
-    if (window.innerHeight > window.innerWidth) {
-        var wsw = window.screen.width;
-		if (wsw < 767) {
-			$("meta[name='viewport']").attr("content", "width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,shrink-to-fit=no");
-		} else if (wsw < 1125) {
-			$("meta[name='viewport']").attr("content", "width=1124");
-		} else {
-			$("meta[name='viewport']").attr("content", "width=device-width");
-		}
-    }else {
+	if (window.innerHeight > window.innerWidth) {
+			var wsw = window.screen.width;
+	if (wsw < 767) {
+		$("meta[name='viewport']").attr("content", "width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,shrink-to-fit=no");
+	} else if (wsw < 1125) {
 		$("meta[name='viewport']").attr("content", "width=1124");
-    }
-
+	} else {
+		$("meta[name='viewport']").attr("content", "width=device-width");
+	}
+	}else {
+	$("meta[name='viewport']").attr("content", "width=1124");
+	}
 }).trigger("resize");
 
 // accordion.js
@@ -82,12 +81,8 @@ $(function() {
 			$('#switch').prop('checked', false);
 	});
 });
-$(document).ready(function(){
-		$(function() {
-			$('.action').on('inview', function(event, isInView, visiblePartX, visiblePartY) {
-				if(isInView){
-					$(this).addClass('once');
-		    	} 
-			});
-		});
+$('.action').on('inview', function(event, isInView, visiblePartX, visiblePartY) {
+	if(isInView){
+		$(this).addClass('once');
+	} 
 });

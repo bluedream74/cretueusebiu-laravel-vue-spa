@@ -10,6 +10,17 @@ export default [
   { path: '/register_complete', name: 'register_complete', component: page('auth/register_complete.vue') },
   { path: '/thanks', name: 'thanks', component: page('auth/thanks.vue') },
 
+  // マイページ
+  { path: '/mypage', name: 'mypage', component: page('mypage/index.vue') },
+  { path: '/profile', name: 'profile', component: page('mypage/profile/index.vue') },
+  { path: '/profile/check', name: 'profile.check', component: page('mypage/profile/check.vue') },
+  { path: '/profile/thanks', name: 'profile.thanks', component: page('mypage/profile/thanks.vue') },
+
+  // 事業者相談フォーム
+  { path: '/consultant_form', name: 'consultant_form', component: page('consultant_form/index.vue') },
+  { path: '/consultant_form/confirm', name: 'consultant_form.confirm', component: page('consultant_form/confirm.vue') },
+  { path: '/consultant_form/complete', name: 'consultant_form.complete', component: page('consultant_form/complete.vue') },
+
   { path: '/password_reset', name: 'forget', component: page('auth/password_reset.vue') },
   { path: '/password_reset_form', name: 'password_reset_form', component: page('auth/password_reset_form.vue') },
   { path: '/login', name: 'login', component: page('auth/login.vue') },

@@ -215,7 +215,6 @@
       },
 
       backProc() {
-        console.log('3234234234')
         this.$router.back()
       },
 

@@ -7,10 +7,10 @@
           <strong>事業者</strong><span><img src="/assets/img/top/txt_deco01.png" alt="×"></span><strong>支援機関</strong><br>
           マッチングサイト
         </h1>
-        <a href="consultation_form/" class="form_btn action ups delay_3">
+        <router-link :to="{ name: 'consultant_form' }" class="form_btn action ups delay_3">
           <img src="/assets/img/top/img_free.png" alt="補助金を受けたいと考えている方へ認定支援機関に無料相談する" class="display_pc">
           <img src="/assets/img/top/img_free_sp.png" alt="補助金を受けたいと考えている方へ認定支援機関に無料相談する" class="display_sp">
-        </a>
+        </router-link>
         <p class="lead action ups delay_4">当サイトは事業者の方と国（経済産業大臣）が認定した<br class="display_pc">
           <span>「認定経営革新等支援機関」をマッチングするサイト</span>です。<br class="display_pc">
           事業者の方の悩み事、相談事を解決するためにご利用ください。
@@ -50,7 +50,7 @@
             <p>補助金申請する時間がない！</p>
           </div>
         </div>
-        <div class="common_btn action ups delay_4"><a href="consultation_form/"><span>認定支援機関に<b>無料相談</b>する</span></a></div>
+        <div class="common_btn action ups delay_4"><router-link :to="{ name: 'consultant_form' }"><span>認定支援機関に<b>無料相談</b>する</span></router-link></div>
       </div>
     </section>
     <section class="entrust_wrap">
@@ -74,7 +74,7 @@
           </div>
         </div>
         <h3 class="sub_tit action ups"><span>他にも様々な補助金があります</span></h3>
-        <div class="common_btn action ups delay_2"><a href="consultation_form/"><span>認定支援機関に<b>無料相談</b>する</span></a></div>
+        <div class="common_btn action ups delay_2"><router-link :to="{ name: 'consultant_form' }"><span>認定支援機関に<b>無料相談</b>する</span></router-link></div>
       </div>
     </section>
     <section class="consultation_wrap">
@@ -225,6 +225,7 @@
         </div>
       </div>
     </section>
+    <input type="text" id="inpective_value" value="123123123123" />
   </main>
 </template>
 <script>
@@ -235,6 +236,9 @@ export default {
     }
   },
   mounted() {
+    let recaptchaScript = document.createElement('script')
+    recaptchaScript.setAttribute('src', 'http://localhost:8000/assets/js/common.js')
+    document.head.appendChild(recaptchaScript)
   },
   methods: {
   }

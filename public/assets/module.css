@@ -275,6 +275,7 @@ a:hover img.opacity{
 	margin-right:1rem;
 }
 .form_el input[type="text"],
+.form_el input[type="date"],
 .form_el input[type="tel"],
 .form_el input[type="number"],
 .form_el input[type="email"],

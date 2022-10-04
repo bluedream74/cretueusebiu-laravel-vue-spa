@@ -34,7 +34,6 @@ $config = [
   <link rel="stylesheet" type="text/css" href="/assets/animation.css" media="all" />
   <script src="/assets/js/jquery.js"></script>
   <script src="/assets/js/jquery.inview.js"></script>
-  <script src="/assets/js/common.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
@@ -54,6 +53,8 @@ $config = [
   {{-- Load the application scripts --}}
   <link rel="stylesheet" type="text/css" href="/assets/slick.css" media="all" />
 		<link rel="stylesheet" type="text/css" href="/assets/slick-theme.css" media="all" />
+    <script src="{{ mix('dist/js/app.js') }}"></script>
+    <!-- <script src="/assets/js/common.js"></script> -->
 		<script src="/assets/js/slick.min.js"></script>
 		<script type="text/javascript">
 			$(document).on('ready', function () {
@@ -80,6 +81,5 @@ $config = [
 				});
 			});
 		</script>
-    <script src="{{ mix('dist/js/app.js') }}"></script>
 </body>
 </html>

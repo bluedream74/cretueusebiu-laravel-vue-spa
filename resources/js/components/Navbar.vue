@@ -2,10 +2,15 @@
   <header id="fix_menu">
     <div class="menu_top block_link fix">
       <div id="site_ttl"><router-link :to="{ name: 'home' }"><img src="/assets/img/common/logo.png" alt="補助金活用.COMのロゴ"></router-link></div>
-      <div class="login_menu"><br>
+      <div class="login_menu" v-if="!$store.getters['auth/user']"><br>
         <router-link :to="{ name: 'register' }" class="btn btn_ylw">支援者に<br>新規登録<br>する</router-link>
-        <a href="login/" class="btn">支援機関<br>ログイン</a>
+        <router-link :to="{ name: 'login' }" class="btn">支援機関<br>ログイン</router-link>
       </div>
+      <div class="login_menu" v-else>
+					<p class="nam">株式会社　{{ $store.getters['auth/user'].com_name }}様</p>
+					<a href="mypage" class="btn btn_ylw">マイページ</a>
+					<a href="index_login.html" class="btn">支援機関<br>ログアウト</a>
+				</div>
       <div class="menu_fix">
         <div class="drop_menu">
           <input type="checkbox" id="switch">
@@ -14,7 +19,12 @@
             <div></div>
           </label>
           <nav id="NavWrap">
-            <div class="login_menu">
+            <div class="login_menu" v-if="!!$store.getters['auth/user']">
+              <p class="nam">株式会社　００００様</p>
+              <router-link :to="{ name: 'mypage' }" class="btn btn_ylw">マイページ</router-link>
+              <a href="index_login.html" class="btn">支援機関<br>ログアウト</a>
+            </div>
+            <div class="login_menu" v-else>
               <router-link :to="{ name: 'register' }" class="btn btn_ylw">支援者に<br>新規登録<br>する</router-link>
               <router-link :to="{ name: 'login' }" href="login/" class="btn">支援機関<br>ログイン</router-link>
             </div>

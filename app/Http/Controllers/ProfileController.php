@@ -101,18 +101,6 @@ class ProfileController extends Controller
     ]);
   }
 
-  public function registerAvatar(Request $request) {
-    $avatar_url = $this->uploadFile($request->file('avatar'), 'upload');
-    Avatar::create([
-      'avatar' => $avatar_url,
-      'user_id' => $request->input('user_id')
-    ]);
-
-    return response()->json([
-      'flag' => true
-    ]);
-  }
-
   public function activateEmail(Request $request) {
     $email = $request->input('email');
     $token = $request->input('token');
@@ -155,76 +143,71 @@ class ProfileController extends Controller
     }
   }
 
-  public function updateIntroduction(Request $request) {
-    Profile::where('user_id', $request->input('user_id'))->update([
-      'introduction' => $request->input('introduction')
+  public function getProfileInfo(Request $request) {
+    $profile = User::where('id', $request->user()->id)->with('available_contents', 'available_jobs', 'available_prices', 'available_amounts')->first();
+    return response()->json([
+      'profile' => $profile
     ]);
+  }
+
+  public function updateProfileInfo(Request $request) {
+    $data = $request->all();
+
+    User::where('id', $request->user()->id)->update([
+      'email' => $data['email'],
+      'kikan_id' => $request->input('kikan_id'),
+      'com_name' => $request->input('com_name'),
+      'com_huri_name' => $request->input('com_huri_name'),
+      'tanto_name' => $request->input('tanto_name'),
+      'department_name' => $request->input('department_name'),
+      'role_name' => $request->input('role_name'),
+      'is_personal' => $request->input('is_personal'),
+      'kind' => $request->input('kind'),
+      'zipcode' => $request->input('zipcode'),
+      'prefecture' => $request->input('prefecture'),
+      'city' => $request->input('city'),
+      'building' => $request->input('building'),
+      'telephone' => $request->input('telephone'),
+      'fax' => $request->input('fax'),
+      'introduction' => $request->input('introduction'),
+    ]);
+
+    AvailableContent::where('user_id', $request->user()->id)->delete();
+    AvailableJob::where('user_id', $request->user()->id)->delete();
+    AvailablePrice::where('user_id', $request->user()->id)->delete();
+    AvailableAmount::where('user_id', $request->user()->id)->delete();
+    $user = User::where('id', $request->user()->id)->first();
+
+    foreach($request->input('available_contents') as $content_id) {
+      AvailableContent::create([
+        'user_id' => $user->id,
+        'content_id' => $content_id
+      ]);
+    }
+
+    foreach($request->input('available_jobs') as $job_id) {
+      AvailableJob::create([
+        'user_id' => $user->id,
+        'job_id' => $job_id
+      ]);
+    }
+
+    foreach($request->input('available_prices') as $price_id) {
+      AvailablePrice::create([
+        'user_id' => $user->id,
+        'price_id' => $price_id
+      ]);
+    }
+
+    foreach($request->input('available_amounts') as $amount_id) {
+      AvailableAmount::create([
+        'user_id' => $user->id,
+        'amount_id' => $amount_id
+      ]);
+    }
 
     return response()->json([
       'flag' => true
-    ]);
-  }
-
-  public function sendPasswordResetEmail(Request $request) {
-    $user = User::where('email', $request->input('email'))->first();
-    if (is_null($user)) {
-      return response()->json([
-          'status' => 0
-      ]);
-    }
-
-    $length = 10;    
-    $token = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,$length);
-    User::where('id', $user->id)->update([
-      'token' => $token,
-      'token_at' => Carbon::now()->addDay()
-    ]);
-
-    $user = User::where('id', $user->id)->first();
-
-    try {
-      PasswordReset::dispatch($user);
-    } catch (Exception $e) {
-      \Log::error($e);
-      return false;
-    }
-
-    return response()->json([
-        'status' => 1
-    ]);
-  }
-
-  public function resetPassword(Request $request) {
-    $user = User::where('email', $request->input('email'))->first();
-
-    if (is_null($user)) {
-      return response()->json([
-          'status' => 0
-      ]);
-    }
-
-    if ($user->token_at < Carbon::now()) {
-      return response()->json([
-          'status' => 1
-      ]);
-    }
-
-    if ($user->token != $request->input('token')) {
-      return response()->json([
-          'status' => 2
-      ]);
-    }
-
-    User::where('id', $user->id)->update([
-      'password' => bcrypt($request->input('password')),
-      'email_verified_at' => Carbon::now(),
-      'is_email_authenticated' => 1,
-      'token' => null,
-      'token_at' => null
-    ]);
-
-    return response()->json([
-        'status' => 3
     ]);
   }
 }

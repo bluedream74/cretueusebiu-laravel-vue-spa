@@ -135,4 +135,20 @@ class User extends Authenticatable implements JWTSubject// , MustVerifyEmail
     {
         return [];
     }
+
+    public function available_contents() {
+        return $this->hasMany('\App\Models\AvailableContent', 'user_id');
+    }
+    
+    public function available_jobs() {
+        return $this->hasMany('\App\Models\AvailableJob', 'user_id');
+    }
+    
+    public function available_prices() {
+        return $this->hasMany('\App\Models\AvailablePrice', 'user_id');
+    }
+
+    public function available_amounts() {
+        return $this->hasMany('\App\Models\AvailableAmount', 'user_id');
+    }
 }
