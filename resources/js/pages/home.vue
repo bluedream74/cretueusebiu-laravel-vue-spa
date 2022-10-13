@@ -177,7 +177,7 @@ export default {
   },
   mounted() {
     let recaptchaScript = document.createElement('script')
-    recaptchaScript.setAttribute('src', 'http://localhost:8000/assets/js/common.js')
+    recaptchaScript.setAttribute('src', 'http://hojyokin-katsuyou.com/assets/js/common.js')
     document.head.appendChild(recaptchaScript)
 
     this.init()
