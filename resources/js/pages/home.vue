@@ -80,88 +80,23 @@
     <section class="consultation_wrap">
       <div class="sitewrap">
         <h2 class="tit action ups"><b>ただいま、<br class="display_sp">掲載中のご相談</b></h2>
-        <p class="sub_tit action ups delay_2"><span>現在、500件以上の<br class="display_sp">ご相談があります</span></p>
+        <p class="sub_tit action ups delay_2"><span>現在、{{ consultants.length }}件以上の<br class="display_sp">ご相談があります</span></p>
         <div class="slider action holizon_open">
-          <a href="consultation/detail.html" class="items">
-            <p class="pref">都道府県：愛知県</p>
+          <a @click="toConsultantDetail(item.id)" class="items" v-for="(item, index) in consultants" :key="index">
+            <p class="pref">都道府県：{{ item.prefecture }}</p>
             <dl class="detail">
               <dt>概 要</dt>
-              <dd>この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、</dd>
+              <dd>{{ item.message_title }}</dd>
             </dl>
             <p class="link_txt">詳細をみる</p>
             <div class="cat">
-              <span class="type">製造業</span>
-              <span class="num">従業員10～30名</span>
-              <span class="sales">年商　5000万円未満</span>
-            </div>
-          </a>
-          <a href="consultation/detail.html" class="items">
-            <p class="pref">都道府県：東京都</p>
-            <dl class="detail">
-              <dt>概 要</dt>
-              <dd>この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、</dd>
-            </dl>
-            <p class="link_txt">詳細をみる</p>
-            <div class="cat">
-              <span class="type">サービス業（他に分類されないもの）</span>
-              <span class="num">従業員500名以上</span>
-              <span class="sales">年商　3億円未満</span>
-            </div>
-          </a>
-          <a href="consultation/detail.html" class="items">
-            <p class="pref">都道府県：東京都</p>
-            <dl class="detail">
-              <dt>概 要</dt>
-              <dd>この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、</dd>
-            </dl>
-            <p class="link_txt">詳細をみる</p>
-            <div class="cat">
-              <span class="type">運輸業、郵便業</span>
-              <span class="num">従業員101~500名</span>
-              <span class="sales">年商　10億円未満</span>
-            </div>
-          </a>
-          <a href="consultation/detail.html" class="items">
-            <p class="pref">都道府県：東京都</p>
-            <dl class="detail">
-              <dt>概 要</dt>
-              <dd>この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、</dd>
-            </dl>
-            <p class="link_txt">詳細をみる</p>
-            <div class="cat">
-              <span class="type">教育、学習支援業</span>
-              <span class="num">従業員51～100名</span>
-              <span class="sales">年商　5000万円未満</span>
-            </div>
-          </a>
-          <a href="consultation/detail.html" class="items">
-            <p class="pref">都道府県：東京都</p>
-            <dl class="detail">
-              <dt>概 要</dt>
-              <dd>この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、</dd>
-            </dl>
-            <p class="link_txt">詳細をみる</p>
-            <div class="cat">
-              <span class="type">宿泊業、飲食サービス業</span>
-              <span class="num">従業員500人以上</span>
-              <span class="sales">年商　3億円未満</span>
-            </div>
-          </a>
-          <a href="consultation/detail.html" class="items">
-            <p class="pref">都道府県：東京都</p>
-            <dl class="detail">
-              <dt>概 要</dt>
-              <dd>この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、</dd>
-            </dl>
-            <p class="link_txt">詳細をみる</p>
-            <div class="cat">
-              <span class="type">情報通信業</span>
-              <span class="num">従業員10～30名</span>
-              <span class="sales">年商　3億円未満</span>
+              <span class="type">{{ JOBS[item.job] }}</span>
+              <span class="num">{{ AMOUNTS[item.amount] }}</span>
+              <span class="sales">年商　{{ PRICES[item.income] }}</span>
             </div>
           </a>
         </div>
-        <div class="common_btn action ups"><a href="consultation/"><span>一覧をみる</span></a></div>
+        <div class="common_btn action ups"><router-link :to="{ name: 'consultant' }"><span>一覧をみる</span></router-link></div>
       </div>
     </section>
     <section class="add_wrap">
@@ -229,18 +164,52 @@
   </main>
 </template>
 <script>
+import { JOBS, AMOUNTS, PRICES } from '../const'
 export default {
   layout: 'default',
   data() {
     return {
+      consultants: [],
+      JOBS: JOBS,
+      AMOUNTS: AMOUNTS,
+      PRICES: PRICES
     }
   },
   mounted() {
     let recaptchaScript = document.createElement('script')
     recaptchaScript.setAttribute('src', 'http://localhost:8000/assets/js/common.js')
     document.head.appendChild(recaptchaScript)
+
+    this.init()
   },
   methods: {
+    async init() {
+      try {
+        const { data } = await axios.post('/api/get_home_data')
+        this.consultants = data.consultants.filter((item, index) => {
+          return index < 10
+        })
+      } catch (error) {
+      }
+    },
+
+    async toConsultantDetail(id) {
+      if (!this.$store.getters['auth/user']) {
+        this.$router.push({ name: 'consultant_detail', query: { id: id } })
+        return
+      }
+      try {
+        const { data } = await axios.post('/api/check_consultant_answer', {
+          id: id
+        })
+        if (!!data.answer) {
+          this.$router.push({ name: 'history_detail', query: { id: id } })
+        } else {
+          this.$router.push({ name: 'consultant_detail', query: { id: id } })
+        }
+      } catch (error) {
+      }
+    }
   }
 }
 </script>

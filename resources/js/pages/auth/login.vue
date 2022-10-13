@@ -75,6 +75,7 @@ export default {
         this.$router.push({ name: 'home' })
         this.$swal('', 'ログインできました')
       } catch (error) {
+        this.$swal('', 'ログインできませんでした')
       }
     }
   }

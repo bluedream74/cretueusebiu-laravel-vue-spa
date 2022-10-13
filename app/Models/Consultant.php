@@ -25,4 +25,20 @@ class Consultant extends Model {
   ];
 
   protected $table = 'consultants';
+
+  public function confirms() {
+    return $this->hasMany('\App\Models\ConsultantConfirm', 'consultant_id');
+  }
+
+  public function misss() {
+    return $this->hasMany('\App\Models\ConsultantMiss', 'consultant_id');
+  }
+
+  public function others() {
+    return $this->hasMany('\App\Models\ConsultantOther', 'consultant_id');
+  }
+
+  public function answers() {
+    return $this->hasMany('\App\Models\ConsultantAnswer', 'consultant_id');
+  }
 }

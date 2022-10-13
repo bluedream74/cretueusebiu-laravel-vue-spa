@@ -210,4 +210,14 @@ class ProfileController extends Controller
       'flag' => true
     ]);
   }
+
+  public function updatePassword(Request $request) {
+    $user = $request->user();
+    $user->password = bcrypt($request->input('password'));
+    $user->save();
+
+    return response()->json([
+      'flag' => true
+    ]);
+  }
 }

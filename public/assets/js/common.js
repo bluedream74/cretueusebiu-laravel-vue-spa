@@ -86,3 +86,24 @@ $('.action').on('inview', function(event, isInView, visiblePartX, visiblePartY) 
 		$(this).addClass('once');
 	} 
 });
+$(".slider").slick({
+	speed: 3000,
+	autoplaySpeed: 2000,
+	dots: true,
+	arrows: false,
+	autoplay: true,
+	centerMode: true,
+	slidesToShow: 3,
+	slidesToScroll: 1,
+	variableWidth: true,
+	responsive: [
+		{
+			breakpoint: 768,
+			settings: {
+				slidesToShow: 1,
+				variableWidth: false,
+				centerMode: false,
+			}
+		}
+	]
+});

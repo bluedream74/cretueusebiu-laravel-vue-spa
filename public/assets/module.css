@@ -1017,6 +1017,9 @@ a:hover img.opacity{
 .pager_style li.next{
 	margin:0 0 0 10px;
 }
+.pager_style li a.active {
+	background-color: #e6f8ff;
+}
 .pager_style li.prev a,
 .pager_style li.next a,
 .pager_style li a:hover,

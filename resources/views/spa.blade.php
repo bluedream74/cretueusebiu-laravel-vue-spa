@@ -56,30 +56,5 @@ $config = [
     <script src="{{ mix('dist/js/app.js') }}"></script>
     <!-- <script src="/assets/js/common.js"></script> -->
 		<script src="/assets/js/slick.min.js"></script>
-		<script type="text/javascript">
-			$(document).on('ready', function () {
-				$(".slider").slick({
-					speed: 3000,
-					autoplaySpeed: 2000,
-					dots: true,
-					arrows: false,
-					autoplay: true,
-					centerMode: true,
-					slidesToShow: 3,
-					slidesToScroll: 1,
-					variableWidth: true,
-					responsive: [
-						{
-							breakpoint: 768,
-							settings: {
-								slidesToShow: 1,
-								variableWidth: false,
-								centerMode: false,
-							}
-						}
-					]
-				});
-			});
-		</script>
 </body>
 </html>

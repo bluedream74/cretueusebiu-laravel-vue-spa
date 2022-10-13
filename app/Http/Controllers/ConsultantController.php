@@ -17,6 +17,7 @@ use App\Models\Consultant;
 use App\Models\ConsultantConfirm;
 use App\Models\ConsultantMiss;
 use App\Models\ConsultantOther;
+use App\Models\ConsultantAnswer;
 use Carbon\Carbon;
 use App\Jobs\EmailVerification;
 use App\Jobs\PasswordReset;
@@ -70,6 +71,67 @@ class ConsultantController extends Controller
 
     return response()->json([
       'flag' => true
+    ]);
+  }
+
+  public function getHomeData(Request $request) {
+    $consultants = Consultant::orderByDesc('created_at')->with('confirms', 'misss', 'others')->get();
+
+    return response()->json([
+      'consultants' => $consultants
+    ]);
+  }
+
+  public function getConsultantList(Request $request) {
+    $consultants = Consultant::orderByDesc('created_at')->with('confirms', 'misss', 'others')->get();
+
+    return response()->json([
+      'consultants' => $consultants
+    ]);
+  }
+
+  public function getConsultantDetail(Request $request) {
+    $consultant = Consultant::where('id', $request->input('id'))->with('confirms', 'misss', 'others')->first();
+    return response()->json([
+      'consultant' => $consultant
+    ]);
+  }
+
+  public function sendConsultantAnswer(Request $request) {
+    ConsultantAnswer::create([
+      'answer' => $request->input('answer'),
+      'user_id' => $request->input('user_id'),
+      'consultant_id' => $request->input('id')
+    ]);
+
+    return response()->json([
+      'flag' => true
+    ]);
+  }
+
+  public function getHistoryList(Request $request) {
+    $user_id = $request->user()->id;
+    $consultants = Consultant::whereIn('id', function($query) use ($user_id) {
+      $query->select('consultant_id')
+          ->from(with(new ConsultantAnswer)->getTable())
+          ->where('user_id', $user_id);
+    })->with('confirms', 'misss', 'others', 'answers')->get();
+    return response()->json([
+      'consultants' => $consultants
+    ]);
+  }
+
+  public function getHistoryDetail(Request $request) {
+    $consultant = Consultant::where('id', $request->input('id'))->with('confirms', 'misss', 'others', 'answers')->first();
+    return response()->json([
+      'consultant' => $consultant
+    ]);
+  }
+
+  public function checkConsultantAnswer(Request $request) {
+    $answer = ConsultantAnswer::where('user_id', $request->user()->id)->where('consultant_id', $request->input('id'))->first();
+    return response()->json([
+      'answer' => $answer
     ]);
   }
 }

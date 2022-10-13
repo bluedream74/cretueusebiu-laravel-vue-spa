@@ -18,6 +18,10 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::get('/user', 'Auth\UserController@current');
   Route::post('get_profile_info', 'ProfileController@getProfileInfo');
   Route::post('update_profile_info', 'ProfileController@updateProfileInfo');
+  Route::post('get_history_list', 'ConsultantController@getHistoryList');
+  Route::post('get_history_detail', 'ConsultantController@getHistoryDetail');
+  Route::post('check_consultant_answer', 'ConsultantController@checkConsultantAnswer');
+  Route::post('update_password', 'ProfileController@updatePassword');
 });
 
 Route::group(['middleware' => 'guest:api'], function() {
@@ -33,3 +37,7 @@ Route::group(['middleware' => 'guest:api'], function() {
 Route::post('regsiter_avatar', 'ProfileController@registerAvatar');
 Route::post('contact_proc', 'CommonController@contactProc');
 Route::post('send_consultant_content', 'ConsultantController@sendConsultantContent');
+Route::post('get_home_data', 'ConsultantController@getHomeData');
+Route::post('get_consultant_list', 'ConsultantController@getConsultantList');
+Route::post('get_consultant_detail', 'ConsultantController@getConsultantDetail');
+Route::post('send_consultant_answer', 'ConsultantController@sendConsultantAnswer');

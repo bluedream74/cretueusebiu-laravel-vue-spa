@@ -171,7 +171,7 @@
 						</div>
 						<ul class="mypage_menu common_btn2">
 							<li><router-link :to="{ name: 'profile' }" class="blue"><span><img src="/assets/img/mypage/ico_profile.png">マイプロフィール</span></router-link></li>
-							<li><a href="history/" class="blue"><span><img src="/assets/img/mypage/ico_ansew.png">過去の回答一覧</span></a></li>
+							<li><router-link :to="{ name: 'history' }" class="blue"><span><img src="/assets/img/mypage/ico_ansew.png">過去の回答一覧</span></router-link></li>
 							<li><a href="invoice/" class="blue"><span><img src="/assets/img/mypage/ico_billing.png">課金状況確認</span></a></li>
 						</ul>
 					</div>

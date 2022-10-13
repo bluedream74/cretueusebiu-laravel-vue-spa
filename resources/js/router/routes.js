@@ -12,6 +12,7 @@ export default [
 
   // マイページ
   { path: '/mypage', name: 'mypage', component: page('mypage/index.vue') },
+  { path: '/mypage/password', name: 'mypage_password', component: page('mypage/password/index.vue') },
   { path: '/profile', name: 'profile', component: page('mypage/profile/index.vue') },
   { path: '/profile/check', name: 'profile.check', component: page('mypage/profile/check.vue') },
   { path: '/profile/thanks', name: 'profile.thanks', component: page('mypage/profile/thanks.vue') },
@@ -20,6 +21,14 @@ export default [
   { path: '/consultant_form', name: 'consultant_form', component: page('consultant_form/index.vue') },
   { path: '/consultant_form/confirm', name: 'consultant_form.confirm', component: page('consultant_form/confirm.vue') },
   { path: '/consultant_form/complete', name: 'consultant_form.complete', component: page('consultant_form/complete.vue') },
+
+  { path: '/consultant', name: 'consultant', component: page('consultant.vue') },
+  { path: '/consultant_detail', name: 'consultant_detail', component: page('consultant/detail.vue') },
+  { path: '/consultant_confirm', name: 'consultant_answer_confirm', component: page('consultant/confirm.vue') },
+  { path: '/consultant_complete', name: 'consultant_answer_complete', component: page('consultant/complete.vue') },
+
+  { path: '/history', name: 'history', component: page('mypage/history/index.vue') },
+  { path: '/history/detail', name: 'history_detail', component: page('mypage/history/detail.vue') },
 
   { path: '/password_reset', name: 'forget', component: page('auth/password_reset.vue') },
   { path: '/password_reset_form', name: 'password_reset_form', component: page('auth/password_reset_form.vue') },
