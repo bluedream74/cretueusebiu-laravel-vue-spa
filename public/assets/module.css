@@ -984,21 +984,21 @@ a:hover img.opacity{
 }
 
 /*  ページャー  */
-.pager_style{
+.main-layout .pager_style{
 	padding:30px 0;
 }
 
-.pager_style ul{
+.main-layout .pager_style ul{ 
 	display:flex;
 	align-items:center;
 	justify-content:center;
 	text-align:center;
 }
-.pager_style li{
+.main-layout .pager_style li{
 	min-width:40px;
 }
-.pager_style li a,
-.pager_style li span{
+.main-layout .pager_style li a,
+.main-layout .pager_style li span{
 	font-size:1rem;
 	text-decoration:none;
 	display:flex;
@@ -1074,7 +1074,7 @@ a:hover img.opacity{
 	.pager_style li{
 		min-width:36px;
 	}
-	.pager_style li a, .pager_style li span{
+	.main-layout .pager_style li a,.main-layout .pager_style li span{
 		width:36px;
 		height:36px;
 		margin: 0 3px;

@@ -1,5 +1,5 @@
 <template>
-    <div class="main-layout">
+    <div class="admin__auth">
         <child />
     </div>
 </template>

@@ -176,9 +176,11 @@ export default {
     }
   },
   mounted() {
-    let recaptchaScript = document.createElement('script')
-    recaptchaScript.setAttribute('src', 'http://hojyokin-katsuyou.com/assets/js/common.js')
-    document.head.appendChild(recaptchaScript)
+    setTimeout(() => {
+      let recaptchaScript = document.createElement('script')
+      recaptchaScript.setAttribute('src', 'http://hojyokin-katsuyou.com/assets/js/common.js')
+      document.head.appendChild(recaptchaScript)
+    }, 1000)
 
     this.init()
   },

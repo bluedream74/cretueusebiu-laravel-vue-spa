@@ -21,7 +21,7 @@ export default {
   components: {
     Navbar,
     Footer
-  }
+  },
 }
 </script>
 <style lang="scss" scoped>

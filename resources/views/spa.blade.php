@@ -32,8 +32,15 @@ $config = [
   <link rel="stylesheet" type="text/css" href="/assets/page.css" media="all" />
   <link rel="stylesheet" type="text/css" href="/assets/print.css" media="print" />
   <link rel="stylesheet" type="text/css" href="/assets/animation.css" media="all" />
+
+  <link rel="stylesheet" type="text/css" href="/admin/css/common.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/admin/css/base.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/admin/css/module.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/admin/css/page.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/admin/css/print.css" media="print" />
   <script src="/assets/js/jquery.js"></script>
   <script src="/assets/js/jquery.inview.js"></script>
+  <script src="/admin/js/jquery.matchHeight.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"

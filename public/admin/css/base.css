@@ -1,0 +1,197 @@
+@charset "utf-8";
+
+
+/* all
+-------------------------------------------------------------------*/
+html {
+	background:#FFFFFF;
+	color:#333333;
+	font-family: 'Noto Sans JP',  "游ゴシック Medium", "Yu Gothic Medium" ,"游ゴシック体", "Yu Gothic", YuGothic , 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+	font-size:16px;
+	line-height:1.4;
+}
+html .goti,
+html .goti form *{
+	font-family:  'Noto Sans JP', "游ゴシック Medium", "Yu Gothic Medium" ,"游ゴシック体", "Yu Gothic", YuGothic , 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+}
+html .min,
+html .min form *{
+	font-family: "游明朝体", "Yu Mincho", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "Times New Roman", "HG明朝B", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+}
+
+body {
+	width: 100%;
+	font-size: 100%;
+	text-align: center;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.sitewrap {
+	width: 1200px;
+	min-width:1000px;
+	overflow:
+	hidden;
+	margin: 0 auto 80px;
+	text-align: left;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+.top .sitewrap,
+.login .sitewrap{
+	margin:0 auto;
+}
+
+/* header
+-------------------------------------------------------------------*/
+header {
+	border-bottom: 5px solid #0072ce;
+    box-sizing: border-box;
+}
+.menu_top {
+   	position:relative;
+}
+.menu_top #site_ttl {
+	float:left;
+	padding: 15px 25px 14px;
+	white-space:nowrap;
+}
+.menu_top #site_ttl a,
+.menu_top #site_ttl p{
+	display:inline-block;
+	vertical-align:middle;
+}
+.menu_top .right_menu{
+	float:right;
+	padding:20px;
+	text-align:right;
+}
+.menu_top .right_menu li{
+	display:inline-block;
+	vertical-align:middle;
+}
+.menu_top .right_menu li + li{
+	margin-left:20px;
+}
+.menu_top .right_menu li a{
+	border:1px solid #0072ce;
+	background: #0072ce;
+	border-radius: 4px;
+	padding: 10px 25px 15px;
+	box-sizing: border-box;
+	line-height:1;
+	color:#fff;
+    transition:color .4s, background .4s;
+}
+.menu_top .right_menu li a span{
+	display:inline-block;
+	vertical-align:middle;
+	font-weight:500;
+	font-size:0.875rem;
+	line-height: 1;
+}
+.menu_top .right_menu li.logout a{
+	border-color:#a0a0a0;
+	background: #f2f2f2;
+	color:#221815;
+}
+.menu_top .right_menu li.logout a span{
+	position:relative;
+	padding-right:28px;
+}
+.menu_top .right_menu li.logout a span:after{
+	position:absolute;
+	display:inline-block;
+	content:"";
+	width: 14px;
+	height: 16px;
+	background:url(../img/ico_logout.png);
+	top: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+}
+.menu_top .right_menu li a:hover{
+	background:#fff;
+	color:#0072ce;
+	opacity:1;
+}
+.menu_top .right_menu li.logout a:hover{
+	background: #dadada;
+	color:#221815;
+}
+/* contents
+-------------------------------------------------------------------*/
+
+main{
+	display: block;
+}
+.home .col_2{
+	margin:50px 0 90px;
+}
+.home .menu_list + .menu_list{
+	margin-top:40px;
+}
+.home .menu_list li{
+	margin-top:10px;
+}
+.home .menu_list li a{
+	display:block;
+	width:300px;
+	border:1px solid #b5b5b5;
+	border-radius:3px;
+	background:#f2f2f2;
+	padding: 8px 25px;
+	box-sizing:border-box;
+	color:#221815;
+}
+.home .menu_list li a span{
+	position:relative;
+	padding-left:20px;
+}
+.home .menu_list li a span:before,
+.home .menu_list li a span:after{
+	position:absolute;
+	display:inline-block;
+	content:"";
+}
+.home .menu_list li a span:before{
+	width:16px;
+	height:16px;
+	background:#0072ce;
+    left:0;
+    top:0;
+    bottom:0;
+    margin:auto;
+}
+.home .menu_list li a span:after{
+	width: 4px;
+	height: 4px;
+	border-top:1px solid #fff;
+	border-right:1px solid #fff;
+	transform: rotate(45deg);
+	left: 4px;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+}
+.home .menu_list li a:hover{
+	text-decoration:none;
+	background:#e5e5e5;
+}
+/* footer
+-------------------------------------------------------------------*/
+#top_link{
+	margin-top:auto;
+}
+#pageTop {display: block;text-align: right;width: 1000px;margin: auto;}
+footer{
+	background:#1F1F1F;;
+	padding:20px 0 58px;
+}
+footer small{
+	font-size:0.75rem;
+	color:#858585;
+	line-height:1;
+}

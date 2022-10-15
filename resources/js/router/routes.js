@@ -39,5 +39,14 @@ export default [
   { path: '/account/activate', name: 'account.activate', component: page('auth/activate.vue') },
   { path: '/user/detail', name: 'user.detail', component: page('user/detail.vue') },
 
+  // admin
+  { path: '/admin/login', name: 'admin.login', component: page('admin/auth/login.vue') },
+  { path: '/admin/password', name: 'admin.password', component: page('admin/auth/password.vue') },
+
+  { path: '/admin/dashboard', name: 'admin.dashboard', component: page('admin/index.vue') },
+  { path: '/admin/register', name: 'admin.register', component: page('admin/register/index.vue') },
+  { path: '/admin/consultant', name: 'admin.consultant', component: page('admin/consultation/index.vue') },
+  { path: '/admin/consultant/edit', name: 'admin.consultant.edit', component: page('admin/consultation/edit.vue') },
+
   { path: '*', component: page('errors/404.vue') }
 ]
