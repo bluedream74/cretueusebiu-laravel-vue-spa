@@ -68,34 +68,7 @@
                 <td><input type="checkbox" id="display50" class="display_btn"><label for="display50"></label></td>							<td>2022/07/14</td>
                 <td>AA株式会社</td>
                 <td>
-                  <a href="edit.html" class="eidt_btn table_btns">編集</a>
-                  <span class="delete_btn table_btns">削除 </span>
-                </td>
-              </tr>
-              <tr>
-                <td>0049</td>
-                <td><input type="checkbox" id="display49" class="display_btn"><label for="display49"></label></td>							<td>2022/03/25</td>
-                <td>BB株式会社</td>
-                <td>
                   <router-link :to="{ name: 'admin.consultant.edit' }" class="eidt_btn table_btns">編集</router-link>
-                  <span class="delete_btn table_btns">削除 </span>
-                </td>
-              </tr>
-              <tr>
-                <td>0048</td>
-                <td><input type="checkbox" id="display48" class="display_btn"><label for="display48"></label></td>							<td>2022/02/03</td>
-                <td>CC株式会社</td>
-                <td>
-                  <a href="edit.html" class="eidt_btn table_btns">編集</a>
-                  <span class="delete_btn table_btns">削除 </span>
-                </td>
-              </tr>
-              <tr>
-                <td>0047</td>
-                <td><input type="checkbox" id="display47" class="display_btn"><label for="display47"></label></td>							<td>2022/02/01</td>
-                <td>DD株式会社</td>
-                <td>
-                  <a href="edit.html" class="eidt_btn table_btns">編集</a>
                   <span class="delete_btn table_btns">削除 </span>
                 </td>
               </tr>

@@ -5,7 +5,7 @@
         <div id="pan">
           <ul>
             <li><router-link :to="{ name: 'admin.dashboard' }">HOME</router-link></li>
-            <li><a href="index.html">事業者管理一覧</a></li>
+            <li><a @click="backProc">事業者管理一覧</a></li>
             <li><span>事業者入力(編集)</span></li>
           </ul>
         </div>
@@ -272,6 +272,10 @@
 </template>
 <script>
 export default {
-  
+  methods: {
+    backProc() {
+      this.$router.back()
+    }
+  }
 }
 </script>

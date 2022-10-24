@@ -22,6 +22,9 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::post('get_history_detail', 'ConsultantController@getHistoryDetail');
   Route::post('check_consultant_answer', 'ConsultantController@checkConsultantAnswer');
   Route::post('update_password', 'ProfileController@updatePassword');
+  Route::post('get_matching_list', 'ProfileController@getMatchingList');
+  Route::post('agree_kakin', 'ProfileController@agreeKakin');
+  Route::post('get_all_invoices', 'ProfileController@getAllInvoices');
 });
 
 Route::group(['middleware' => 'guest:api'], function() {

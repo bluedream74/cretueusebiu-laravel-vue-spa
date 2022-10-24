@@ -13,7 +13,8 @@ use App\Models\AvailableContent;
 use App\Models\AvailableJob;
 use App\Models\AvailablePrice;
 use App\Models\AvailableAmount;
-use App\Models\Avatar;
+use App\Models\Consultant;
+use App\Models\ConsultantKakin;
 use Carbon\Carbon;
 use App\Jobs\EmailVerification;
 use App\Jobs\PasswordReset;
@@ -218,6 +219,41 @@ class ProfileController extends Controller
 
     return response()->json([
       'flag' => true
+    ]);
+  }
+
+  public function getMatchingList(Request $request) {
+    $consultants = Consultant::with('confirms', 'misss', 'others')->get();
+    $available_amounts = AvailableAmount::where('user_id', $request->user()->id)->get();
+    $available_contents = AvailableContent::where('user_id', $request->user()->id)->get();
+    $available_jobs = AvailableJob::where('user_id', $request->user()->id)->get();
+    $available_prices = AvailablePrice::where('user_id', $request->user()->id)->get();
+    $consultant_kakins = ConsultantKakin::where('user_id', $request->user()->id)->get();
+    return response()->json([
+      'consultants' => $consultants,
+      'available_amounts' => $available_amounts,
+      'available_contents' => $available_contents,
+      'available_jobs' => $available_jobs,
+      'available_prices' => $available_prices
+    ]);
+  }
+
+  public function agreeKakin(Request $request) {
+    ConsultantKakin::create([
+      'consultant_id' => $request->input('consultant_id'),
+      'user_id' => $request->user()->id,
+    ]);
+
+    return response()->json([
+      'flag' => true
+    ]);
+  }
+
+  public function getAllInvoices(Request $request) {
+    $consultant_kakins = ConsultantKakin::where('user_id', $request->user()->id)->orderByDesc('created_at')->get();
+
+    return response()->json([
+      'consultant_kakins' => $consultant_kakins
     ]);
   }
 }

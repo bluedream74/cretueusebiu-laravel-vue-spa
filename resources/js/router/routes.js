@@ -45,8 +45,24 @@ export default [
 
   { path: '/admin/dashboard', name: 'admin.dashboard', component: page('admin/index.vue') },
   { path: '/admin/register', name: 'admin.register', component: page('admin/register/index.vue') },
+  { path: '/admin/register/history', name: 'admin.register.history', component: page('admin/register/history.vue') },
+  { path: '/admin/register/invoice', name: 'admin.register.invoice', component: page('admin/register/invoice.vue') },
+
   { path: '/admin/consultant', name: 'admin.consultant', component: page('admin/consultation/index.vue') },
   { path: '/admin/consultant/edit', name: 'admin.consultant.edit', component: page('admin/consultation/edit.vue') },
+  { path: '/admin/news', name: 'admin.news', component: page('admin/news/index.vue') },
+  { path: '/admin/news/edit', name: 'admin.news.edit', component: page('admin/news/edit.vue') },
+  { path: '/admin/news/check', name: 'admin.news.check', component: page('admin/news/check.vue') },
+  { path: '/admin/contact', name: 'admin.contact', component: page('admin/contact/index.vue') },
+  { path: '/admin/add_bnr', name: 'admin.add_bnr', component: page('admin/add_bnr/index.vue') },
+  { path: '/admin/add_bnr/edit', name: 'admin.add_bnr.edit', component: page('admin/add_bnr/edit.vue') },
+  { path: '/admin/add_bnr/check', name: 'admin.add_bnr.check', component: page('admin/add_bnr/check.vue') },
+  { path: '/admin/add_bnr/finish', name: 'admin.add_bnr.finish', component: page('admin/add_bnr/finish.vue') },
+
+  { path: '/admin/billing', name: 'admin.billing', component: page('admin/billing/index.vue') },
+  { path: '/admin/billing/finish', name: 'admin.billing.finish', component: page('admin/billing/finish.vue') },
+
+  { path: '/admin/freee', name: 'admin.freee', component: page('admin/freee/index.vue') },
 
   { path: '*', component: page('errors/404.vue') }
 ]

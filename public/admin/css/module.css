@@ -1110,7 +1110,7 @@ form input[name="publish_status"]~label:before {
 .edit_form>dl dd .in_table dd textarea {
 	width: 100%;
 }
-.modal-content {
+.admin__auth .modal-content {
 	width: auto;
 	margin: 0;
 	box-sizing: border-box;

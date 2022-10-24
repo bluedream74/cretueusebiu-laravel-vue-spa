@@ -4,7 +4,7 @@
       <div class="sitewrap">
         <div id="pan">
           <ul>
-            <li><a href="../">HOME</a></li>
+            <li><router-link :to="{ name: 'admin.dashboard' }">HOME</router-link></li>
             <li><span>支援機関管理一覧</span></li>
           </ul>
         </div>
@@ -42,7 +42,7 @@
           <div class="load_btn"><a href="javascript:void(0)"><span>表示の更新</span></a></div>
         </div>
         <div class="table_wrap">
-          <div class="pager_style">
+          <!-- <div class="pager_style">
             <ul>
               <li class="prev"><a href="#">＜＜前の50件</a></li>
               <li><a href="#">1</a></li>
@@ -51,7 +51,8 @@
               <li><a href="#">4</a></li>
               <li class="next"><a href="#">次の50件＞＞</a></li>
             </ul>
-          </div>
+          </div> -->
+          <Pagination v-if="temp.length > 0" :total="temp.length" @changeCurrentPage="changeCurrentPage"  />
           <table>
             <tbody>
               <tr>
@@ -64,52 +65,13 @@
                 <th width="90">請求情報</th>
                 <th width="140"></th>
               </tr>
-              <tr>
-                <td>0050</td>
+              <tr v-for="(item, index) in temp" :key="index">
+                <td>{{ item.kikan_id }}</td>
                 <td><input type="checkbox" id="koukai50" class="display_btn"><label for="koukai50"></label></td>
                 <td><input type="checkbox" id="display50" class="display_btn"><label for="display50"></label></td>
-                <td>2022/07/14</td>
-                <td>AA株式会社</td>
-                <td><a href="history.html" class="eidt_btn table_btns">回答履歴</a></td>
-                <td><a href="invoice.html" class="browsing_btn table_btns">請求情報</a></td>
-                <td>
-                  <a href="edit.html" class="eidt_btn table_btns">編集</a>
-                  <span class="delete_btn table_btns">削除 </span>
-                </td>
-              </tr>
-              <tr>
-                <td>0049</td>
-                <td><input type="checkbox" id="koukai49" class="display_btn"><label for="koukai49"></label></td>
-                <td><input type="checkbox" id="display49" class="display_btn"><label for="display49"></label></td>
-                <td>2022/03/25</td>
-                <td>BB株式会社</td>
-                <td><a href="history.html" class="eidt_btn table_btns">回答履歴</a></td>
-                <td><a href="invoice.html" class="browsing_btn table_btns">請求情報</a></td>
-                <td>
-                  <a href="edit.html" class="eidt_btn table_btns">編集</a>
-                  <span class="delete_btn table_btns">削除 </span>
-                </td>
-              </tr>
-              <tr>
-                <td>0048</td>
-                <td><input type="checkbox" id="koukai48" class="display_btn"><label for="koukai48"></label></td>
-                <td><input type="checkbox" id="display48" class="display_btn"><label for="display48"></label></td>
-                <td>2022/02/03</td>
-                <td>CC株式会社</td>
-                <td><a href="history.html" class="eidt_btn table_btns">回答履歴</a></td>
-                <td><a href="invoice.html" class="browsing_btn table_btns">請求情報</a></td>
-                <td>
-                  <a href="edit.html" class="eidt_btn table_btns">編集</a>
-                  <span class="delete_btn table_btns">削除 </span>
-                </td>
-              </tr>
-              <tr>
-                <td>0047</td>
-                <td><input type="checkbox" id="koukai47" class="display_btn"><label for="koukai47"></label></td>
-                <td><input type="checkbox" id="display47" class="display_btn"><label for="display47"></label></td>
-                <td>2022/02/01</td>
-                <td>DD株式会社</td>
-                <td><a href="history.html" class="eidt_btn table_btns">回答履歴</a></td>
+                <td>{{ item.created_at | dateFormatEn }}</td>
+                <td>{{ item.com_name }}</td>
+                <td><router-link :to="{ name: 'admin.register.history', query: {user_id: item.id } }" class="eidt_btn table_btns">回答履歴</router-link></td>
                 <td><a href="invoice.html" class="browsing_btn table_btns">請求情報</a></td>
                 <td>
                   <a href="edit.html" class="eidt_btn table_btns">編集</a>
@@ -125,7 +87,39 @@
   </div>
 </template>
 <script>
+import Pagination from '../../../components/Pagination.vue'
 export default {
-  layout: 'admin_auth'
+  layout: 'admin_auth',
+  middleware: 'admin',
+  components: {
+    Pagination
+  },
+  mounted() {
+    this.init()
+  },
+  data() {
+    return {
+      registers: [],
+      temp: []
+    }
+  },
+  methods: {
+    async init() {
+      try {
+        const { data } = await axios.post('/admin/get_register_list')
+        this.temp = data.registers
+        this.registers = this.temp.filter((item, index) => {
+          return index < 10
+        })
+      } catch (error) {
+      }
+    },
+
+    changeCurrentPage(page) {
+      this.registers = this.temp.filter((item, index) => {
+        return index >= (page - 1) * 10 && index < (page * 10)
+      })
+    },
+  }
 }
 </script>

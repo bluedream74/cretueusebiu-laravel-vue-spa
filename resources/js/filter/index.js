@@ -35,6 +35,11 @@ let filters = {
     if(!date) return ''
     return moment.utc(date).local().format('YYYY年MM月DD日')
   },
+  
+  dateFormatEn(date){
+    if(!date) return ''
+    return moment.utc(date).local().format('YYYY/MM/DD')
+  },
 
   yearFormat(date) {
     if(!date) return ''

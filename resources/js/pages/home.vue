@@ -160,7 +160,6 @@
         </div>
       </div>
     </section>
-    <input type="text" id="inpective_value" value="123123123123" />
   </main>
 </template>
 <script>
@@ -178,7 +177,7 @@ export default {
   mounted() {
     setTimeout(() => {
       let recaptchaScript = document.createElement('script')
-      recaptchaScript.setAttribute('src', 'http://hojyokin-katsuyou.com/assets/js/common.js')
+      recaptchaScript.setAttribute('src', 'http://localhost:8000/assets/js/common.js')
       document.head.appendChild(recaptchaScript)
     }, 1000)
 
