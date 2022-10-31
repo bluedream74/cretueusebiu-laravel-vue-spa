@@ -45,8 +45,11 @@ export default [
 
   { path: '/admin/dashboard', name: 'admin.dashboard', component: page('admin/index.vue') },
   { path: '/admin/register', name: 'admin.register', component: page('admin/register/index.vue') },
+  { path: '/admin/register/edit', name: 'admin.register.edit', component: page('admin/register/edit.vue') },
   { path: '/admin/register/history', name: 'admin.register.history', component: page('admin/register/history.vue') },
   { path: '/admin/register/invoice', name: 'admin.register.invoice', component: page('admin/register/invoice.vue') },
+  { path: '/admin/register/koukoku_add', name: 'admin.register.koukoku_add', component: page('admin/register/koukoku_add.vue') },
+  { path: '/admin/register/invoice_pdf', name: 'admin.register.invoice_pdf', component: page('admin/register/invoice_pdf.vue') },
 
   { path: '/admin/consultant', name: 'admin.consultant', component: page('admin/consultation/index.vue') },
   { path: '/admin/consultant/edit', name: 'admin.consultant.edit', component: page('admin/consultation/edit.vue') },

@@ -11,7 +11,7 @@
         </div>
         <h2 class="h_style03"><span>AA株式会社 請求情報一覧</span></h2>
         <div class="table_wrap">
-          <div class="pager_style">
+          <!-- <div class="pager_style">
             <ul>
               <li class="prev"><a href="#">＜＜前の50件</a></li>
               <li><a href="#">1</a></li>
@@ -20,11 +20,10 @@
               <li><a href="#">4</a></li>
               <li class="next"><a href="#">次の50件＞＞</a></li>
             </ul>
-          </div>
+          </div> -->
           <table>
             <tbody>
               <tr>
-                <th width="60">ID</th>
                 <th width="200">請求月</th>
                 <th width="200">利用件数</th>
                 <th width="200">金額</th>
@@ -32,41 +31,13 @@
                 <th width="100">広告費入力</th>
                 <th width="90">請求書発行</th>
               </tr>
-              <tr>
-                <td>0050</td>
-                <td>2022年7月</td>
-                <td>3件</td>
-                <td>￥1,500</td>
-                <td>￥60,000</td>
-                <td><a href="add.html" class="eidt_btn table_btns">広告費入力</a></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>0049</td>
-                <td>2022年6月</td>
-                <td>10件</td>
-                <td>￥5,000</td>
-                <td></td>
-                <td><a href="add.html" class="eidt_btn table_btns">広告費入力</a></td>
-                <td><a href="pdf.html" target="_blank" class="browsing_btn table_btns">PDF出力</a></td>
-              </tr>
-              <tr>
-                <td>0048</td>
-                <td>2022年5月</td>
-                <td>15件</td>
-                <td>￥7,500</td>
-                <td></td>
-                <td><a href="add.html" class="eidt_btn table_btns">広告費入力</a></td>
-                <td><a href="pdf.html" target="_blank" class="browsing_btn table_btns">PDF出力</a></td>
-              </tr>
-              <tr>
-                <td>0047</td>
-                <td>2022年4月</td>
-                <td>10件</td>
-                <td>￥5,000</td>
-                <td></td>
-                <td><a href="add.html" class="eidt_btn table_btns">広告費入力</a></td>
-                <td><a href="pdf.html" target="_blank" class="browsing_btn table_btns">PDF出力</a></td>
+              <tr v-for="(item, index) in kakins" :key="index">
+                <td>{{ item.date }}</td>
+                <td>{{ item.amount }}件</td>
+                <td>￥{{ item.amount * 500 | moneyFormat }}</td>
+                <td>￥{{ !!item.koukoku ? (item.koukoku.price) : '' }}</td>
+                <td><router-link :to="{ name: 'admin.register.koukoku_add', query: { user_id: $route.query.user_id, date: item.date } }" class="eidt_btn table_btns">広告費入力</router-link></td>
+                <td><router-link :to="{ name: 'admin.register.invoice_pdf', query: { user_id: $route.query.user_id, date: item.date, price: (item.amount * 500 + (!!item.koukoku ? item.koukoku.price : 0)), amount: item.amount, koukoku_amount: (!!item.koukoku ? item.koukoku.amount : 0), koukoku_unit: (!!item.koukoku ? item.koukoku.unit : ''), koukoku_price: (!!item.koukoku ? item.koukoku.price: 0) } }" target="_blank" class="browsing_btn table_btns">PDF出力</router-link></td>
               </tr>
             </tbody>
           </table>
@@ -78,6 +49,38 @@
 </template>
 <script>
 export default {
-  
+  layout: 'admin_auth',
+  middleware: 'admin',
+  mounted() {
+    this.init()
+  },
+  data() {
+    return {
+      kakins: []
+    }
+  },
+  methods: {
+    async init() {
+      const { data } = await axios.post('/admin/get_register_invoices', {
+        user_id: this.$route.query.user_id
+      })
+      let temp = []
+      let temp1 = ['2022年10月']
+      temp1.forEach(item => {
+        let filter = data.kakins.filter(it => {
+          return moment(it.created_at).format('YYYY年MM月') == item
+        })
+        let koukoku_filter = data.koukokus.find(it => {
+          return item == it.date
+        })
+        temp.push({
+          amount: filter.length,
+          date: item,
+          koukoku: koukoku_filter
+        })
+      })
+      this.kakins = temp
+    }
+  }
 }
 </script>

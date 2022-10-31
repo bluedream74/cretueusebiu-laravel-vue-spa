@@ -10,39 +10,39 @@
           </ul>
         </div>
         <h2 class="h_style03"><span>支援機関入力(編集)</span></h2>
-        <form class="edit_form" action="check.html">
+        <div class="edit_form" v-if="!!user_info">
             <dl>
               <dt>ID</dt>
-              <dd>1</dd>
+              <dd>{{ !!user_info ? user_info.id : '' }}</dd>
             </dl>
             <dl>
               <dt>利用可否<span>必須</span></dt>
               <dd>
-                <input type="radio" id="koukai" name="koukai_cat" checked="checked">
+                <input type="radio" id="koukai" name="koukai_cat" :checked="user_info.available == 1" @click="() => { user_info.available = 1 }">
                 <label for="koukai">可</label>
-                <input type="radio" id="hikoukai" name="koukai_cat">
+                <input type="radio" id="hikoukai" name="koukai_cat" :checked="user_info.available == 0" @click="() => { user_info.available = 0 }">
                 <label for="hikoukai">否</label>
               </dd>
             </dl>
             <dl>
               <dt>請求有無<span>必須</span></dt>
               <dd>
-                <input type="radio" id="invoice" name="invoice_cat" checked="checked">
+                <input type="radio" id="invoice" name="invoice_cat" :checked="user_info.need_pay == 1" @click="() => { user_info.need_pay = 1 }">
                 <label for="invoice">有</label>
-                <input type="radio" id="invoice_no" name="invoice_cat">
+                <input type="radio" id="invoice_no" name="invoice_cat" :checked="user_info.need_pay == 0" @click="() => { user_info.need_pay = 0 }">
                 <label for="invoice_no">無</label>
               </dd>
             </dl>
             <dl>
               <dt>初回登録日</dt>
-              <dd>
-                <span>2022/07/14</span>
+              <dd v-if="user_info">
+                <span>{{ user_info.created_at | dateFormat }}</span>
               </dd>
             </dl>
             <dl>
               <dt>認定支援機関ID番号<span>必須</span></dt>
               <dd>
-                <input type="text" class="w_150">
+                <input type="text" class="w_150" v-model="user_info.kikan_id">
               </dd>
             </dl>
             <dl>
@@ -50,27 +50,27 @@
               <dd>
                 <input type="text">
                 <p class="mt05">カナ</p>
-                <input type="text">
+                <input type="text" v-model="user_info.com_name">
               </dd>
             </dl>
             <dl>
               <dt>担当名</dt>
               <dd>
-                <input type="text">
+                <input type="text" v-model="user_info.tanto_name">
               </dd>
             </dl>
             <dl>
               <dt>部署名<span>必須</span></dt>
               <dd>
-                <input type="text">
+                <input type="text" v-model="user_info.department_name">
               </dd>
             </dl>
             <dl>
               <dt>法人／個人事業主<span>必須</span></dt>
               <dd>
-                <input type="radio" id="corporation" name="registration_cat" checked="checked">
+                <input type="radio" id="corporation" name="registration_cat" :checked="user_info.is_personal == 0" @click="user_info.is_personal = 0">
                 <label for="corporation">法人</label>
-                <input type="radio" id="freelance" name="registration_cat">
+                <input type="radio" id="freelance" name="registration_cat" :checked="user_info.is_personal == 1" @click="user_info.is_personal = 1">
                 <label for="freelance">個人事業主</label>
               </dd>
             </dl>
@@ -78,16 +78,8 @@
               <dt>種別<span>必須</span></dt>
               <dd>
                 <div class="wrap">
-                  <select class="w_200">
-                    <option value="公認会計士">公認会計士</option>
-                    <option value="税理士">税理士</option>
-                    <option value="中小企業診断士">中小企業診断士</option>
-                    <option value="一般コンサルタント">一般コンサルタント</option>
-                    <option value="弁護士">弁護士</option>
-                    <option value="行政書士">行政書士</option>
-                    <option value="司法書士">司法書士</option>
-                    <option value="金融機関">金融機関</option>
-                    <option value="その他">その他</option>
+                  <select class="w_200" v-model="user_info.kind">
+                    <option v-for="(item, index) in JOB_KINDS" :key="index" :value="index">{{item}}</option>
                   </select>
                 </div>
               </dd>
@@ -97,102 +89,48 @@
               <dd>
                 〒<input type="text" name="" class="w_200 ml05">
                 <div class="wrap ml20">
-                  <select class="w_100">
-                    <option value="北海道">北海道</option>
-                    <option value="青森県">青森県</option>
-                    <option value="岩手県">岩手県</option>
-                    <option value="宮城県">宮城県</option>
-                    <option value="秋田県">秋田県</option>
-                    <option value="山形県">山形県</option>
-                    <option value="福島県">福島県</option>
-                    <option value="茨城県">茨城県</option>
-                    <option value="栃木県">栃木県</option>
-                    <option value="群馬県">群馬県</option>
-                    <option value="埼玉県">埼玉県</option>
-                    <option value="千葉県">千葉県</option>
-                    <option value="東京都">東京都</option>
-                    <option value="神奈川県">神奈川県</option>
-                    <option value="新潟県">新潟県</option>
-                    <option value="富山県">富山県</option>
-                    <option value="石川県">石川県</option>
-                    <option value="福井県">福井県</option>
-                    <option value="山梨県">山梨県</option>
-                    <option value="長野県">長野県</option>
-                    <option value="岐阜県">岐阜県</option>
-                    <option value="静岡県">静岡県</option>
-                    <option value="愛知県">愛知県</option>
-                    <option value="三重県">三重県</option>
-                    <option value="滋賀県">滋賀県</option>
-                    <option value="京都府">京都府</option>
-                    <option value="大阪府">大阪府</option>
-                    <option value="兵庫県">兵庫県</option>
-                    <option value="奈良県">奈良県</option>
-                    <option value="和歌山県">和歌山県</option>
-                    <option value="鳥取県">鳥取県</option>
-                    <option value="島根県">島根県</option>
-                    <option value="岡山県">岡山県</option>
-                    <option value="広島県">広島県</option>
-                    <option value="山口県">山口県</option>
-                    <option value="徳島県">徳島県</option>
-                    <option value="香川県">香川県</option>
-                    <option value="愛媛県">愛媛県</option>
-                    <option value="高知県">高知県</option>
-                    <option value="福岡県">福岡県</option>
-                    <option value="佐賀県">佐賀県</option>
-                    <option value="長崎県">長崎県</option>
-                    <option value="熊本県">熊本県</option>
-                    <option value="大分県">大分県</option>
-                    <option value="宮崎県">宮崎県</option>
-                    <option value="鹿児島県">鹿児島県</option>
-                    <option value="沖縄県">沖縄県</option>
+                  <select class="w_100" v-model="user_info.prefecture">
+                    <option :value="null">--</option>
+                    <option v-for="(item, index) in PREFECTURES" :key="index" :value="item">{{ item }}</option>
                   </select>
                 </div>
                 <p class="mt05">市区町村・番地</p>
-                <input type="text">
+                <input type="text" v-model="user_info.city">
                 <p class="mt05">建物名・部屋番号など</p>
-                <input type="text">
+                <input type="text" v-model="user_info.building">
               </dd>
             </dl>
             <dl>
               <dt>電話番号</dt>
               <dd>
-                <input type="text" class="w_200">
+                <input type="text" class="w_200" v-model="user_info.telephone">
               </dd>
             </dl>
             <dl>
               <dt>FAX</dt>
               <dd>
-                <input type="text" class="w_200">
+                <input type="text" class="w_200" v-model="user_info.fax">
               </dd>
             </dl>
             <dl>
               <dt>メールアドレス<span>必須</span></dt>
               <dd>
-                <input type="text">
+                <input type="text" v-model="user_info.email">
               </dd>
             </dl>
             <dl>
               <dt>PRポイント</dt>
               <dd>
-                <textarea cols="30" rows="5"></textarea>
+                <textarea cols="30" rows="5" v-model="user_info.description"></textarea>
               </dd>
             </dl>
             <dl>
               <dt>支援可能内容<span>必須</span></dt>
               <dd>
                 <div>
-                  <input type="checkbox" id="display01" checked><label for="display01">事業再構築補助金</label>
-                  <input type="checkbox" id="display02"><label for="display02">ものづくり補助金</label>
-                  <input type="checkbox" id="display03"><label for="display03">小規模事業者補助金</label>
-                  <input type="checkbox" id="display04"><label for="display04">創業支援</label>
-                  <input type="checkbox" id="display05"><label for="display05">事業承継支援</label>
-                  <input type="checkbox" id="display06"><label for="display06">経営改善計画策定</label>
-                  <input type="checkbox" id="display07"><label for="display07">IT導入補助金</label>
-                  <input type="checkbox" id="display09"><label for="display09">経営力向上計画</label>
-                  <input type="checkbox" id="display10"><label for="display10">先端設備等導入計画</label>
-                  <input type="checkbox" id="display11" checked><label for="display11">経営革新計画</label>
-                  <input type="checkbox" id="display12"><label for="display12">事業継続力強化計画</label>
-                  <input type="checkbox" id="display13"><label for="display13">その他</label>
+                  <span v-for="(item, index) in CONTENTS" :key="index">
+                    <input type="checkbox" :id="'display' + (index + 1)" :value="index" :checked="available_contents.includes(index)" @change="changeContent($event, item, index)"><label :for="'display' + (index + 1)">{{ item }}</label>
+                  </span>
                 </div>
               </dd>
             </dl>
@@ -200,31 +138,9 @@
               <dt>支援可能業種<span>必須</span></dt>
               <dd>
                 <div>
-                  <input type="checkbox" id="display14"><label for="display14">農業、林業</label>
-                  <input type="checkbox" id="display15"><label for="display15">漁業</label>
-                  <input type="checkbox" id="display16" checked><label for="display16">鉱業、採石業、砂利採取業</label>
-                  <input type="checkbox" id="display17"><label for="display17">建設業</label>
-                  <input type="checkbox" id="display18" checked><label for="display18">製造業</label>
-                  <input type="checkbox" id="display19"><label for="display19">電気</label>
-                  <input type="checkbox" id="display20"><label for="display20">ガス</label>
-                  <input type="checkbox" id="display21"><label for="display21">熱供給</label>
-                  <input type="checkbox" id="display22"><label for="display22">水道業</label>
-                  <input type="checkbox" id="display23" checked><label for="display23">情報通信業</label>
-                  <input type="checkbox" id="display24"><label for="display24">運輸業</label>
-                  <input type="checkbox" id="display25"><label for="display25">郵便業</label>
-                  <input type="checkbox" id="display26"><label for="display26">卸売業、小売業</label>
-                  <input type="checkbox" id="display27"><label for="display27">金融業、保険業</label>
-                  <input type="checkbox" id="display28" checked><label for="display28">不動産業、物品賃貸業</label>
-                  <input type="checkbox" id="display29"><label for="display29">学術研究、専門</label>
-                  <input type="checkbox" id="display30"><label for="display30">技術サービス業</label>
-                  <input type="checkbox" id="display31"><label for="display31">宿泊業、飲食サービス業</label>
-                  <input type="checkbox" id="display32"><label for="display32">生活関連サービス業、娯楽業</label>
-                  <input type="checkbox" id="display33"><label for="display33">教育、学習支援業</label>
-                  <input type="checkbox" id="display34"><label for="display34">医療、福祉</label>
-                  <input type="checkbox" id="display35" checked><label for="display35">複合サービス事業</label>
-                  <input type="checkbox" id="display36"><label for="display36">サービス業（他に分類されないもの）</label>
-                  <input type="checkbox" id="display37"><label for="display37">公務（他に分類されるものを除く）</label>
-                  <input type="checkbox" id="display38"><label for="display38">分類不能の産業</label>
+                  <span v-for="(item, index) in JOBS" :key="index">
+                    <input type="checkbox" :id="'job' + (index + 1)" :value="index" :checked="available_jobs.includes(index)" @change="changeJob($event, item, index)"><label :for="'job' + (index + 1)">{{ item }}</label>
+                  </span>
                 </div>
               </dd>
             </dl>
@@ -232,10 +148,9 @@
               <dt>支援可能年商<span>必須</span></dt>
               <dd>
                 <div>
-                  <input type="checkbox" id="display39" checked><label for="display39">5,000万円未満</label>
-                  <input type="checkbox" id="display40" checked><label for="display40">5,000万円以上3億円未満</label>
-                  <input type="checkbox" id="display41"><label for="display41">3億円以上10億円未満</label>
-                  <input type="checkbox" id="display42"><label for="display42">10億円以上</label>
+                  <span v-for="(item, index) in PRICES" :key="index">
+                    <input type="checkbox" :id="'price' + (index + 1)" :value="index" :checked="available_prices.includes(index)" @change="changePrice($event, item, index)"><label :for="'price' + (index + 1)">{{ item }}</label>
+                  </span>
                 </div>
               </dd>
             </dl>
@@ -243,26 +158,230 @@
               <dt>支援可能従業員規模<span>必須</span></dt>
               <dd>
                 <div>
-                  <input type="checkbox" id="display43" checked><label for="display43">10人未満</label>
-                  <input type="checkbox" id="display44" checked><label for="display44">10人以上30人未満</label>
-                  <input type="checkbox" id="display45" checked><label for="display45">30人以上50人未満</label>
-                  <input type="checkbox" id="display46"><label for="display46">50人以上100人未満</label>
-                  <input type="checkbox" id="display47"><label for="display47">100人以上300人未満</label>
-                  <input type="checkbox" id="display48"><label for="display48">300人以上</label>
+                  <span v-for="(item, index) in AMOUNTS" :key="index">
+                    <input type="checkbox" :id="'amount' + (index + 1)" :value="index" :checked="available_amounts.includes(index)" @change="changeAmount($event, item, index)"><label :for="'amount' + (index + 1)">{{ item }}</label>
+                  </span>
                 </div>
               </dd>
             </dl>
             <div class="submit_wrap">
-              <div class="form_btn_blue"><span><input type="submit" value="変更"></span></div>
+              <div class="form_btn_blue"><span><input @click="updateProc" type="button" value="変更"></span></div>
             </div>
-        </form>
+          </div>
       </div>
 
     </main>
   </div>
 </template>
 <script>
+import { JOB_KINDS, CONTENTS, JOBS, PRICES, AMOUNTS, PREFECTURES } from '../../../const';
 export default {
-  
+  layout: 'admin_auth',
+  middleware: 'admin',
+  data() {
+    return {
+      JOB_KINDS: JOB_KINDS,
+			CONTENTS: CONTENTS,
+			JOBS: JOBS,
+			PRICES: PRICES,
+			AMOUNTS: AMOUNTS,
+			PREFECTURES,
+
+      kikan_id: null,
+      available: 1,
+      need_pay: 1,
+			com_name: null,
+			com_huri_name: null,
+			tanto_name: null,
+			department_name: null,
+			role_name: null,
+			is_personal: 0,
+			kind: null,
+			zipcode: null,
+			prefecture: null,
+			city: null,
+			building: null,
+			telephone: null,
+			fax: null,
+			email: null,
+			password: null,
+			introduction: null,
+			available_contents: [],
+			available_jobs: [],
+			available_prices: [],
+			available_amounts: [],
+      user_info: null
+    }
+  },
+  mounted() {
+    this.init()
+  },
+  methods: {
+    async init() {
+      try {
+        const { data } = await axios.post('/admin/get_user_info', {
+          user_id: this.$route.query.user_id
+        })
+        this.user_info = data.user_info
+        this.kikan_id = data.user_info.kikan_id
+        this.available_contents = data.available_contents.map(item => {
+          return item.content_id
+        })
+        this.available_jobs = data.available_jobs.map(item => {
+          return item.job_id
+        })
+        this.available_amounts = data.available_amounts.map(item => {
+          return item.amount_id
+        })
+        this.available_prices = data.available_prices.map(item => {
+          return item.price_id
+        })
+      } catch (error) {
+      }
+    },
+
+    async updateProc() {
+      console.log(this.user_info, 'this.user_info123')
+      if (!this.user_info.kikan_id) {
+				this.$swal('', '認定支援機関ID番号を入力してください')
+				return
+			}
+			if (this.user_info.kikan_id.length != 12) {
+				this.$swal('', '桁数は12桁となります')
+				return
+			}
+
+			if (!this.user_info.com_name) {
+				this.$swal('', '会社名を入力してください')
+				return
+			}
+
+			if (!this.user_info.com_huri_name) {
+				this.$swal('', '会社名(フリガナ)を入力してください')
+				return
+			}
+
+			if (!this.user_info.tanto_name) {
+				this.$swal('', '担当者氏名を入力してください')
+				return
+			}
+
+			if (!this.user_info.kind) {
+				this.$swal('', '種別を選択してください')
+				return
+			}
+
+			if (!this.user_info.zipcode) {
+				this.$swal('', '会社所在地の郵便番号を入力してください')
+				return
+			}
+
+			if (!this.user_info.prefecture) {
+				this.$swal('', '会社所在地の都道府県を選択してください')
+				return
+			}
+
+			if (!this.user_info.city) {
+				this.$swal('', '市区町村番地を入力してください')
+				return
+			}
+
+			if (!this.user_info.email) {
+				this.$swal('', 'メールアドレスを入力してください')
+				return
+			}
+
+			if (!this.user_info.password) {
+				this.$swal('', 'マイページパスワードを入力してください')
+				return
+			}
+
+			if (this.available_contents.length == 0) {
+				this.$swal('', '支援可能内容を設定してください')
+				return
+			}
+
+			if (this.available_jobs.length == 0) {
+				this.$swal('', '支援可能業種を設定してください')
+				return
+			}
+
+			if (this.available_prices.length == 0) {
+				this.$swal('', '支援可能年商を設定してください')
+				return
+			}
+
+			if (this.available_amounts.length == 0) {
+				this.$swal('', '支援可能従業員規模を設定してください')
+				return
+			}
+
+      const { data } = await axios.post('/admin/user_info_edit', {
+        kikan_id: this.user_info.kikan_id,
+        com_name: this.user_info.com_name,
+        com_huri_name: this.user_info.com_huri_name,
+        tanto_name: this.user_info.tanto_name,
+        department_name: this.user_info.department_name,
+        role_name: this.user_info.role_name,
+        is_personal: this.user_info.is_personal,
+        kind: this.user_info.kind,
+        zipcode: this.user_info.zipcode,
+        prefecture: this.user_info.prefecture,
+        city: this.user_info.city,
+        building: this.user_info.building,
+        telephone: this.user_info.telephone,
+        fax: this.user_info.fax,
+        email: this.user_info.email,
+        introduction: this.user_info.introduction,
+        available_contents: this.available_contents,
+        available_jobs: this.available_jobs,
+        available_prices: this.available_prices,
+        available_amounts: this.available_amounts,
+        user_id: this.user_info.id
+      })
+      this.$router.back()
+    },
+    
+    changeContent(event, content, index) {
+			if (event.target.checked == true) {
+				this.available_contents.push(index)
+			} else {
+				let temp = this.available_contents.slice()
+				const idex = temp.indexOf(index)
+				temp.splice(idex, 1)
+				this.available_contents = temp
+			}
+		},
+    changeJob(event, job, index) {
+			if (event.target.checked == true) {
+				this.available_jobs.push(index)
+			} else {
+				let temp = this.available_jobs.slice()
+				const idex = temp.indexOf(index)
+				temp.splice(idex, 1)
+				this.available_jobs = temp
+			}
+		},
+		changePrice(event, price, index) {
+			if (event.target.checked == true) {
+				this.available_prices.push(index)
+			} else {
+				let temp = this.available_prices.slice()
+				const idex = temp.indexOf(index)
+				temp.splice(idex, 1)
+				this.available_prices = temp
+			}
+		},
+		changeAmount(event, amount, index) {
+			if (event.target.checked == true) {
+				this.available_amounts.push(index)
+			} else {
+				let temp = this.available_amounts.slice()
+				const idex = temp.indexOf(index)
+				temp.splice(idex, 1)
+				this.available_amounts = temp
+			}
+		},
+  }
 }
 </script>

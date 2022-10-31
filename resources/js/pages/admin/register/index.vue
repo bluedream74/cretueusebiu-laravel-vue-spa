@@ -12,7 +12,7 @@
         <div class="graph_form mt10 mb30">
           <div class="select_wrap">
             <p>支援機関情報CSV出力</p>
-            <a href="javascript:void(0)" class="btn_blue" download="">ダウンロード</a>
+            <a @click="downloadCSV" class="btn_blue" download="">ダウンロード</a>
           </div>
         </div>
         <form class="search_form">
@@ -20,26 +20,26 @@
             <dl class="input_txt">
               <dt>支援機関名</dt>
               <dd>
-                <input type="text">
+                <input v-model="search.name" type="text">
               </dd>
             </dl>
             <dl class="input_txt">
               <dt>利用可否</dt>
               <dd>
-                <input type="radio" id="koukai" name="koukai_cat" checked="checked">
+                <input type="radio" id="koukai" name="koukai_cat" :checked="search.available == 1" @click="() => search.available = 1">
                 <label for="koukai">可</label>
-                <input type="radio" id="hikoukai" name="koukai_cat">
+                <input type="radio" id="hikoukai" name="koukai_cat" :checked="search.available == 0" @click="() => search.available = 0">
                 <label for="hikoukai">否</label>
               </dd>
             </dl>
           </div>
           <div class="submit_wrap">
-            <div class="form_btn_blue"><span><input type="submit" value="検索"></span></div>
-            <div class="cancel_btn"><button type="button">リセット</button></div>
+            <div class="form_btn_blue"><span><input @click="init" value="検索"></span></div>
+            <div class="cancel_btn"><button @click="resetForm" type="button">リセット</button></div>
           </div>
         </form>
         <div class="flex_btw_wrap">
-          <div class="load_btn"><a href="javascript:void(0)"><span>表示の更新</span></a></div>
+          <div class="load_btn"><a @click="reload"><span>表示の更新</span></a></div>
         </div>
         <div class="table_wrap">
           <!-- <div class="pager_style">
@@ -67,15 +67,15 @@
               </tr>
               <tr v-for="(item, index) in temp" :key="index">
                 <td>{{ item.kikan_id }}</td>
-                <td><input type="checkbox" id="koukai50" class="display_btn"><label for="koukai50"></label></td>
-                <td><input type="checkbox" id="display50" class="display_btn"><label for="display50"></label></td>
+                <td><input type="checkbox" :id="'koukai' + index" class="display_btn" :checked="item.available == 1" @change="changeAvailable(item, $event)"><label :for="'koukai' + index"></label></td>
+                <td><input type="checkbox" :id="'display' + index" class="display_btn" :checked="item.need_pay == 1" @change="changeNeedPay(item, $event)"><label :for="'display' + index"></label></td>
                 <td>{{ item.created_at | dateFormatEn }}</td>
                 <td>{{ item.com_name }}</td>
                 <td><router-link :to="{ name: 'admin.register.history', query: {user_id: item.id } }" class="eidt_btn table_btns">回答履歴</router-link></td>
-                <td><a href="invoice.html" class="browsing_btn table_btns">請求情報</a></td>
+                <td><router-link :to="{ name: 'admin.register.invoice', query: {user_id: item.id } }" class="browsing_btn table_btns">請求情報</router-link></td>
                 <td>
-                  <a href="edit.html" class="eidt_btn table_btns">編集</a>
-                  <span class="delete_btn table_btns">削除 </span>
+                  <router-link :to="{ name: 'admin.register.edit', query: { user_id: item.id } }" class="eidt_btn table_btns">編集</router-link>
+                  <span @click="deleteProc(item)" class="delete_btn table_btns">削除 </span>
                 </td>
               </tr>
             </tbody>
@@ -100,26 +100,80 @@ export default {
   data() {
     return {
       registers: [],
-      temp: []
+      temp: [],
+      search: {
+        name: '',
+        available: 1
+      }
     }
   },
   methods: {
+    reload() {
+      this.init()
+    },
+    resetForm() {
+      this.search = {
+        name: '',
+        available: 1
+      }
+    },
     async init() {
       try {
         const { data } = await axios.post('/admin/get_register_list')
-        this.temp = data.registers
+        this.temp = data.registers.filter(item => {
+          if (this.search.name != '') {
+            return item.com_name.includes(this.search.name) && item.available == this.search.available
+          } else {
+            return item.available == this.search.available
+          }
+        })
         this.registers = this.temp.filter((item, index) => {
           return index < 10
         })
       } catch (error) {
       }
     },
-
+    async changeAvailable(item, event) {
+      try {
+        const { data } = await axios.post('/admin/change_available', {
+          id: item.id,
+          flag: event.target.checked ? 1 : 0
+        })
+        this.init()
+      } catch (error) {
+      }
+    },
+    async downloadCSV() {
+      let users = this.temp.map(item => {
+        return item.id
+      })
+      let newWindow = window.open();
+      newWindow.location = 'https://' + window.location.hostname + `/admin/download_csv?users=${JSON.stringify(users)}`;
+    },
+    async changeNeedPay(item, event) {
+      try {
+        const { data } = await axios.post('/admin/change_need_pay', {
+          id: item.id,
+          flag: event.target.checked ? 1 : 0
+        })
+        this.init()
+      } catch (error) {
+      }
+    },
     changeCurrentPage(page) {
       this.registers = this.temp.filter((item, index) => {
         return index >= (page - 1) * 10 && index < (page * 10)
       })
     },
+    async deleteProc(item) {
+      try {
+        const { data } = await axios.post('/admin/delete_user', {
+          id: item.id
+        })
+        this.init()
+      } catch (error) {
+      }
+    }
   }
 }
 </script>

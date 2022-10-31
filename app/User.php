@@ -40,7 +40,9 @@ class User extends Authenticatable implements JWTSubject// , MustVerifyEmail
         'introduction',
         'is_email_authenticated',
         'token',
-        'token_at'
+        'token_at',
+        'available',
+        'need_pay'
     ];
 
     /**

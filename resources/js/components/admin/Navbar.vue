@@ -6,14 +6,19 @@
 				<li class="menu"><router-link :to="{ name: 'admin.dashboard' }"><span>メニュー画面へ</span></router-link></li>
 				<li class="menu"><router-link :to="{ name: 'admin.password' }"><span>パスワード変更</span></router-link></li>
 				<li class="menu"><router-link :to="{ name: 'home' }"><span>サイトを表示</span></router-link></li>
-				<li class="logout"><a><span>ログアウト</span></a></li>
+				<li class="logout"><a @click="logout"><span>ログアウト</span></a></li>
 			</ul>
 		</div>
 	</header>
 </template>
 <script>
 export default {
-    
+    methods: {
+			async logout() {
+				await this.$store.dispatch('admin_auth/logout')
+      	this.$router.push({ name: 'admin.login' })
+			}
+		}
 }
 </script>
 <style lang="scss" scoped>
