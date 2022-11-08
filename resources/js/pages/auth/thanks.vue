@@ -7,7 +7,7 @@
 					<div class="sitewrap">
 						<ol id="pan">
 							<li><router-link :to="{ name: 'home' }">TOP</router-link></li>
-							<li><router-link :to="{ name: 'register' }" href="index.html">支援機関新規登録</router-link></li>
+							<li><router-link :to="{ name: 'register' }">支援機関新規登録</router-link></li>
 							<li><span>仮登録完了</span></li>
 						</ol>
 					</div>
@@ -27,7 +27,7 @@
 							<p>メールが届かない場合、【メールアドレスの間違い】や【メール受信設定されていない】または【迷惑メールフォルダ】に入ってしまっている可能性がありますので、ご確認ください。</p>
 						</div>
 						<div class="common_btn2 backbtn">
-							<a href="../" class="blue"><span>TOPへ戻る</span></a>
+							<router-link :to="{ name: 'login' }" class="blue"><span>ログインへ</span></router-link>
 						</div>
 					</div>
 				</section>

@@ -11,12 +11,16 @@ use App\Models\AvailablePrice;
 use App\Models\AvailableAmount;
 use App\Models\ConsultantKakin;
 use App\Models\Koukoku;
+use App\Models\News;
+use App\Models\Banner;
 use Illuminate\Support\Facades\Auth;
 use App\Jobs\WarningEmailJob;
 use Carbon\Carbon;
+use App\Traits\FileUpload;
 
 class CommonController extends BaseController
 {
+    use FileUpload;
     public function getRegisterList(Request $request) {
       $registers = User::get();
 
@@ -278,6 +282,120 @@ class CommonController extends BaseController
 
       return response()->json([
         'flag' => true
+      ]);
+    }
+
+    public function getNewsList(Request $request) {
+      $news = News::get();
+      
+      return response()->json([
+        'news' => $news
+      ]); 
+    }
+
+    public function getBannerList(Request $request) {
+      $banners = Banner::get();
+      
+      return response()->json([
+        'banners' => $banners
+      ]); 
+    }
+
+    public function deleteNewsProc(Request $request) {
+      News::where('id', $request->input('id'))->delete();
+
+      return response()->json([
+        'flag' => true
+      ]);
+    }
+
+    public function deleteBannerProc(Request $request) {
+      Banner::where('id', $request->input('id'))->delete();
+
+      return response()->json([
+        'flag' => true
+      ]);
+    }
+
+    public function createNews(Request $request) {
+      if ($request->file('pdf') != 'null' && $request->file('pdf') != null) {
+        $pdf_url = $this->uploadFile($request->file('pdf'), 'upload');
+      } else {
+        $pdf_url = null;
+      }
+      
+      News::create([
+        'is_public' => intval($request->input('is_public')),
+        'start_at' => $request->input('start_at') == 'null' || $request->input('start_at') == null ? null : $request->input('start_at'),
+        'end_at' => $request->input('end_at') == 'null' || $request->input('end_at') == null ? null : $request->input('end_at'),
+        'title' => $request->input('title') == 'null' ? null : $request->input('title'),
+        'url' => $request->input('url') == 'null' ? null : $request->input('url'),
+        'pdf' => $pdf_url,
+        'pdf_title' => $request->input('pdf_title') == 'null' ? null : $request->input('pdf_title'),
+        'content' => $request->input('content') == 'null' ? null : $request->input('content'),
+      ]);
+    }
+
+    public function createBanner(Request $request) {
+      if ($request->file('image') != 'null' && $request->file('image') != null) {
+        $image_url = $this->uploadFile($request->file('image'), 'upload');
+      } else {
+        $image_url = null;
+      }
+      
+      Banner::create([
+        'is_public' => intval($request->input('is_public')),
+        'title' => $request->input('title') == 'null' ? null : $request->input('title'),
+        'link' => $request->input('link') == 'null' ? null : $request->input('link'),
+        'image' => $image_url
+      ]);
+    }
+
+    public function getNewsDetail(Request $request) {
+      $news = News::where('id', $request->input('id'))->first();
+      return response()->json([
+        'news' => $news
+      ]);
+    }
+
+    public function getBannerDetail(Request $request) {
+      $banner = Banner::where('id', $request->input('id'))->first();
+      return response()->json([
+        'banner' => $banner
+      ]);
+    }
+
+    public function updateNews(Request $request) {
+      if ($request->file('pdf') != 'null' && $request->file('pdf') != null) {
+        $pdf_url = $this->uploadFile($request->file('pdf'), 'upload');
+      } else {
+        $pdf_url = null;
+      }
+      
+      News::where('id', $request->input('id'))->update([
+        'is_public' => intval($request->input('is_public')),
+        'start_at' => $request->input('start_at') == 'null' || $request->input('start_at') == null ? null : $request->input('start_at'),
+        'end_at' => $request->input('end_at') == 'null' || $request->input('end_at') == null ? null : $request->input('end_at'),
+        'title' => $request->input('title') == 'null' ? null : $request->input('title'),
+        'url' => $request->input('url') == 'null' ? null : $request->input('url'),
+        'pdf' => $pdf_url,
+        'pdf_title' => $request->input('pdf_title') == 'null' ? null : $request->input('pdf_title'),
+        'content' => $request->input('content') == 'null' ? null : $request->input('content'),
+      ]);
+    }
+
+    public function updateBanner(Request $request) {
+      if ($request->file('pdf') != 'null' && $request->file('pdf') != null) {
+        $pdf_url = $this->uploadFile($request->file('pdf'), 'upload');
+      } else {
+        $pdf_url = null;
+      }
+      
+      Banner::where('id', $request->input('id'))->update([
+        'is_public' => intval($request->input('is_public')),
+        'title' => $request->input('title') == 'null' ? null : $request->input('title'),
+        'link' => $request->input('link') == 'null' ? null : $request->input('link'),
+        'image' => $image_url
       ]);
     }
 }
