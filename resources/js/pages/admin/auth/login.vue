@@ -56,7 +56,7 @@ export default {
         if (error.response.data.error == 'Already authenticated.') {
           console.clear();
           await this.$store.dispatch('admin_auth/fetchUser')
-          this.$router.push({ name: 'admin.users' })
+          this.$router.push({ name: 'admin.register' })
         } else {
           this.error = 'ログインに失敗しました。'
           this.$swal('', 'メールアドレスまたはパスワードに誤りがあります。')

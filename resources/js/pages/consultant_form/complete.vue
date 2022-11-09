@@ -26,9 +26,7 @@
 							<router-link :to="{ name: 'home' }" class="blue"><span>TOPへ戻る</span></router-link>
 						</div>
 					</div>
-				</section
-
-			></div>
+				</section></div>
 		</main>
   </div>
 </template>
