@@ -47,7 +47,7 @@
               <dd><input type="text" v-model="link"></dd>
             </dl>
             <div class="submit_wrap">
-              <div class="form_btn_blue"><span><input type="submit" value="変更"></span></div>
+              <div class="form_btn_blue"><span><input type="submit" value="新規登録"></span></div>
             </div>
         </form>
       </div>
