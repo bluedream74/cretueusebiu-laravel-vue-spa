@@ -8,6 +8,8 @@ class Banner extends Model {
     'title',
     'image',
     'link',
+    'start_at',
+    'end_at'
   ];
 
   protected $table = 'banners';

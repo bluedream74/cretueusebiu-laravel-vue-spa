@@ -38,7 +38,7 @@
                 <td>{{ item.id }}</td>
                 <td><input type="checkbox" :id="'display' + index" class="display_btn" :checked="item.is_public == 1"><label :for="'display' + index"></label></td>
                 <td>{{ item.title }}</td>
-                <td>{{ item.link }}</td>
+                <td>{{ item.start_at | dateFormat }}～{{ item.end_at | dateFormat }}</td>
                 <td>
                   <router-link :to="{ name: 'admin.add_bnr.edit', query: { id: item.id } }" class="eidt_btn table_btns">編集</router-link>
                   <span @click="deleteProc(item.id)" class="delete_btn table_btns">削除 </span>

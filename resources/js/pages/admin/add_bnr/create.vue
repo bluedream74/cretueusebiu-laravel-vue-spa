@@ -31,9 +31,9 @@
             <dl>
               <dt>公開期間<span>必須</span></dt>
               <dd>
-                <input type="text" class="datepicker">
+                <input type="date" class="datepicker" v-model="start_at">
                 ～
-                <input type="text" class="datepicker">
+                <input type="date" class="datepicker" v-model="end_at">
               </dd>
             </dl>
             <dl>
@@ -63,6 +63,8 @@ export default {
       title: null,
       link: null,
       image: null,
+      start_at: null,
+      end_at: null,
     }
   },
   methods: {
@@ -76,13 +78,23 @@ export default {
       }
     },
     async createNews() {
-      // if (!this.start_at) {
-      //   this.$swal('', '公開期間を指定してください')
-      //   return
-      // }
-
       if (!this.title) {
-        this.$swal('', 'タイトルを入力してください。')
+        this.$swal('', 'バナー名を入力してください。')
+        return
+      }
+
+      if (!this.start_at) {
+        this.$swal('', '公開期間を指定してください')
+        return
+      }
+
+      if (!this.image) {
+        this.$swal('', 'バナー画像を選択してください')
+        return
+      }
+
+      if (!this.link) {
+        this.$swal('', 'リンク先URLを入力してください')
         return
       }
 
@@ -90,6 +102,8 @@ export default {
       formData.append('is_public', this.is_public)
       formData.append('title', this.title)
       formData.append('link', this.link)
+      formData.append('start_at', this.start_at)
+      formData.append('end_at', this.end_at)
       formData.append('image', this.image)
       await axios.post('/admin/create_banner', formData, { headers: { 'Content-Type': 'multipart/form-data' }})
       this.$router.push({ name: 'admin.add_bnr' })

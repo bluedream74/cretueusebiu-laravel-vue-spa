@@ -83,8 +83,8 @@ export default {
           id: this.$route.query.id
         })
         this.is_public = data.news.is_public
-        this.start_at = data.news.start_at
-        this.end_at = data.news.end_at
+        this.start_at = !!data.news.start_at ? moment(data.news.start_at, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD') : null
+        this.end_at = !!data.news.end_at ? moment(data.news.end_at, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD') : null
         this.title = data.news.title
         this.url = data.news.url
         this.pdf = data.news.pdf

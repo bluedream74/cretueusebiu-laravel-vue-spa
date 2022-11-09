@@ -13,7 +13,7 @@
         <form class="edit_form" @submit.prevent="createNews">
             <dl>
               <dt>ID</dt>
-              <dd>1</dd>
+              <dd>{{ id }}</dd>
             </dl>
             <dl>
               <dt>公開・非公開<span>必須</span></dt>
@@ -31,9 +31,9 @@
             <dl>
               <dt>公開期間<span>必須</span></dt>
               <dd>
-                <input type="text" class="datepicker">
+                <input type="date" class="datepicker" v-model="start_at">
                 ～
-                <input type="text" class="datepicker">
+                <input type="date" class="datepicker" v-model="end_at">
               </dd>
             </dl>
             <dl>
@@ -56,6 +56,7 @@
   </div>
 </template>
 <script>
+import moment from 'moment'
 export default {
   data() {
     return {
@@ -63,6 +64,9 @@ export default {
       title: null,
       link: null,
       image: null,
+      start_at: null,
+      end_at: null,
+      id: null
     }
   },
   mounted() {
@@ -77,6 +81,9 @@ export default {
         this.is_public = data.banner.is_public
         this.title = data.banner.title
         this.link = data.banner.link
+        this.start_at = !!data.banner.start_at ? moment(data.banner.start_at, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD') : null
+        this.end_at = !!data.banner.end_at ? moment(data.banner.end_at, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD') : null
+        this.id = data.banner.id
       } catch (error) {
       } 
     },
@@ -90,13 +97,18 @@ export default {
       }
     },
     async createNews() {
-      // if (!this.start_at) {
-      //   this.$swal('', '公開期間を指定してください')
-      //   return
-      // }
-
       if (!this.title) {
-        this.$swal('', 'タイトルを入力してください。')
+        this.$swal('', 'バナー名を入力してください。')
+        return
+      }
+
+      if (!this.start_at) {
+        this.$swal('', '公開期間を指定してください')
+        return
+      }
+
+      if (!this.link) {
+        this.$swal('', 'リンク先URLを入力してください')
         return
       }
 
@@ -105,6 +117,8 @@ export default {
       formData.append('title', this.title)
       formData.append('link', this.link)
       formData.append('image', this.image)
+      formData.append('start_at', this.start_at)
+      formData.append('end_at', this.end_at)
       formData.append('id', this.$route.query.id)
       await axios.post('/admin/update_banner', formData, { headers: { 'Content-Type': 'multipart/form-data' }})
       this.$router.push({ name: 'admin.add_bnr' })

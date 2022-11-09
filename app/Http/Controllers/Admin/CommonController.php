@@ -345,6 +345,8 @@ class CommonController extends BaseController
       
       Banner::create([
         'is_public' => intval($request->input('is_public')),
+        'start_at' => $request->input('start_at') == 'null' || $request->input('start_at') == null ? null : $request->input('start_at'),
+        'end_at' => $request->input('end_at') == 'null' || $request->input('end_at') == null ? null : $request->input('end_at'),
         'title' => $request->input('title') == 'null' ? null : $request->input('title'),
         'link' => $request->input('link') == 'null' ? null : $request->input('link'),
         'image' => $image_url
@@ -368,34 +370,54 @@ class CommonController extends BaseController
     public function updateNews(Request $request) {
       if ($request->file('pdf') != 'null' && $request->file('pdf') != null) {
         $pdf_url = $this->uploadCommon($request->file('pdf'), 'upload');
+
+        News::where('id', $request->input('id'))->update([
+          'is_public' => intval($request->input('is_public')),
+          'start_at' => $request->input('start_at') == 'null' || $request->input('start_at') == null ? null : $request->input('start_at'),
+          'end_at' => $request->input('end_at') == 'null' || $request->input('end_at') == null ? null : $request->input('end_at'),
+          'title' => $request->input('title') == 'null' ? null : $request->input('title'),
+          'url' => $request->input('url') == 'null' ? null : $request->input('url'),
+          'pdf' => $pdf_url,
+          'pdf_title' => $request->input('pdf_title') == 'null' ? null : $request->input('pdf_title'),
+          'content' => $request->input('content') == 'null' ? null : $request->input('content'),
+        ]);
       } else {
         $pdf_url = null;
+
+        News::where('id', $request->input('id'))->update([
+          'is_public' => intval($request->input('is_public')),
+          'start_at' => $request->input('start_at') == 'null' || $request->input('start_at') == null ? null : $request->input('start_at'),
+          'end_at' => $request->input('end_at') == 'null' || $request->input('end_at') == null ? null : $request->input('end_at'),
+          'title' => $request->input('title') == 'null' ? null : $request->input('title'),
+          'url' => $request->input('url') == 'null' ? null : $request->input('url'),
+          'pdf_title' => $request->input('pdf_title') == 'null' ? null : $request->input('pdf_title'),
+          'content' => $request->input('content') == 'null' ? null : $request->input('content'),
+        ]);
       }
-      
-      News::where('id', $request->input('id'))->update([
-        'is_public' => intval($request->input('is_public')),
-        'start_at' => $request->input('start_at') == 'null' || $request->input('start_at') == null ? null : $request->input('start_at'),
-        'end_at' => $request->input('end_at') == 'null' || $request->input('end_at') == null ? null : $request->input('end_at'),
-        'title' => $request->input('title') == 'null' ? null : $request->input('title'),
-        'url' => $request->input('url') == 'null' ? null : $request->input('url'),
-        'pdf' => $pdf_url,
-        'pdf_title' => $request->input('pdf_title') == 'null' ? null : $request->input('pdf_title'),
-        'content' => $request->input('content') == 'null' ? null : $request->input('content'),
-      ]);
     }
 
     public function updateBanner(Request $request) {
       if ($request->file('pdf') != 'null' && $request->file('pdf') != null) {
-        $pdf_url = $this->uploadFile($request->file('pdf'), 'upload');
+        $image_url = $this->uploadFile($request->file('pdf'), 'upload');
+
+        Banner::where('id', $request->input('id'))->update([
+          'is_public' => intval($request->input('is_public')),
+          'start_at' => $request->input('start_at') == 'null' || $request->input('start_at') == null ? null : $request->input('start_at'),
+          'end_at' => $request->input('end_at') == 'null' || $request->input('end_at') == null ? null : $request->input('end_at'),
+          'title' => $request->input('title') == 'null' ? null : $request->input('title'),
+          'link' => $request->input('link') == 'null' ? null : $request->input('link'),
+          'image' => $image_url
+        ]);
       } else {
-        $pdf_url = null;
+        $image_url = null;
+
+        Banner::where('id', $request->input('id'))->update([
+          'is_public' => intval($request->input('is_public')),
+          'start_at' => $request->input('start_at') == 'null' || $request->input('start_at') == null ? null : $request->input('start_at'),
+          'end_at' => $request->input('end_at') == 'null' || $request->input('end_at') == null ? null : $request->input('end_at'),
+          'title' => $request->input('title') == 'null' ? null : $request->input('title'),
+          'link' => $request->input('link') == 'null' ? null : $request->input('link'),
+        ]);
       }
-      
-      Banner::where('id', $request->input('id'))->update([
-        'is_public' => intval($request->input('is_public')),
-        'title' => $request->input('title') == 'null' ? null : $request->input('title'),
-        'link' => $request->input('link') == 'null' ? null : $request->input('link'),
-        'image' => $image_url
-      ]);
     }
 }
