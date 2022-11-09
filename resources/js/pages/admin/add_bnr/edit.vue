@@ -40,6 +40,9 @@
               <dt>バナー画像<span>必須</span></dt>
               <dd>
                 <label for="photo"><input type="file" name="" id="photo" @change="selectedPDF" accept="image/*"></label>
+                <p class="image">
+                  <img :src="image_url" />
+                </p>
               </dd>
             </dl>
             <dl>
@@ -66,7 +69,8 @@ export default {
       image: null,
       start_at: null,
       end_at: null,
-      id: null
+      id: null,
+      image_url: null
     }
   },
   mounted() {
@@ -84,6 +88,7 @@ export default {
         this.start_at = !!data.banner.start_at ? moment(data.banner.start_at, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD') : null
         this.end_at = !!data.banner.end_at ? moment(data.banner.end_at, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD') : null
         this.id = data.banner.id
+        this.image_url = data.banner.image_url
       } catch (error) {
       } 
     },
