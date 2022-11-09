@@ -367,7 +367,7 @@ class CommonController extends BaseController
 
     public function updateNews(Request $request) {
       if ($request->file('pdf') != 'null' && $request->file('pdf') != null) {
-        $pdf_url = $this->uploadFile($request->file('pdf'), 'upload');
+        $pdf_url = $this->uploadCommon($request->file('pdf'), 'upload');
       } else {
         $pdf_url = null;
       }
