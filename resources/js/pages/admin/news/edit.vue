@@ -39,7 +39,7 @@
             <dl>
               <dt>PDF</dt>
               <dd>
-                <label for="photo"><input type="file" name="" id="photo" @change="selectedPDF"></label>
+                <label for="photo"><input type="file" name="" id="photo" @change="selectedPDF" accept=".pdf"></label>
                 <p>ファイル名</p>
                 <input type="text" v-model="pdf_title">
               </dd>

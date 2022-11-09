@@ -39,7 +39,7 @@
             <dl>
               <dt>バナー画像<span>必須</span></dt>
               <dd>
-                <label for="photo"><input type="file" name="" id="photo" @change="selectedPDF"></label>
+                <label for="photo"><input type="file" name="" id="photo" @change="selectedPDF" accept="image/*"></label>
               </dd>
             </dl>
             <dl>
@@ -74,9 +74,9 @@ export default {
         const { data } = await axios.post('/admin/get_banner_detail', {
           id: this.$route.query.id
         })
-        this.is_public = data.news.is_public
-        this.title = data.news.title
-        this.link = data.news.link
+        this.is_public = data.banner.is_public
+        this.title = data.banner.title
+        this.link = data.banner.link
       } catch (error) {
       } 
     },

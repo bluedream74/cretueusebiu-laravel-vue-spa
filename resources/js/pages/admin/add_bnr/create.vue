@@ -39,7 +39,7 @@
             <dl>
               <dt>バナー画像<span>必須</span></dt>
               <dd>
-                <label for="photo"><input type="file" name="" id="photo" @change="selectedPDF"></label>
+                <label for="photo"><input type="file" name="" id="photo" @change="selectedPDF" accept="image/*"></label>
               </dd>
             </dl>
             <dl>

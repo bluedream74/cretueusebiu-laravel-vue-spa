@@ -39,7 +39,7 @@
             <dl>
               <dt>PDF</dt>
               <dd>
-                <label for="photo"><input type="file" name="" id="photo" @change="selectedPDF"></label>
+                <label for="photo"><input type="file" name="" id="photo" @change="selectedPDF" accept=".pdf"></label>
                 <p>ファイル名</p>
                 <input type="text" v-model="pdf_title">
               </dd>
@@ -51,7 +51,7 @@
               </dd>
             </dl>
             <div class="submit_wrap">
-              <div class="form_btn_blue"><span><input type="submit" value="変更"></span></div>
+              <div class="form_btn_blue"><span><input type="submit" value="新規登録"></span></div>
             </div>
           </form>
       </div>
