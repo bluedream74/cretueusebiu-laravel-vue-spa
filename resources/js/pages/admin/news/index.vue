@@ -92,13 +92,27 @@ export default {
       })
     },
 		async deleteProc(id) {
-			try {
-				const { data } = await axios.post('/admin/delete_news_proc', {
-					id: id
-				})
-				this.init()
-			} catch (error) {
-			}
+			this.$swal({
+				title: '削除します。よろしいでしょうか？',
+				text: '',
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonText: '削除',
+				cancelButtonText: 'キャンセル',
+				showCloseButton: true,
+				showLoaderOnConfirm: true
+			}).then(async (result) => {
+				if(result.value) {
+					try {
+						await axios.post('/admin/delete_news_proc', {
+							id: id
+						})
+						this.init()
+					} catch (error) {
+					}
+				} else {
+				}
+			})
 		}
 	}
 }
