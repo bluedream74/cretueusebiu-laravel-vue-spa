@@ -246,6 +246,8 @@ class CommonController extends BaseController
         'telephone' => $request->input('telephone'),
         'fax' => $request->input('fax'),
         'introduction' => $request->input('introduction'),
+        'available' => $request->input('available'),
+        'need_pay' => $request->input('need_pay'),
       ]);
 
       AvailableContent::where('user_id', $request->input('user_id'))->delete();

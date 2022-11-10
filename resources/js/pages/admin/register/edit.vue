@@ -10,7 +10,7 @@
           </ul>
         </div>
         <h2 class="h_style03"><span>支援機関入力(編集)</span></h2>
-        <div class="edit_form" v-if="!!user_info">
+        <form class="edit_form" v-if="!!user_info" key="" @submit.prevent="updateProc">
             <dl>
               <dt>ID</dt>
               <dd>{{ !!user_info ? user_info.id : '' }}</dd>
@@ -48,9 +48,9 @@
             <dl>
               <dt>会社名<span>必須</span></dt>
               <dd>
-                <input type="text">
-                <p class="mt05">カナ</p>
                 <input type="text" v-model="user_info.com_name">
+                <p class="mt05">カナ</p>
+                <input type="text" v-model="user_info.com_huri_name">
               </dd>
             </dl>
             <dl>
@@ -121,14 +121,14 @@
             <dl>
               <dt>PRポイント</dt>
               <dd>
-                <textarea cols="30" rows="5" v-model="user_info.description"></textarea>
+                <textarea cols="30" rows="5" v-model="user_info.introduction"></textarea>
               </dd>
             </dl>
             <dl>
               <dt>支援可能内容<span>必須</span></dt>
               <dd>
                 <div>
-                  <span v-for="(item, index) in CONTENTS" :key="index">
+                  <span v-for="(item, index) in CONTENTS" :key="index" class="cell_item">
                     <input type="checkbox" :id="'display' + (index + 1)" :value="index" :checked="available_contents.includes(index)" @change="changeContent($event, item, index)"><label :for="'display' + (index + 1)">{{ item }}</label>
                   </span>
                 </div>
@@ -138,7 +138,7 @@
               <dt>支援可能業種<span>必須</span></dt>
               <dd>
                 <div>
-                  <span v-for="(item, index) in JOBS" :key="index">
+                  <span v-for="(item, index) in JOBS" :key="index" class="cell_item">
                     <input type="checkbox" :id="'job' + (index + 1)" :value="index" :checked="available_jobs.includes(index)" @change="changeJob($event, item, index)"><label :for="'job' + (index + 1)">{{ item }}</label>
                   </span>
                 </div>
@@ -148,7 +148,7 @@
               <dt>支援可能年商<span>必須</span></dt>
               <dd>
                 <div>
-                  <span v-for="(item, index) in PRICES" :key="index">
+                  <span v-for="(item, index) in PRICES" :key="index" class="cell_item">
                     <input type="checkbox" :id="'price' + (index + 1)" :value="index" :checked="available_prices.includes(index)" @change="changePrice($event, item, index)"><label :for="'price' + (index + 1)">{{ item }}</label>
                   </span>
                 </div>
@@ -158,16 +158,16 @@
               <dt>支援可能従業員規模<span>必須</span></dt>
               <dd>
                 <div>
-                  <span v-for="(item, index) in AMOUNTS" :key="index">
+                  <span v-for="(item, index) in AMOUNTS" :key="index" class="cell_item">
                     <input type="checkbox" :id="'amount' + (index + 1)" :value="index" :checked="available_amounts.includes(index)" @change="changeAmount($event, item, index)"><label :for="'amount' + (index + 1)">{{ item }}</label>
                   </span>
                 </div>
               </dd>
             </dl>
             <div class="submit_wrap">
-              <div class="form_btn_blue"><span><input @click="updateProc" type="button" value="変更"></span></div>
+              <div class="form_btn_blue"><span><input type="submit" value="変更"></span></div>
             </div>
-          </div>
+          </form>
       </div>
 
     </main>
@@ -337,7 +337,9 @@ export default {
         available_jobs: this.available_jobs,
         available_prices: this.available_prices,
         available_amounts: this.available_amounts,
-        user_id: this.user_info.id
+        user_id: this.user_info.id,
+        available: this.user_info.available,
+        need_pay: this.user_info.need_pay
       })
       this.$router.back()
     },
@@ -385,3 +387,9 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.cell_item {
+  margin-bottom: 4px;
+  display: inline-block;
+}
+</style>
