@@ -48,7 +48,6 @@ $config = [
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
     rel="stylesheet">
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-  <!-- <link href="https://fonts.googleapis.com/earlyaccess/hannari.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}">
 </head>
 <body id="top" class="home">
