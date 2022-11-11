@@ -80,7 +80,7 @@
 								<dl class="required">
 									<dt>会社所在地<i>必須</i></dt>
 									<dd><div class="form_el inline">
-										<span>〒</span><input type="tel" name="zip" v-model="zipcode" class="p-postal-code" size="8" maxlength="8" placeholder="000-0000">
+										<span>〒</span><input type="tel" name="zip" @change="changeZip" v-model="zipcode" class="p-postal-code" size="8" maxlength="8" placeholder="000-0000">
 										<div class="select_wrap">
 											<select name="pref" class="p-region-id" v-model="prefecture">
 												<option :value="null">--</option>
@@ -166,6 +166,7 @@
 </template>
 <script>
 import { JOB_KINDS, CONTENTS, JOBS, PRICES, AMOUNTS, PREFECTURES } from '../../const';
+var postal_code = require('japan-postal-code')
 export default {
   layout: 'default',
   middleware: 'guest',
@@ -273,6 +274,18 @@ export default {
 				temp.splice(idex, 1)
 				this.available_contents = temp
 			}
+		},
+		async changeZip() {
+			if (!this.zipcode || this.zipcode.length != 7) {
+        this.$swal('', '郵便番号の形式が違います')
+        return
+      }
+
+      let self = this
+      postal_code.get(this.zipcode, function(address) {
+        self.prefecture = address.prefecture
+        self.city = address.city + address.area
+      })
 		},
 		changeJob(event, job, index) {
 			if (event.target.checked == true) {

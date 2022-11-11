@@ -33,11 +33,13 @@ $config = [
   <link rel="stylesheet" type="text/css" href="/assets/print.css" media="print" />
   <link rel="stylesheet" type="text/css" href="/assets/animation.css" media="all" />
 
+  @if(str_contains($_SERVER['REQUEST_URI'], '/admin') )
   <link rel="stylesheet" type="text/css" href="/admin/css/common.css" media="all" />
   <link rel="stylesheet" type="text/css" href="/admin/css/base.css" media="all" />
   <link rel="stylesheet" type="text/css" href="/admin/css/module.css" media="all" />
   <link rel="stylesheet" type="text/css" href="/admin/css/page.css" media="all" />
   <link rel="stylesheet" type="text/css" href="/admin/css/print.css" media="print" />
+  @endif
   <script src="/assets/js/jquery.js"></script>
   <script src="/assets/js/jquery.inview.js"></script>
   <script src="/admin/js/jquery.matchHeight.js"></script>
@@ -51,7 +53,6 @@ $config = [
 </head>
 <body id="top" class="home">
   <div id="app"></div>
-
   {{-- Global configuration object --}}
   <script>
     window.config = @json($config);

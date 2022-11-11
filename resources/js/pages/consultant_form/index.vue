@@ -66,7 +66,7 @@
 								<dl class="required">
 									<dt>会社所在地<i>必須</i></dt>
 									<dd><div class="form_el inline">
-										<span>〒</span><input type="text" v-model="zipcode" name="zip" class="p-postal-code" size="8" maxlength="8" placeholder="000-0000">
+										<span>〒</span><input type="text" v-model="zipcode" @change="changeZip" name="zip" class="p-postal-code" size="8" maxlength="8" placeholder="000-0000">
 										<div class="select_wrap">
 											<select name="pref" class="p-region-id" v-model="prefecture">
 												<option :value="null">--</option>
@@ -163,6 +163,7 @@
 </template>
 <script>
 import moment from 'moment'
+var postal_code = require('japan-postal-code')
 import { JOBS, SYSTEM_OTHER, SYSTEM_MISS, SYSTEM_CONFIRM, AMOUNTS, PRICES, PREFECTURES, SUPPORT_PRICES } from '../../const'
 export default {
   data() {
@@ -260,6 +261,18 @@ export default {
 				temp.splice(idex, 1)
 				this.system_others = temp
 			}
+		},
+		async changeZip() {
+			if (!this.zipcode || this.zipcode.length != 7) {
+        this.$swal('', '郵便番号の形式が違います')
+        return
+      }
+
+      let self = this
+      postal_code.get(this.zipcode, function(address) {
+        self.prefecture = address.prefecture
+        self.city = address.city + address.area
+      })
 		},
 		toConfirmPage() {
 			// validation
