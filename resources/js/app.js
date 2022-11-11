@@ -9,7 +9,6 @@ import VueSwal from 'vue-swal'
 import Spinner from 'vue-simple-spinner'
 import SweetModal from 'sweet-modal-vue/src/plugin.js'
 
-//AWS setting
 window.axios = axios;
 
 Vue.config.productionTip = false
