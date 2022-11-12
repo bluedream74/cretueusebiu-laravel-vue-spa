@@ -44,3 +44,5 @@ Route::post('get_home_data', 'ConsultantController@getHomeData');
 Route::post('get_consultant_list', 'ConsultantController@getConsultantList');
 Route::post('get_consultant_detail', 'ConsultantController@getConsultantDetail');
 Route::post('send_consultant_answer', 'ConsultantController@sendConsultantAnswer');
+Route::post('get_all_news', 'ConsultantController@getAllnews');
+Route::post('get_news_detail', 'ConsultantController@getNewsDetail');

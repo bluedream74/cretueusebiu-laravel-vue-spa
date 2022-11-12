@@ -104,11 +104,7 @@
         <h2 class="sub_tit action ups"><span>20,000以上の認定支援機関が<br class="display_sp">登録しています</span></h2>
         <p class="add_tit action ups delay_2">おすすめの認定支援機関</p>
         <div class="list action feders delay_set">
-          <a href="" target="_blank"><img src="/assets/img/top/img_add.png" alt="広告アドのバナー"></a>
-          <a href="" target="_blank"><img src="/assets/img/top/img_add.png" alt="広告アドのバナー"></a>
-          <a href="" target="_blank"><img src="/assets/img/top/img_add.png" alt="広告アドのバナー"></a>
-          <a href="" target="_blank"><img src="/assets/img/top/img_add.png" alt="広告アドのバナー"></a>
-          <a href="" target="_blank"><img src="/assets/img/top/img_add.png" alt="広告アドのバナー"></a>
+          <a :href="item.link" target="_blank" v-for="(item, index) in banners" :key="index"><img :src="item.image_url" alt="広告アドのバナー"></a>
         </div>
       </div>
     </section>
@@ -124,39 +120,15 @@
       <div class="sitewrap">
         <h2 class="tit action ups"><b>お知らせ</b></h2>
         <ul class="topics_list action feders delay_set">
-          <li>
+          <li v-for="(item, index) in news" :key="index">
             <article><a href="news/detail.html">
-                <time>2022.00.00</time>
-                <p>ダミーテキスト、ダミーテキスト。ダミーテキスト、ダミーテキスト。ダミーテキスト、ダミーテキスト。</p>
-              </a></article>
-          </li>
-          <li>
-            <article><a href="news/detail.html">
-                <time>2022.00.00</time>
-                <p>ダミーテキスト、ダミーテキスト。ダミーテキスト、ダミーテキスト。</p>
-              </a></article>
-          </li>
-          <li>
-            <article><a href="news/detail.html">
-                <time>2022.00.00</time>
-                <p>ダミーテキスト。</p>
-              </a></article>
-          </li>
-          <li>
-            <article><a href="news/detail.html">
-                <time>2022.00.00</time>
-                <p>ダミーテキスト、ダミーテキスト。ダミーテキスト、ダミーテキスト。</p>
-              </a></article>
-          </li>
-          <li>
-            <article><a href="news/detail.html">
-                <time>2022.00.00</time>
-                <p>ダミーテキスト、ダミーテキスト。ダミーテキスト、ダミーテキスト。ダミーテキスト。</p>
+                <time>{{ item.created_at | dateFormat }}</time>
+                <p>{{ item.title }}</p>
               </a></article>
           </li>
         </ul>
         <div class="more_link">
-          <a href="news/"><span>お知らせ一覧　＞</span></a>
+          <router-link :to="{ name: 'news' }"><span>お知らせ一覧　＞</span></router-link>
         </div>
       </div>
     </section>
@@ -169,9 +141,11 @@ export default {
   data() {
     return {
       consultants: [],
+      news: [],
+      banners: [],
       JOBS: JOBS,
       AMOUNTS: AMOUNTS,
-      PRICES: PRICES
+      PRICES: PRICES,
     }
   },
   mounted() {
@@ -190,6 +164,8 @@ export default {
         this.consultants = data.consultants.filter((item, index) => {
           return index < 10
         })
+        this.news = data.news
+        this.banners = data.banners
       } catch (error) {
       }
     },

@@ -6,7 +6,7 @@
 				<div class="topicpath">
 					<div class="sitewrap">
 						<ol id="pan">
-							<li><a href="../">TOP</a></li>
+							<li><router-link :to="{ name: 'home' }">TOP</router-link></li>
 							<li><span>支援者マイページ</span></li>
 						</ol>
 					</div>

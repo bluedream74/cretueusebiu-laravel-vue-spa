@@ -18,6 +18,8 @@ use App\Models\ConsultantConfirm;
 use App\Models\ConsultantMiss;
 use App\Models\ConsultantOther;
 use App\Models\ConsultantAnswer;
+use App\Models\News;
+use App\Models\Banner;
 use Carbon\Carbon;
 use App\Jobs\EmailVerification;
 use App\Jobs\PasswordReset;
@@ -75,10 +77,38 @@ class ConsultantController extends Controller
   }
 
   public function getHomeData(Request $request) {
-    $consultants = Consultant::orderByDesc('created_at')->with('confirms', 'misss', 'others')->get();
+    $consultants = Consultant::with('confirms', 'misss', 'others')->get();
+    $news = News::orderByDesc('created_at')->where('start_at', '<=', Carbon::now()->format('Y-m-d H:i:s'))->where(function($query) {
+      $query->where('end_at', '>=', Carbon::now()->format('Y-m-d H:i:s'))
+      ->orWhereNull('end_at');
+    })->limit(5)->orderByDesc('created_at')->get();
+    $banners = Banner::orderByDesc('created_at')->where('start_at', '<=', Carbon::now()->format('Y-m-d H:i:s'))->where(function($query) {
+      $query->where('end_at', '>=', Carbon::now()->format('Y-m-d H:i:s'))
+      ->orWhereNull('end_at');
+    })->orderByDesc('created_at')->get();
 
     return response()->json([
-      'consultants' => $consultants
+      'consultants' => $consultants,
+      'news' => $news,
+      'banners' => $banners
+    ]);
+  }
+
+  public function getAllnews(Request $request) {
+    $news = News::orderByDesc('created_at')->where('start_at', '<=', Carbon::now()->format('Y-m-d H:i:s'))->where(function($query) {
+      $query->where('end_at', '>=', Carbon::now()->format('Y-m-d H:i:s'))
+      ->orWhereNull('end_at');
+    })->orderByDesc('created_at')->get();
+
+    return response()->json([
+      'news' => $news
+    ]);
+  }
+
+  public function getNewsDetail(Request $request) {
+    $news = News::where('id', $request->input('id'))->first();
+    return response()->json([
+      'news' => $news
     ]);
   }
 

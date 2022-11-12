@@ -30,6 +30,10 @@ export default [
   { path: '/history', name: 'history', component: page('mypage/history/index.vue') },
   { path: '/history/detail', name: 'history_detail', component: page('mypage/history/detail.vue') },
 
+  // お知らせ
+  { path: '/news', name: 'news', component: page('news/index.vue') },
+  { path: '/news/detail', name: 'news.detail', component: page('news/detail.vue') },
+
   { path: '/password_reset', name: 'forget', component: page('auth/password_reset.vue') },
   { path: '/password_reset_form', name: 'password_reset_form', component: page('auth/password_reset_form.vue') },
   { path: '/login', name: 'login', component: page('auth/login.vue') },
