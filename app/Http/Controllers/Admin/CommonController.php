@@ -409,8 +409,8 @@ class CommonController extends BaseController
     }
 
     public function updateBanner(Request $request) {
-      if ($request->file('pdf') != 'null' && $request->file('pdf') != null) {
-        $image_url = $this->uploadFile($request->file('pdf'), 'upload');
+      if ($request->file('image') != null) {
+        $image_url = $this->uploadFile($request->file('image'), 'upload');
         \Log::error($image_url);
 
         Banner::where('id', $request->input('id'))->update([
