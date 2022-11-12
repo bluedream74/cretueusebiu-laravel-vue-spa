@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth.admin:admin'], function () {
     Route::post('/create_news', 'CommonController@createNews');
     Route::post('/update_news', 'CommonController@updateNews');
     Route::post('/get_news_detail', 'CommonController@getNewsDetail');
+    Route::post('/change_news_public', 'CommonController@changeNewsPublic');
 
     // バーナー
     Route::post('/get_banner_list', 'CommonController@getBannerList');

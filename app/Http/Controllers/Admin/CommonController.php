@@ -311,6 +311,16 @@ class CommonController extends BaseController
       ]);
     }
 
+    public function changeNewsPublic(Request $request) {
+      News::where('id', $request->input('id'))->update([
+        'is_public' => $request->input('flag')
+      ]);
+
+      return response()->json([
+        'flag' => true
+      ]);
+    }
+
     public function deleteBannerProc(Request $request) {
       Banner::where('id', $request->input('id'))->delete();
 
