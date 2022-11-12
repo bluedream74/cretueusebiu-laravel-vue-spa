@@ -65,7 +65,7 @@
                 <th width="90">請求情報</th>
                 <th width="140"></th>
               </tr>
-              <tr v-for="(item, index) in temp" :key="index">
+              <tr v-for="(item, index) in registers" :key="index">
                 <td>{{ item.kikan_id }}</td>
                 <td><input type="checkbox" :id="'koukai' + index" class="display_btn" :checked="item.available == 1" @change="changeAvailable(item, $event)"><label :for="'koukai' + index"></label></td>
                 <td><input type="checkbox" :id="'display' + index" class="display_btn" :checked="item.need_pay == 1" @change="changeNeedPay(item, $event)"><label :for="'display' + index"></label></td>
@@ -118,6 +118,8 @@ export default {
       }
     },
     async init() {
+      this.temp = []
+      this.registers = []
       try {
         const { data } = await axios.post('/admin/get_register_list')
         this.temp = data.registers.filter(item => {

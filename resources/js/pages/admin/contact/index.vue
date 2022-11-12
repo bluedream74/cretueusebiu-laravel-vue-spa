@@ -4,7 +4,7 @@
       <div class="sitewrap">
         <div id="pan">
           <ul>
-            <li><a href="../">HOME</a></li>
+            <li><router-link :to="{ name: 'admin.dashboard' }">HOME</router-link></li>
             <li><span>お問い合わせ管理一覧</span></li>
           </ul>
         </div>
@@ -21,6 +21,8 @@
 </template>
 <script>
 export default {
+  layout: 'admin_auth',
+  middleware: 'admin',
   
 }
 </script>

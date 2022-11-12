@@ -57,6 +57,8 @@ export default [
 
   { path: '/admin/consultant', name: 'admin.consultant', component: page('admin/consultation/index.vue') },
   { path: '/admin/consultant/edit', name: 'admin.consultant.edit', component: page('admin/consultation/edit.vue') },
+  { path: '/admin/consultant/check', name: 'admin.consultant.check', component: page('admin/consultation/check.vue') },
+  { path: '/admin/consultant/finish', name: 'admin.consultant.finish', component: page('admin/consultation/finish.vue') },
   { path: '/admin/news', name: 'admin.news', component: page('admin/news/index.vue') },
   { path: '/admin/news/create', name: 'admin.news.create', component: page('admin/news/create.vue') },
   { path: '/admin/news/edit', name: 'admin.news.edit', component: page('admin/news/edit.vue') },

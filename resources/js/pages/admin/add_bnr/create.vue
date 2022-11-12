@@ -12,10 +12,6 @@
         <h2 class="h_style03"><span>バナー入力(新規)</span></h2>
         <form class="edit_form" @submit.prevent="createNews">
             <dl>
-              <dt>ID</dt>
-              <dd>1</dd>
-            </dl>
-            <dl>
               <dt>公開・非公開<span>必須</span></dt>
               <dd>
                 <input type="radio" id="honbu" name="fc_cat" :checked="is_public == 1" @click="() => { is_public = 1 }">
@@ -51,11 +47,12 @@
             </div>
         </form>
       </div>
-
+      <Spinner v-if="loading" />
     </main>
   </div>
 </template>
 <script>
+import Spinner from '../../../components/Spinner.vue'
 export default {
   data() {
     return {
@@ -65,7 +62,13 @@ export default {
       image: null,
       start_at: null,
       end_at: null,
+      loading: false
     }
+  },
+  components: {
+    Spinner
+  },
+  mounted() {
   },
   methods: {
     backProc() {
@@ -97,7 +100,7 @@ export default {
         this.$swal('', 'リンク先URLを入力してください')
         return
       }
-
+      this.loading = true
       let formData = new FormData()
       formData.append('is_public', this.is_public)
       formData.append('title', this.title)
@@ -106,6 +109,7 @@ export default {
       formData.append('end_at', this.end_at)
       formData.append('image', this.image)
       await axios.post('/admin/create_banner', formData, { headers: { 'Content-Type': 'multipart/form-data' }})
+      this.loading = false
       this.$router.push({ name: 'admin.add_bnr' })
     }
   }

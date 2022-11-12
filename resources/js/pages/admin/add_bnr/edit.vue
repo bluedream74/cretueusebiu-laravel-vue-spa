@@ -54,11 +54,12 @@
             </div>
         </form>
       </div>
-
+      <Spinner v-if="loading" />
     </main>
   </div>
 </template>
 <script>
+import Spinner from '../../../components/Spinner.vue'
 import moment from 'moment'
 export default {
   data() {
@@ -70,7 +71,8 @@ export default {
       start_at: null,
       end_at: null,
       id: null,
-      image_url: null
+      image_url: null,
+      loading: false
     }
   },
   mounted() {
@@ -116,7 +118,7 @@ export default {
         this.$swal('', 'リンク先URLを入力してください')
         return
       }
-
+      this.loading = true
       let formData = new FormData()
       formData.append('is_public', this.is_public)
       formData.append('title', this.title)
@@ -126,6 +128,7 @@ export default {
       formData.append('end_at', this.end_at)
       formData.append('id', this.$route.query.id)
       await axios.post('/admin/update_banner', formData, { headers: { 'Content-Type': 'multipart/form-data' }})
+      this.loading = false
       this.$router.push({ name: 'admin.add_bnr' })
     }
   }

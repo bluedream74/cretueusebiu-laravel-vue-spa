@@ -21,7 +21,8 @@ class Consultant extends Model {
     'price',
     'message_title',
     'message_content',
-    'expired_at'
+    'expired_at',
+    'available'
   ];
 
   protected $table = 'consultants';

@@ -8,6 +8,7 @@ import './filter/index'
 import Trend from "vuetrend"
 import axios from 'axios'
 import VueSwal from 'vue-swal'
+import iosAlertView from 'vue-ios-alertview';
 import Spinner from 'vue-simple-spinner'
 import {ServerTable, ClientTable, Event} from 'vue-tables-2';
 import SweetModal from 'sweet-modal-vue/src/plugin.js'
@@ -34,6 +35,7 @@ Vue.config.productionTip = false
 Vue.use(MdCheckbox)
 Vue.use(MdRadio)
 Vue.use(MdTable)
+Vue.use(iosAlertView);
 Vue.use(ClientTable);
 Vue.use(Trend)
 Vue.component('font-awesome-icon', FontAwesomeIcon)

@@ -36,7 +36,7 @@
               </tr>
               <tr v-for="(item, index) in banners" :key="index">
                 <td>{{ item.id }}</td>
-                <td><input type="checkbox" :id="'display' + index" class="display_btn" :checked="item.is_public == 1"><label :for="'display' + index"></label></td>
+                <td><input type="checkbox" :id="'display' + index" class="display_btn" @change="changePublic(item, $event)" :checked="item.is_public == 1"><label :for="'display' + index"></label></td>
                 <td>{{ item.title }}</td>
                 <td>{{ item.start_at | dateFormat }}～{{ item.end_at | dateFormat }}</td>
                 <td>
@@ -73,6 +73,15 @@ export default {
 		this.init()
 	},
   methods: {
+    async changePublic(item, event) {
+			try {
+				const { data } = await axios.post('/admin/change_banner_public', {
+					id: item.id,
+					flag: event.target.checked ? 1 : 0
+				})
+			} catch (error) {
+			}
+		},
 		async init() {
 			try {
 				const { data } = await axios.post('/admin/get_banner_list')
@@ -89,13 +98,15 @@ export default {
       })
     },
 		async deleteProc(id) {
-			try {
-				const { data } = await axios.post('/admin/delete_banner_proc', {
-					id: id
-				})
-				this.init()
-			} catch (error) {
-			}
+      this.$iosConfirm('削除します。よろしいでしょうか？').then(async () => {
+        try {
+          const { data } = await axios.post('/admin/delete_banner_proc', {
+            id: id
+          })
+          this.init()
+        } catch (error) {
+        }
+      })
 		}
 	}
 }

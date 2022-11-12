@@ -43,6 +43,20 @@ Route::group(['middleware' => 'auth.admin:admin'], function () {
     Route::post('/create_banner', 'CommonController@createBanner');
     Route::post('/update_banner', 'CommonController@updateBanner');
     Route::post('/get_banner_detail', 'CommonController@getBannerDetail');
+    Route::post('/change_banner_public', 'CommonController@changeBannerPublic');
+
+    // 事業者
+    Route::post('/get_consultant_list', 'CommonController@getConsultantList');
+    Route::post('/change_consultant_available', 'CommonController@changeConsultantAvailable');
+    Route::post('/delete_consultant', 'CommonController@deleteConsultant');
+    Route::post('/get_consultant_info', 'CommonController@getConsultantInfo');
+    Route::post('/save_consultant_content', 'CommonController@saveConsultantContent');
+
+    // 課金額管理
+    Route::post('/get_billing_data', 'CommonController@getBillingData');
+
+    Route::post('/save_master', 'CommonController@saveMaster');
 });
 
 Route::get('/download_csv', 'CommonController@downloadCSV');
+Route::get('/download_consultants_csv', 'CommonController@downloadConsultantsCSV');

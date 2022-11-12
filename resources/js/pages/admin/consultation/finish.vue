@@ -5,14 +5,14 @@
         <div id="pan">
           <ul>
             <li><router-link :to="{ name: 'admin.dashboard' }">HOME</router-link></li>
-            <li><router-link :to="{ name: 'admin.billing' }">課金額管理一覧</router-link></li>
-            <li><span>課金額入力(完了)</span></li>
+            <li><router-link :to="{ name: 'admin.consultant' }">事業者管理一覧</router-link></li>
+            <li><span>事業者入力(完了)</span></li>
           </ul>
         </div>
-        <h2 class="h_style03"><span>課金額入力(完了)</span></h2>
-        <p class="finish_txt">課金額を登録しました。</p>
+        <h2 class="h_style03"><span>事業者入力(完了)</span></h2>
+        <p class="finish_txt">事業者を登録しました。</p>
         <div class="btn_wrap">
-          <div class="btn_blue"><router-link :to="{ name: 'admin.billing' }"><span>一覧画面へ戻る</span></router-link></div>
+          <div class="btn_blue"><router-link :to="{ name: 'admin.consultant' }"><span>一覧画面へ戻る</span></router-link></div>
           <div class="btn_blue btn_gry"><router-link :to="{ name: 'admin.dashboard' }"><span>メニュー画面へ戻る</span></router-link></div>
         </div>
       </div>

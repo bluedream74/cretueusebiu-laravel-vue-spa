@@ -5,13 +5,18 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\ConsultantAnswer;
+use App\Models\ConsultantConfirm;
+use App\Models\ConsultantMiss;
+use App\Models\ConsultantOther;
 use App\Models\AvailableContent;
 use App\Models\AvailableJob;
 use App\Models\AvailablePrice;
 use App\Models\AvailableAmount;
 use App\Models\ConsultantKakin;
+use App\Models\Consultant;
 use App\Models\Koukoku;
 use App\Models\News;
+use App\Models\Master;
 use App\Models\Banner;
 use Illuminate\Support\Facades\Auth;
 use App\Jobs\WarningEmailJob;
@@ -187,6 +192,151 @@ class CommonController extends BaseController
       fclose($stream);
     }
 
+    public function downloadConsultantsCSV(Request $request) {
+      $data = $request->all();
+      $targets = json_decode($data['consultants']);
+
+      $SYSTEM_CONFIRM = [
+        '事業再構築補助金',
+        'ものづくり補助金',
+        '小規模事業者補助金',
+        '創業支援',
+        '事業承継支援',
+        '経営改善計画策定',
+        'IT導入補助金',
+        '経営力向上計画',
+        '先端設備等導入計画',
+        '経営革新計画',
+        '事業継続力強化計画',
+      ];
+
+      $SYSTEM_MISS = [
+        '設備を導入したい・設備投資をしたい',
+        'Webサイトを作りたい・改善したい',
+        'ショッピングサイトを作りたい・改善したい',
+        '試作品を作りたい',
+        '開発したいことがある',
+        '生産性を改善したい・作業を効率化したい',
+        '人材育成したい・人材確保したい',
+        '品質を改善したい',
+        '経営を改善したい・経営を革新したい',
+        '起業スタートアップを支援してほしい',
+        '設備や作業をIT化したい',
+        'キャッシュレス化したい・会計ソフトを導入したい',
+        '違う事業を始めたい',
+        '違う事業に変更したい',
+        '会社を譲りたい・事業を譲りたい',
+        '会社を買いたい・事業を買いたい',
+        '災害や突然の社会情勢変化に強い会社にしたい',
+        '他の事業者と連携し新たな取組をしたい',
+        '海外展開したい',
+        '販路開拓したい'
+      ];
+
+      $SYSTEM_OTHER = [
+        'その他',
+        '連携相談'
+      ];
+
+      $JOBS = [
+        '農業、林業',
+        '漁業',
+        '鉱業、採石業、砂利採取業',
+        '建設業',
+        '製造業',
+        '電気',
+        'ガス',
+        '熱供給',
+        '水道業',
+        '情報通信業',
+        '運輸業',
+        '郵便業',
+        '卸売業、小売業',
+        '金融業、保険業',
+        '不動産業、物品賃貸業',
+        '学術研究、専門',
+        '技術サービス業',
+        '宿泊業、飲食サービス業',
+        '生活関連サービス業、娯楽業',
+        '教育、学習支援業',
+        '医療、福祉',
+        '複合サービス事業',
+        'サービス業（他に分類されないもの）',
+        '公務（他に分類されるものを除く）',
+        '分類不能の産業'
+      ];
+
+      $AMOUNTS = [
+        '5人未満',
+        '5～9人',
+        '10～29人',
+        '30～99人',
+        '100～499人',
+        '500～999人',
+        '1,000人以上'
+      ];
+
+      $SUPPORT_PRICES = [
+        '1,000万円未満',
+        '1,000万円以上3,000万円未満',
+        '3,000万円以上5,000万円未満',
+        '5,000万円以上8,000万円未満',
+        '8,000万円以上'
+      ];
+
+      $PRICES = [
+        '5,000万円未満',
+        '5,000万円以上3億円未満',
+        '3億円以上10億円未満',
+        '10億円以上'
+      ];
+
+      $temp = [
+        ['ID', '公開・非公開', '登録日時', '相談内容', '会社名', '業種', '会社所在地', '従業員規模', '年商', '電話番号', 'メールアドレス', '担当名', '役職', '投資予定額', '相談内容概略', '相談内容詳細', '掲載期限']
+      ];
+
+      foreach($targets as $consultant_id) {
+        $consultant = Consultant::where('id', $consultant_id)->first();
+
+        $confirms = ConsultantConfirm::where('consultant_id', $consultant->id)->get();
+        $confirms_str = "";
+        foreach($confirms as $confirm) {
+          $confirms_str .= $SYSTEM_CONFIRM[$confirm->confirm_id].',';
+        }
+
+        $misss = ConsultantMiss::where('consultant_id', $consultant->id)->get();
+        $misss_str = "";
+        foreach($misss as $miss) {
+          $misss_str .= $SYSTEM_MISS[$miss->miss_id].',';
+        }
+
+        $others = ConsultantOther::where('consultant_id', $consultant->id)->get();
+        $others_str = "";
+        foreach($others as $other) {
+          $others_str .= $SYSTEM_OTHER[$other->other_id].',';
+        }
+        array_push($temp, [$consultant->id, $consultant->available == 1 ? '公開' : '非公開', $consultant->created_at, $confirms_str.' '.$misss_str.' '.$others_str, $consultant->com_name, $JOBS[$consultant->job], $consultant->prefecture, $AMOUNTS[$consultant->amount], $PRICES[$consultant->income], $consultant->telephone, $consultant->email, $consultant->tanto_name, $consultant->role_name, $SUPPORT_PRICES[$consultant->price], $consultant->message_title , $consultant->message_content, $consultant->expired_at]);
+      }
+
+      header('Content-Type: text/plain;charset=UTF-8');
+      $stream = fopen('../storage/test.csv', 'w');
+      foreach ($temp as $csvRecord) {
+        fputcsv($stream, $csvRecord);
+      }
+      fclose($stream);
+      $stream = fopen('../storage/test.csv', 'r');
+      header("Content-Type: application/octet-stream");
+
+      $now = new Carbon();
+      $filename = 'Consultation-' . $now->format('Ymdhis') . '.csv';
+      header("Content-Disposition: attachment; filename=" . $filename);
+      while (!feof($stream)) {
+        $content = fread($stream, 1024);
+        echo mb_convert_encoding($content, 'SJIS', 'UTF-8');
+      }
+      fclose($stream);
+    }
+
     public function getRegisterInvoices(Request $request) {
       $kakins = ConsultantKakin::where('user_id', $request->input('user_id'))->get();
       $koukokus = Koukoku::where('user_id', $request->input('user_id'))->get();
@@ -321,6 +471,16 @@ class CommonController extends BaseController
       ]);
     }
 
+    public function changeBannerPublic(Request $request) {
+      Banner::where('id', $request->input('id'))->update([
+        'is_public' => $request->input('flag')
+      ]);
+
+      return response()->json([
+        'flag' => true
+      ]);
+    }
+
     public function deleteBannerProc(Request $request) {
       Banner::where('id', $request->input('id'))->delete();
 
@@ -432,5 +592,106 @@ class CommonController extends BaseController
           'link' => $request->input('link') == 'null' ? null : $request->input('link'),
         ]);
       }
+    }
+
+    public function getConsultantList(Request $request) {
+      $consultants = Consultant::with('confirms', 'misss', 'others', 'answers')->get();
+      return response()->json([
+        'consultants' => $consultants
+      ]);
+    }
+
+    public function changeConsultantAvailable(Request $request) {
+      Consultant::where('id', $request->input('id'))->update([
+        'available' => $request->input('flag')
+      ]);
+      return response()->json([
+        'flag' => true
+      ]);
+    }
+
+    public function deleteConsultant(Request $request) {
+      Consultant::where('id', $request->input('id'))->delete();
+      return response()->json([
+        'flag' => true
+      ]);
+    }
+
+    public function getConsultantInfo(Request $request) {
+      $consultant = Consultant::where('id', $request->input('id'))->with('confirms', 'misss', 'others', 'answers')->first();
+      return response()->json([
+        'consultant' => $consultant
+      ]);
+    }
+
+    public function saveConsultantContent(Request $request) {
+      Consultant::where('id', $request->input('id'))->update([
+        'com_name' => $request->input('com_name'),
+        'job' => $request->input('job'),
+        'zipcode' => $request->input('zipcode'),
+        'prefecture' => $request->input('prefecture'),
+        'city' => $request->input('city'),
+        'building' => $request->input('building'),
+        'amount' => $request->input('amount'),
+        'income' => $request->input('income'),
+        'fax' => $request->input('fax'),
+        'tanto_name' => $request->input('tanto_name'),
+        'telephone' => $request->input('telephone'),
+        'department_name' => $request->input('department_name'),
+        'role_name' => $request->input('role_name'),
+        'price' => $request->input('price'),
+        'message_title' => $request->input('message_title'),
+        'message_content' => $request->input('message_content'),
+      ]);
+
+      ConsultantConfirm::where('consultant_id', $request->input('id'))->delete();
+      ConsultantMiss::where('consultant_id', $request->input('id'))->delete();
+      ConsultantOther::where('consultant_id', $request->input('id'))->delete();
+
+      foreach($request->input('system_confirms') as $row) {
+        ConsultantConfirm::create([
+          'consultant_id' => $request->input('id'),
+          'confirm_id' => $row
+        ]);
+      }
+  
+      foreach($request->input('system_misss') as $row) {
+        ConsultantMiss::create([
+          'consultant_id' => $request->input('id'),
+          'miss_id' => $row
+        ]);
+      }
+  
+      foreach($request->input('system_others') as $row) {
+        ConsultantOther::create([
+          'consultant_id' => $request->input('id'),
+          'other_id' => $row
+        ]);
+      }
+
+      return response()->json([
+        'flag' => true
+      ]);
+    }
+
+    public function getBillingData(Request $request) {
+      $master = Master::first();
+
+      return response()->json([
+        'master' => $master
+      ]);
+    }
+
+    public function saveMaster(Request $request) {
+      Master::where('id', 1)->update([
+        'price' => $request->input('price'),
+        'special_price' => $request->input('special_price'),
+        'from' => $request->input('from'),
+        'to' => $request->input('to'),
+      ]);
+
+      return response()->json([
+        'flag' => true
+      ]);
     }
 }
