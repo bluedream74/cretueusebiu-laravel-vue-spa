@@ -9,7 +9,7 @@
           </ul>
         </div>
         <h2 class="h_style03"><span>課金額管理 (税抜きの金額で入力してください)</span></h2>
-        <form class="edit_form" @submit.prevent="saveMaster">
+        <form class="edit_form" @submit.prevent="saveMaster" v-if="master">
             <dl>
               <dt>基本金額</dt>
               <dd><input type="text" class="w_150 mr05" v-model="master.price">円</dd>
