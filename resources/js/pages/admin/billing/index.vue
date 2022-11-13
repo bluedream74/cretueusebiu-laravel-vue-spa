@@ -37,9 +37,6 @@ export default {
   layout: 'admin_auth',
   middleware: 'admin',
   mounted() {
-    $('.datepicker').datepicker({
-      numberOfMonths:1,
-    });
     this.init()
   },
   data() {
@@ -54,6 +51,9 @@ export default {
         this.master = data.master
         this.master.from = !!data.master.from ? moment(data.master.from, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD') : null
         this.master.to = !!data.master.to ? moment(data.master.to, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD') : null
+        $('.datepicker').datepicker({
+          numberOfMonths:1,
+        });
       } catch (error) {
       }
     },
