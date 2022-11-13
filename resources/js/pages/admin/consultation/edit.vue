@@ -219,7 +219,7 @@ export default {
 				return
 			}
 
-			if (!this.consultant.com_name) {
+			if (!this.consultant.com_name || this.consultant.com_name == '') {
 				this.$swal('', '会社名を入力してください')
 				return
 			}
@@ -254,32 +254,32 @@ export default {
 				return
 			}
 
-			if (!this.consultant.telephone) {
+			if (!this.consultant.telephone || this.consultant.telephone == '') {
 				this.$swal('', '電話番号を入力してください')
 				return
 			}
 
-			if (!this.consultant.email) {
+			if (!this.consultant.email || this.consultant.email == '') {
 				this.$swal('', 'メールアドレスを入力してください')
 				return
 			}
 
-      if (!this.consultant.role_name) {
+      if (!this.consultant.role_name || this.consultant.role_name == '') {
 				this.$swal('', '役職を入力してください')
 				return
 			}
 
-			if (!this.consultant.tanto_name) {
+			if (!this.consultant.tanto_name || this.consultant.tanto_name == '') {
 				this.$swal('', '担当者氏名を入力してください')
 				return
 			}
 
-			if (!this.consultant.message_title) {
+			if (!this.consultant.message_title || this.consultant.message_title == '') {
 				this.$swal('', '相談内容概略を入力してください')
 				return
 			}
 
-			if (!this.consultant.message_content) {
+			if (!this.consultant.message_content || this.consultant.message_content == '') {
 				this.$swal('', '相談内容詳細を入力してください')
 				return
 			}
