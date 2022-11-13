@@ -82,11 +82,11 @@ class ConsultantController extends Controller
     $news = News::orderByDesc('created_at')->where('start_at', '<=', Carbon::now()->format('Y-m-d H:i:s'))->where(function($query) {
       $query->where('end_at', '>=', Carbon::now()->format('Y-m-d H:i:s'))
       ->orWhereNull('end_at');
-    })->limit(5)->orderByDesc('created_at')->get();
+    })->where('is_public', 1)->limit(5)->orderByDesc('created_at')->get();
     $banners = Banner::orderByDesc('created_at')->where('start_at', '<=', Carbon::now()->format('Y-m-d H:i:s'))->where(function($query) {
       $query->where('end_at', '>=', Carbon::now()->format('Y-m-d H:i:s'))
       ->orWhereNull('end_at');
-    })->orderByDesc('created_at')->get();
+    })->where('is_public', 1)->orderByDesc('created_at')->get();
 
     return response()->json([
       'consultants' => $consultants,
