@@ -23,7 +23,7 @@
               <dd>
                 <input type="text" class="datepicker" v-model="master.from">
                 ～
-                <input type="text" class="datepicker" v-model="end_at">
+                <input type="text" class="datepicker" v-model="master.to">
               </dd>
             </dl>
             <div class="submit_wrap">
