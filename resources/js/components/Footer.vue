@@ -8,7 +8,7 @@
 				<ul>
 					<li><a href="../about"><span>会社概要</span></a></li>
 					<li><a href="../privacy"><span>プライバシーポリシー</span></a></li>
-					<li><a href="../contact_form"><span>お問い合わせ</span></a></li>
+					<li><router-link :to="{ name: 'contact' }"><span>お問い合わせ</span></router-link></li>
 					<li><a href="../terms"><span>利用規約</span></a></li>
 				</ul>
 				<small>Copyright&copy; hojyokinn.COM Co.,Ltd. All right reserved.</small>

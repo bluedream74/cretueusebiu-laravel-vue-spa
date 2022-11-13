@@ -17,6 +17,11 @@ export default [
   { path: '/profile/check', name: 'profile.check', component: page('mypage/profile/check.vue') },
   { path: '/profile/thanks', name: 'profile.thanks', component: page('mypage/profile/thanks.vue') },
 
+  // 問い合わせ
+  { path: '/contact', name: 'contact', component: page('contact/index.vue') },
+  { path: '/contact/check', name: 'contact.check', component: page('contact/check.vue') },
+  { path: '/contact/thanks', name: 'contact.thanks', component: page('contact/thanks.vue') },
+
   // 事業者相談フォーム
   { path: '/consultant_form', name: 'consultant_form', component: page('consultant_form/index.vue') },
   { path: '/consultant_form/confirm', name: 'consultant_form.confirm', component: page('consultant_form/confirm.vue') },

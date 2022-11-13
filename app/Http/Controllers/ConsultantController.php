@@ -19,6 +19,7 @@ use App\Models\ConsultantMiss;
 use App\Models\ConsultantOther;
 use App\Models\ConsultantAnswer;
 use App\Models\News;
+use App\Models\Contact;
 use App\Models\Banner;
 use Carbon\Carbon;
 use App\Jobs\EmailVerification;
@@ -162,6 +163,21 @@ class ConsultantController extends Controller
     $answer = ConsultantAnswer::where('user_id', $request->user()->id)->where('consultant_id', $request->input('id'))->first();
     return response()->json([
       'answer' => $answer
+    ]);
+  }
+
+  public function sendContact(Request $request) {
+    Contact::create([
+      'name' => $request->input('name'),
+      'huri_name' => $request->input('huri_name'),
+      'email' => $request->input('email'),
+      'telephone' => $request->input('telephone'),
+      'fax' => $request->input('fax'),
+      'content' => $request->input('content'),
+    ]);
+
+    return response()->json([
+      'flag' => true
     ]);
   }
 }
