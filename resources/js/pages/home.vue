@@ -112,7 +112,7 @@
       <div class="sitewrap">
         <div class="list action feders delay_set">
           <p class="register_tit">支援機関も募集しています。</p>
-          <div class="common_btn"><a href="register_form/"><span>支援者に新規登録する</span></a></div>
+          <div class="common_btn"><router-link :to="{ name: 'register' }"><span>支援者に新規登録する</span></router-link></div>
         </div>
       </div>
     </section>
