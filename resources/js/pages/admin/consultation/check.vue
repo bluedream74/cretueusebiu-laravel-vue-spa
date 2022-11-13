@@ -287,7 +287,8 @@ export default {
           system_confirms: this.system_confirms1,
           system_misss: this.system_misss1,
           system_others: this.system_others1,
-          id: this.$route.query.id
+          id: this.$route.query.id,
+          available: this.available
         })
         
         this.clearFormData()

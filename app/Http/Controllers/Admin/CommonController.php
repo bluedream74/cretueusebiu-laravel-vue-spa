@@ -642,6 +642,7 @@ class CommonController extends BaseController
         'price' => $request->input('price'),
         'message_title' => $request->input('message_title'),
         'message_content' => $request->input('message_content'),
+        'available' => $request->input('available'),
       ]);
 
       ConsultantConfirm::where('consultant_id', $request->input('id'))->delete();
