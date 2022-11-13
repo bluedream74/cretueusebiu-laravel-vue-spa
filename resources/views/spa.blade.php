@@ -63,5 +63,6 @@ $config = [
     <script src="{{ mix('dist/js/app.js') }}"></script>
     <!-- <script src="/assets/js/common.js"></script> -->
 		<script src="/assets/js/slick.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 </body>
 </html>
