@@ -697,6 +697,7 @@ select {
 	cursor: pointer;
 }
 form input[type="text"],
+form input[type="date"],
 form textarea,
 .table_wrap input[type="text"] {
 	background: #fff;
