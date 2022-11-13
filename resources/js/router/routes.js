@@ -13,6 +13,7 @@ export default [
   // マイページ
   { path: '/mypage', name: 'mypage', component: page('mypage/index.vue') },
   { path: '/mypage/password', name: 'mypage_password', component: page('mypage/password/index.vue') },
+  { path: '/mypage/invoice', name: 'invoice', component: page('mypage/invoice/index.vue') },
   { path: '/profile', name: 'profile', component: page('mypage/profile/index.vue') },
   { path: '/profile/check', name: 'profile.check', component: page('mypage/profile/check.vue') },
   { path: '/profile/thanks', name: 'profile.thanks', component: page('mypage/profile/thanks.vue') },
