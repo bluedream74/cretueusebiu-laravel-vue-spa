@@ -21,9 +21,9 @@
             <dl>
               <dt>特殊金額有効日</dt>
               <dd>
-                <input type="text" class="datepicker" v-model="master.from">
+                <input type="text" class="datepicker hasDatepicker" v-model="master.from">
                 ～
-                <input type="text" class="datepicker" v-model="master.to">
+                <input type="text" class="datepicker hasDatepicker" v-model="master.to">
               </dd>
             </dl>
             <div class="submit_wrap">
