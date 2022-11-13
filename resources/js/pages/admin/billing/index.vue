@@ -20,7 +20,7 @@
             </dl>
             <dl>
               <dt>特殊金額有効日</dt>
-              <dd><input type="date" class="datepicker" v-model="master.from"><span class="ml05 mr05">～</span><input type="date" class="datepicker" v-model="master.to"></dd>
+              <dd><input type="text" class="datepicker" v-model="master.from"><span class="ml05 mr05">～</span><input type="text" class="datepicker" v-model="master.to"></dd>
             </dl>
             <div class="submit_wrap">
               <div class="form_btn_blue"><span><input type="submit" value="更新"></span></div>
@@ -43,6 +43,11 @@ export default {
     return {
       master: null
     }
+  },
+  mounted() {
+    $('.datepicker').datepicker({
+      numberOfMonths:1,
+    });
   },
   methods: {
     async init() {

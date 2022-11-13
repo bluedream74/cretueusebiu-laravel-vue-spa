@@ -27,9 +27,9 @@
             <dl>
               <dt>公開期間<span>必須</span></dt>
               <dd>
-                <input type="date" class="datepicker" v-model="start_at">
+                <input type="text" class="datepicker" v-model="start_at">
                 ～
-                <input type="date" class="datepicker" v-model="end_at">
+                <input type="text" class="datepicker" v-model="end_at">
               </dd>
             </dl>
             <dl>
@@ -69,6 +69,9 @@ export default {
     Spinner
   },
   mounted() {
+    $('.datepicker').datepicker({
+      numberOfMonths:1,
+    });
   },
   methods: {
     backProc() {
