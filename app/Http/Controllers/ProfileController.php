@@ -234,7 +234,8 @@ class ProfileController extends Controller
       'available_amounts' => $available_amounts,
       'available_contents' => $available_contents,
       'available_jobs' => $available_jobs,
-      'available_prices' => $available_prices
+      'available_prices' => $available_prices,
+      'consultant_kakins' => $consultant_kakins
     ]);
   }
 
