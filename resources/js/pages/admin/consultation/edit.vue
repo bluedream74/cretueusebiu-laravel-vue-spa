@@ -264,7 +264,7 @@ export default {
 				return
 			}
 
-      if (!this.consultant.tanto_name) {
+      if (!this.consultant.role_name) {
 				this.$swal('', '役職を入力してください')
 				return
 			}
