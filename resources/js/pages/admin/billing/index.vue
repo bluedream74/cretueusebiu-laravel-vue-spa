@@ -9,6 +9,7 @@
           </ul>
         </div>
         <h2 class="h_style03"><span>課金額管理 (税抜きの金額で入力してください)</span></h2>
+        <!-- <input type="text" class="datepicker" v-model="master.from"> -->
         <form class="edit_form" @submit.prevent="saveMaster" v-if="master">
             <dl>
               <dt>基本金額</dt>
@@ -21,9 +22,9 @@
             <dl>
               <dt>特殊金額有効日</dt>
               <dd>
-                <input type="text" class="datepicker hasDatepicker" v-model="master.from">
+                <input type="text" class="datepicker" v-model="master.from">
                 ～
-                <input type="text" class="datepicker hasDatepicker" v-model="master.to">
+                <input type="text" class="datepicker" v-model="master.to">
               </dd>
             </dl>
             <div class="submit_wrap">
@@ -55,9 +56,11 @@ export default {
         this.master = data.master
         this.master.from = !!data.master.from ? moment(data.master.from, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD') : null
         this.master.to = !!data.master.to ? moment(data.master.to, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD') : null
-        $('.datepicker').datepicker({
-          numberOfMonths:1,
-        });
+        setTimeout(() => {
+          $('.datepicker').datepicker({
+            numberOfMonths:1,
+          });
+        }, 1000)
       } catch (error) {
       }
     },
