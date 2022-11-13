@@ -20,9 +20,9 @@
             <dl class="date">
               <dt>登録日</dt>
               <dd>
-                <input type="date" class="datepicker" v-model="search.from">
+                <input type="text" class="datepicker" v-model="search.from">
                 ～
-                <input type="date" class="datepicker" v-model="search.to">
+                <input type="text" class="datepicker" v-model="search.to">
               </dd>
             </dl>
             <dl class="input_txt">
