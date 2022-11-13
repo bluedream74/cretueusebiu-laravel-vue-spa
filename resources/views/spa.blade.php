@@ -43,6 +43,9 @@ $config = [
   <script src="/assets/js/jquery.js"></script>
   <script src="/assets/js/jquery.inview.js"></script>
   <script src="/admin/js/jquery.matchHeight.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
@@ -63,6 +66,5 @@ $config = [
     <script src="{{ mix('dist/js/app.js') }}"></script>
     <!-- <script src="/assets/js/common.js"></script> -->
 		<script src="/assets/js/slick.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 </body>
 </html>

@@ -93,6 +93,9 @@ export default {
     }
   },
   mounted() {
+    $('.datepicker').datepicker({
+      numberOfMonths:1,
+    });
     this.init()
   },
   methods: {
