@@ -80,6 +80,7 @@ export default {
     }
   },
   mounted() {
+    window.location.reload();
     this.init()
   },
   methods: {
