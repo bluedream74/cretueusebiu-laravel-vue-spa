@@ -37,17 +37,15 @@ export default {
   layout: 'admin_auth',
   middleware: 'admin',
   mounted() {
+    $('.datepicker').datepicker({
+      numberOfMonths:1,
+    });
     this.init()
   },
   data() {
     return {
       master: null
     }
-  },
-  mounted() {
-    $('.datepicker').datepicker({
-      numberOfMonths:1,
-    });
   },
   methods: {
     async init() {

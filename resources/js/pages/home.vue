@@ -121,7 +121,7 @@
         <h2 class="tit action ups"><b>お知らせ</b></h2>
         <ul class="topics_list action feders delay_set">
           <li v-for="(item, index) in news" :key="index">
-            <article><a href="news/detail.html">
+            <article><a @click="toDetailNews(item)">
                 <time>{{ item.created_at | dateFormat }}</time>
                 <p>{{ item.title }}</p>
               </a></article>
@@ -167,6 +167,16 @@ export default {
         this.news = data.news
         this.banners = data.banners
       } catch (error) {
+      }
+    },
+
+    toDetailNews(item) {
+      if (!!item.url) {
+        window.open(item.url, "_blank");
+      } else if (!!item.pdf) {
+        window.open(item.pdf_url, "_blank");
+      } else {
+        this.$router.push({ name: 'news.detail', query: { id: item.id } })
       }
     },
 
