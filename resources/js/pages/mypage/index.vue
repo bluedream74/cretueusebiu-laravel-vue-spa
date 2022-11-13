@@ -105,6 +105,7 @@ export default {
 					this.$router.push({ name: 'consultant_detail', query: {
 						id: consultant.id
 					} })
+					window.location.reload();
 				} catch (error) {
 				}
 			}
@@ -117,6 +118,7 @@ export default {
 				this.$router.push({ name: 'consultant_detail', query: {
 					id: consultant.id
 				} })
+				window.location.reload();
 			}
 		},
 		async init() {
