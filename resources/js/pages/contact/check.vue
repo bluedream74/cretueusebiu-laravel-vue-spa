@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="common_page form_page contact_form">
     <main>
 			<section class="section mv_area">
 				<h1>お問い合わせ内容確認</h1>
