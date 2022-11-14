@@ -59,4 +59,5 @@ Route::group(['middleware' => 'auth.admin:admin'], function () {
 });
 
 Route::get('/download_csv', 'CommonController@downloadCSV');
+Route::get('/download_contact_csv', 'CommonController@downloadContactCSV');
 Route::get('/download_consultants_csv', 'CommonController@downloadConsultantsCSV');

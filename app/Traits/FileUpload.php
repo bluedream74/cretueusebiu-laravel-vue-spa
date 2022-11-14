@@ -47,10 +47,10 @@ trait FileUpload
             $filename = time();
             $filename = "{$filename}.{$ext}";
         }
-        $path = Storage::disk('public')->put("{$folder}/{$filename}", $file);
+        // $path = Storage::disk('public')->put("{$folder}/{$filename}", $file);
         $path = Storage::disk('public')->put($folder, $file);
 
-        $path = Storage::putFile('public'.$folder, $file);
+        // $path = Storage::putFile('public'.$folder, $file);
         $path = str_replace('public/', '/storage/', $path);
 
         return $path;

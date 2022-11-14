@@ -12,7 +12,7 @@
         <form class="graph_form">
           <div class="select_wrap">
             <p>お問い合わせCSVダウンロード</p>
-            <a href="javascript:void(0)" class="btn_blue" download="">ダウンロード</a>
+            <a @click="downloadCSV" class="btn_blue">ダウンロード</a>
           </div>
         </form>
       </div>
@@ -23,6 +23,13 @@
 export default {
   layout: 'admin_auth',
   middleware: 'admin',
-  
+  mounted() {
+  },
+  methods: {
+    downloadCSV() {
+      let newWindow = window.open();
+      newWindow.location = 'https://' + window.location.hostname + `/admin/download_contact_csv`;
+    }
+  }
 }
 </script>

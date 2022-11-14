@@ -16,6 +16,7 @@ use App\Models\ConsultantKakin;
 use App\Models\Consultant;
 use App\Models\Koukoku;
 use App\Models\News;
+use App\Models\Contact;
 use App\Models\Master;
 use App\Models\Banner;
 use Illuminate\Support\Facades\Auth;
@@ -694,5 +695,35 @@ class CommonController extends BaseController
       return response()->json([
         'flag' => true
       ]);
+    }
+
+    public function downloadContactCSV(Request $request) {
+      $temp = [
+        ['氏名', 'フリガナ', 'メールアドレス', '電話番号', 'FAX', 'お問合せ内容']
+      ];
+
+      $contacts = Contact::orderByDesc('created_at')->get();
+      foreach($contacts as $contact) {
+        array_push($temp, [
+          $contact->name, $contact->huri_name, $contact->email, $contact->telephone, $contact->fax, $contact->content
+        ]);
+      }
+      header('Content-Type: text/plain;charset=UTF-8');
+      $stream = fopen('../storage/test.csv', 'w');
+      foreach ($temp as $csvRecord) {
+        fputcsv($stream, $csvRecord);
+      }
+      fclose($stream);
+      $stream = fopen('../storage/test.csv', 'r');
+      header("Content-Type: application/octet-stream");
+
+      $now = new Carbon();
+      $filename = 'Contact-' . $now->format('Ymdhis') . '.csv';
+      header("Content-Disposition: attachment; filename=" . $filename);
+      while (!feof($stream)) {
+        $content = fread($stream, 1024);
+        echo mb_convert_encoding($content, 'SJIS', 'UTF-8');
+      }
+      fclose($stream);
     }
 }
