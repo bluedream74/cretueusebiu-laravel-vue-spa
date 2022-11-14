@@ -14,6 +14,7 @@ export default [
   { path: '/mypage', name: 'mypage', component: page('mypage/index.vue') },
   { path: '/mypage/password', name: 'mypage_password', component: page('mypage/password/index.vue') },
   { path: '/mypage/invoice', name: 'invoice', component: page('mypage/invoice/index.vue') },
+  { path: '/mypage/invoice/pdf', name: 'invoice.pdf', component: page('mypage/invoice/invoice_pdf.vue') },
   { path: '/profile', name: 'profile', component: page('mypage/profile/index.vue') },
   { path: '/profile/check', name: 'profile.check', component: page('mypage/profile/check.vue') },
   { path: '/profile/thanks', name: 'profile.thanks', component: page('mypage/profile/thanks.vue') },

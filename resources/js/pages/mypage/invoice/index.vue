@@ -26,7 +26,7 @@
 									<!-- <dl><dt>合計金額</dt><dd>￥5,000</dd></dl> -->
 								</div>
 								<div class="common_btn2 arrow">
-									<a href="#" target="_blank"><span>請求書PDF</span></a>
+									<router-link :to="{ name: 'invoice.pdf', query: { user_id: $store.getters['auth/user'].id, date: item.date, price: (item.amount * 500 + (!!item.koukoku ? item.koukoku.price : 0)), amount: item.amount, koukoku_amount: (!!item.koukoku ? item.koukoku.amount : 0), koukoku_unit: (!!item.koukoku ? item.koukoku.unit : ''), koukoku_price: (!!item.koukoku ? item.koukoku.price: 0) } }" target="_blank" class="browsing_btn table_btns">請求書PDF</router-link>
 								</div>
 							</li>
 						</ul>
@@ -60,9 +60,13 @@ export default {
           let filter = data.consultant_kakins.filter(it => {
             return moment(it.created_at).format('YYYY年MM月') == item
           })
+					let koukoku_filter = data.koukokus.find(it => {
+						return item == it.date
+					})
           temp.push({
             amount: filter.length,
-            date: item
+            date: item,
+						koukoku: koukoku_filter
           })
         })
         this.invoices = temp

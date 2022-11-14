@@ -14,6 +14,7 @@ use App\Models\AvailableJob;
 use App\Models\AvailablePrice;
 use App\Models\AvailableAmount;
 use App\Models\Consultant;
+use App\Models\Koukoku;
 use App\Models\ConsultantKakin;
 use Carbon\Carbon;
 use App\Jobs\EmailVerification;
@@ -252,9 +253,11 @@ class ProfileController extends Controller
 
   public function getAllInvoices(Request $request) {
     $consultant_kakins = ConsultantKakin::where('user_id', $request->user()->id)->orderByDesc('created_at')->get();
+    $koukokus = Koukoku::where('user_id', $request->user()->i)->get();
 
     return response()->json([
-      'consultant_kakins' => $consultant_kakins
+      'consultant_kakins' => $consultant_kakins,
+      'koukokus' => $koukokus
     ]);
   }
 }
