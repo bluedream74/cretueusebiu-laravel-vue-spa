@@ -51,13 +51,7 @@ export default {
       }
     },
     calcContent(item) {
-      if (!!item.url) {
-        return item.url
-      } else if (!!item.pdf) {
-        return item.pdf_url
-      } else {
-        return item.content
-      }
+      return item.title
     },
     toDetail(item) {
       if (!!item.url) {
