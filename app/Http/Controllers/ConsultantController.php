@@ -79,12 +79,12 @@ class ConsultantController extends Controller
 
   public function getHomeData(Request $request) {
     $consultants = Consultant::with('confirms', 'misss', 'others')->get();
-    $news = News::orderByDesc('created_at')->where('start_at', '<=', Carbon::now()->format('Y-m-d H:i:s'))->where(function($query) {
-      $query->where('end_at', '>=', Carbon::now()->format('Y-m-d H:i:s'))
+    $news = News::orderByDesc('created_at')->where('start_at', '<=', Carbon::now()->format('Y-m-d'))->where(function($query) {
+      $query->where('end_at', '>=', Carbon::now()->format('Y-m-d'))
       ->orWhereNull('end_at');
     })->where('is_public', 1)->limit(5)->orderByDesc('created_at')->get();
-    $banners = Banner::orderByDesc('created_at')->where('start_at', '<=', Carbon::now()->format('Y-m-d H:i:s'))->where(function($query) {
-      $query->where('end_at', '>=', Carbon::now()->format('Y-m-d H:i:s'))
+    $banners = Banner::orderByDesc('created_at')->where('start_at', '<=', Carbon::now()->format('Y-m-d'))->where(function($query) {
+      $query->where('end_at', '>=', Carbon::now()->format('Y-m-d'))
       ->orWhereNull('end_at');
     })->where('is_public', 1)->orderByDesc('created_at')->get();
 
@@ -96,8 +96,8 @@ class ConsultantController extends Controller
   }
 
   public function getAllnews(Request $request) {
-    $news = News::orderByDesc('created_at')->where('start_at', '<=', Carbon::now()->format('Y-m-d H:i:s'))->where(function($query) {
-      $query->where('end_at', '>=', Carbon::now()->format('Y-m-d H:i:s'))
+    $news = News::orderByDesc('created_at')->where('start_at', '<=', Carbon::now()->format('Y-m-d'))->where(function($query) {
+      $query->where('end_at', '>=', Carbon::now()->format('Y-m-d'))
       ->orWhereNull('end_at');
     })->orderByDesc('created_at')->get();
 
