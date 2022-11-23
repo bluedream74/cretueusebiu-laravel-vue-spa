@@ -19,6 +19,10 @@ class AdminTableSeeder extends Seeder
                 'email' => 'admin@hozyokin.jp',
                 'password' => bcrypt('123123123')
             ],
+            [ 
+                'email' => 'ddcontents@digital-dive.co.jp',
+                'password' => bcrypt('ddcontents')
+            ],
         ]);
     }
 }
