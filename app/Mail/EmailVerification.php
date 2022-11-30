@@ -32,7 +32,7 @@ class EmailVerification extends Mailable
                     ->subject('【補助金活用.COM】支援機関新規登録の仮登録が完了しました')
                     ->view('emails.verify-email')
                     ->with([
-                        'url' => 'http://localhost:8000/account/activate?'.'email='.str_replace('+', '%2b', $this->user->email).'&token='.$this->user->token,
+                        'url' => 'https://hojyokin-katsuyou.com/account/activate?'.'email='.str_replace('+', '%2b', $this->user->email).'&token='.$this->user->token,
                         'tanto_name' => $this->user->tanto_name
                     ]);
     }
@@ -43,7 +43,7 @@ class EmailVerification extends Mailable
                     ->subject('【補助金活用.COM】支援機関新規登録の仮登録が完了しました')
                     ->view('emails.verify-email')
                     ->with([
-                        'url' => 'http://localhost:8000/account/activate?'.'email='.str_replace('+', '%2b', $this->user->email).'&token='.$this->user->token,
+                        'url' => 'https://hojyokin-katsuyou.com/account/activate?'.'email='.str_replace('+', '%2b', $this->user->email).'&token='.$this->user->token,
                         'tanto_name' => $this->user->tanto_name
                     ]);
     }

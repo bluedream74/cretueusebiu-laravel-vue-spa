@@ -34,7 +34,7 @@ class ConsultantEmail extends Mailable
                     ->subject('【事業者相談申し込み】ホームページより受付')
                     ->view('emails.consultant')
                     ->with([
-                        'url' => 'http://localhost:8000/consultant_form/complete?'.'id='.$this->consultant->id,
+                        'url' => 'https://hojyokin-katsuyou.com/consultant_form/complete?'.'id='.$this->consultant->id,
                         'consultant' => $this->consultant
                     ]);
     }
@@ -45,7 +45,7 @@ class ConsultantEmail extends Mailable
                     ->subject('【事業者相談申し込み】ホームページより受付')
                     ->view('emails.consultant')
                     ->with([
-                        'url' => 'http://localhost:8000/consultant_form/complete?'.'id='.$this->consultant->id,
+                        'url' => 'https://hojyokin-katsuyou.com/consultant_form/complete?'.'id='.$this->consultant->id,
                         'consultant' => $this->consultant
                     ]);
     }
