@@ -200,6 +200,10 @@ export default {
 			expired_at: null
     }
   },
+	created() {
+		window.document.title = '事業者相談フォーム'
+		window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「事業者相談フォーム」ページです。事業者として相談をするする場合、本フォームより「事業者相談入力欄」を入力してください。支援機関新規登録、その他のお問い合わせは専用のフォームからお問い合わせください。'
+	},
 	mounted() {
 		if (localStorage.getItem('com_name')) {
 			this.com_name = localStorage.getItem('com_name')
@@ -306,7 +310,7 @@ export default {
 				return
 			}
 
-			if (!this.amount) {
+			if (this.amount == null) {
 				this.$swal('', '従業員規模を選択してください')
 				return
 			}
@@ -374,5 +378,4 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
 </style>

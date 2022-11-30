@@ -62,6 +62,8 @@
 <script>
 import moment from 'moment'
 export default {
+  layout: 'admin_auth',
+	middleware: 'admin',
   data() {
     return {
       is_public: 1,
@@ -79,6 +81,15 @@ export default {
       numberOfMonths:1,
     });
     this.init()
+
+    tinymce.init({
+        selector: ".tinymce",
+        language: "ja",
+        height: 200,
+        relative_urls : false,
+        plugins:'table jbimages link autolink preview textcolor image code fullscreen',
+        toolbar  : 'table code fontsizeselect forecolor formatselect bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | jbimages image link | preview | fullscreen',
+    });
   },
   methods: {
     async init() {

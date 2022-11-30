@@ -70,6 +70,10 @@ export default {
 	components: {
 		Pagination
 	},
+	created() {
+		window.document.title = '支援者マイページ'
+		window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「支援者マイページ」です。各マッチング事業者の情報をリストからご確認いただけます。支援者マイページではこのほかマイプロフィール、過去の回答一覧、課金状況確認がご覧いただけます。'
+	},
 	mounted() {
 		this.init()
 	},
@@ -189,8 +193,9 @@ export default {
 					let others = item.others.map(it => {
 						return it.other_id
 					})
+					let flag1 = false;
 					if (this.intersection(available_contents, confirms).length > 0) {
-						return true
+						flag1 = true
 					}
 
 					let flag = false
@@ -200,22 +205,32 @@ export default {
 						}
 					})
 					if (flag == true) {
-						return true
+						flag1 = true
+					}
+
+					if (flag1 == false) {
+						return false
 					}
 
 					if (available_amounts.includes(item.amount)) {
-						return true
+						flag1 = true
+					} else {
+						return false
 					}
 
 					if (available_jobs.includes(item.job)) {
-						return true
+						flag1 = true
+					} else {
+						return false
 					}
 
 					if (available_prices.includes(item.price)) {
-						return true
+						flag1 = true
+					} else {
+						return false
 					}
 
-					return false
+					return true
 				})
 
 				this.list = this.temp.filter((item, index) => {

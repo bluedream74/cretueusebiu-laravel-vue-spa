@@ -161,6 +161,10 @@ export default {
 			expired_at: null
     }
   },
+	created() {
+		window.document.title = '事業者相談フォーム'
+		window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「支援機関新規登録」ページです。支援機関を新規登録する場合、本フォームより「認定支援機関情報入力欄」「支援可能条件入力欄」を入力してください。事業者相談、その他のお問い合わせは専用のフォームからお問い合わせください。'
+	},
   mounted() {
     this.init()
   },
@@ -264,7 +268,7 @@ export default {
         })
         
         this.clearFormData()
-        this.$router.push({ name: 'consultant_form.complete' })
+        this.$router.push({ name: 'consultant_form.thanks' })
       } catch (error) {
       }
     },

@@ -122,13 +122,15 @@ export default {
 			// 	} else {
 			// 	}
 			// })
-			try {
-				const { data } = await axios.post('/admin/delete_news_proc', {
-					id: id
-				})
-				this.init()
-			} catch (error) {
-			}
+			this.$iosConfirm('一度削除した情報は復元できません。この情報を削除してもよろしいですか？').then(async () => {
+        try {
+					const { data } = await axios.post('/admin/delete_news_proc', {
+						id: id
+					})
+					this.init()
+				} catch (error) {
+				}
+      })
 		}
 	}
 }

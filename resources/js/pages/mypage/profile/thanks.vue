@@ -2,7 +2,7 @@
   <div class="common_page form_page register_form">
     <main>
 			<section class="section mv_area">
-				<h1>支援機関新規登録<br class="display_sp">仮登録完了</h1>
+				<h1>マイプロフィール<br class="display_sp">更新完了</h1>
 				<div class="topicpath">
 					<div class="sitewrap">
 						<ol id="pan">
@@ -40,6 +40,10 @@ export default {
       introduction: ""
     }
   },
+  created() {
+		window.document.title = 'マイプロフィール | 支援者マイページ'
+		window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「マイプロフィール更新完了」ページです。認定支援機関の登録情報および、支援可能条件について、入力いただいた内容にて変更が完了いたしました。変更内容は支援者マイページに反映されます。'
+	},
   mounted() {
   },
   methods: {

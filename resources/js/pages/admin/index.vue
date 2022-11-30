@@ -23,7 +23,7 @@
               </ul>
             </div>
             <div class="menu_list">
-              <h2 class="h_style07"><span>会計freee CSV出力</span></h2>
+              <h2 class="h_style07"><span>CSV出力</span></h2>
               <ul>
                 <li><router-link :to="{ name: 'admin.freee' }"><span>新規登録・編集</span></router-link></li>
               </ul>

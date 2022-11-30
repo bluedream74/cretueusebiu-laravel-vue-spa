@@ -16,10 +16,7 @@
               <div class="wrap year">
                 <select class="w_150">
                   <option value=""></option>
-                  <option value="">2021</option>
-                  <option value="">2020</option>
-                  <option value="">2019</option>
-                  <option value="">2018</option>
+                  <option value="">2022</option>
                 </select>
               </div>
               <span>年</span>
@@ -58,6 +55,7 @@
 </template>
 <script>
 export default {
-  
+  layout: 'admin_auth',
+	middleware: 'admin',
 }
 </script>

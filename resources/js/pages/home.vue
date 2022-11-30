@@ -82,7 +82,7 @@
         <h2 class="tit action ups"><b>ただいま、<br class="display_sp">掲載中のご相談</b></h2>
         <p class="sub_tit action ups delay_2"><span>現在、{{ consultants.length }}件以上の<br class="display_sp">ご相談があります</span></p>
         <div class="slider action holizon_open">
-          <a @click="toConsultantDetail(item.id)" class="items" v-for="(item, index) in consultants" :key="index">
+          <a class="items" v-for="(item, index) in consultants" :key="index">
             <p class="pref">都道府県：{{ item.prefecture }}</p>
             <dl class="detail">
               <dt>概 要</dt>
@@ -122,7 +122,7 @@
         <ul class="topics_list action feders delay_set">
           <li v-for="(item, index) in news" :key="index">
             <article><a @click="toDetailNews(item)">
-                <time>{{ item.created_at | dateFormat }}</time>
+                <time>{{ item.created_at | dateFormatEnDot }}</time>
                 <p>{{ item.title }}</p>
               </a></article>
           </li>
@@ -147,6 +147,10 @@ export default {
       AMOUNTS: AMOUNTS,
       PRICES: PRICES,
     }
+  },
+  created() {
+    window.document.title = '補助金活用.COM | 補助金申請のことなら事業者×支援機関マッチングサイト'
+    window.document.description = '補助金活用.COMのホームページです。当サイトは事業者の方と国（経済産業大臣）が認定した「認定経営革新等支援機関」をマッチングするサイトです。事業者の方の悩み事、相談事を解決するためにご利用ください。'
   },
   mounted() {
     setTimeout(() => {

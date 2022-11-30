@@ -186,6 +186,10 @@ export default {
 			available_amounts: []
     }
   },
+	created() {
+		window.document.title = 'マイプロフィール | 支援者マイページ'
+		window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「マイプロフィール」ページです。認定支援機関の登録情報および、支援可能条件についてはこちらから変更いただけます。必須項目を確認のうえ、フォームに必定な変更内容を入力してください。'
+	},
   mounted() {
 		// this.clearContent()
 		this.init()

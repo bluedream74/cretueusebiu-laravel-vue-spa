@@ -162,28 +162,32 @@
         available_amounts1: ''
       }
     },
+    created() {
+      window.document.title = 'マイプロフィール | 支援者マイページ'
+      window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「マイプロフィール」ページです。認定支援機関の登録情報および、支援可能条件についてはこちらから変更いただけます。必須項目を確認のうえ、フォームに必定な変更内容を入力してください。'
+    },
     mounted() {
       this.init()
     },
     methods: {
       init() {
-        this.kikan_id = localStorage.getItem('kikan_id')
-        this.com_name = localStorage.getItem('com_name')
-        this.com_huri_name = localStorage.getItem('com_huri_name')
-        this.tanto_name = localStorage.getItem('tanto_name')
-        this.department_name = localStorage.getItem('department_name')
-        this.role_name = localStorage.getItem('role_name')
+        this.kikan_id = localStorage.getItem('kikan_id') == 'null' ? null : localStorage.getItem('kikan_id')
+        this.com_name = localStorage.getItem('com_name') == 'null' ? null : localStorage.getItem('com_name')
+        this.com_huri_name = localStorage.getItem('com_huri_name') == 'null' ? null : localStorage.getItem('com_huri_name')
+        this.tanto_name = localStorage.getItem('tanto_name') == 'null' ? null : localStorage.getItem('tanto_name')
+        this.department_name = localStorage.getItem('department_name') == 'null' ? null : localStorage.getItem('department_name')
+        this.role_name = localStorage.getItem('role_name') == 'null' ? null : localStorage.getItem('role_name')
         this.is_personal = parseInt(localStorage.getItem('is_personal'))
         this.kind = parseInt(localStorage.getItem('kind'))
         this.zipcode = localStorage.getItem('zipcode')
-        this.prefecture = localStorage.getItem('prefecture')
-        this.city = localStorage.getItem('city')
-        this.building = localStorage.getItem('building')
+        this.prefecture = localStorage.getItem('prefecture') == 'null' ? null : localStorage.getItem('prefecture')
+        this.city = localStorage.getItem('city') == 'null' ? null : localStorage.getItem('city')
+        this.building = localStorage.getItem('building') == 'null' ? null : localStorage.getItem('building')
         this.telephone = localStorage.getItem('telephone')
-        this.fax = localStorage.getItem('fax')
+        this.fax = localStorage.getItem('fax') == 'null' ? null : localStorage.getItem('fax')
         this.email = localStorage.getItem('email')
         this.password = localStorage.getItem('password')
-        this.introduction = localStorage.getItem('introduction')
+        this.introduction = localStorage.getItem('introduction') == 'null' ? null : localStorage.getItem('introduction')
         this.available_contents = localStorage.getItem('available_contents').split('、').map(item => {
           return CONTENTS[parseInt(item)]
         }).join('、')

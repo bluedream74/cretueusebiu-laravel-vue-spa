@@ -47,3 +47,4 @@ Route::post('send_consultant_answer', 'ConsultantController@sendConsultantAnswer
 Route::post('get_all_news', 'ConsultantController@getAllnews');
 Route::post('get_news_detail', 'ConsultantController@getNewsDetail');
 Route::post('send_contact', 'ConsultantController@sendContact');
+Route::post('accept_consultant', 'ConsultantController@acceptConsultant');

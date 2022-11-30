@@ -2,6 +2,9 @@
   <div class="admin__auth">
     <Navbar class="navbar" />
     <child />
+    <aside id="top_link">
+      <a id="pageTop" href="javascript:void(0)"><img src="/admin/img/btn_pagetop.png" alt="TOPへ" class="scale"></a>
+    </aside>
     <Footer />
   </div>
 </template>
@@ -19,4 +22,12 @@ export default {
 </script>
 
 <style lang="scss">
+.admin__auth {
+  width: 100%;
+  font-size: 100%;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 </style>

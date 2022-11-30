@@ -16,7 +16,7 @@
 				<div class="section area01">
 					<div class="sitewrap">
 						<ul class="matching_list">
-							<li v-for="(item, index) in consultants" :key="index" @click="toConsultantDetail(item.id)">
+							<li v-for="(item, index) in consultants" :key="index">
 								<div class="ttl_wrap">
 									<h2 class="list_ttl">都道府県：{{ item.prefecture }}</h2>
 									<ul>
@@ -55,6 +55,10 @@ export default {
       AMOUNTS: AMOUNTS,
       SUPPORT_PRICES: SUPPORT_PRICES
     }
+  },
+	created() {
+    window.document.title = '支援者マイページ'
+    window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「相談一覧」ページです。各事業者の相談情報をリストからご確認いただけます。相談の概要および事業者情報については無料で閲覧いただけます。詳細情報の閲覧・相談への回答についてはご利用料が発生いたします。'
   },
   mounted() {
     this.init()

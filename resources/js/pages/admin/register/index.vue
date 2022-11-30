@@ -34,7 +34,7 @@
             </dl>
           </div>
           <div class="submit_wrap">
-            <div class="form_btn_blue"><span><input @click="init" value="検索"></span></div>
+            <div class="form_btn_blue"><span><input type="button" @click="init" value="検索"></span></div>
             <div class="cancel_btn"><button @click="resetForm" type="button">リセット</button></div>
           </div>
         </form>
@@ -60,7 +60,7 @@
                 <th width="60">利用可</th>
                 <th width="60">請求有</th>
                 <th width="100">登録日</th>
-                <th width="460">支援機関名</th>
+                <th width="400">支援機関名</th>
                 <th width="90">回答履歴</th>
                 <th width="90">請求情報</th>
                 <th width="140"></th>
@@ -168,13 +168,15 @@ export default {
       })
     },
     async deleteProc(item) {
-      try {
-        const { data } = await axios.post('/admin/delete_user', {
-          id: item.id
-        })
-        this.init()
-      } catch (error) {
-      }
+      this.$iosConfirm('一度削除した情報は復元できません。この情報を削除してもよろしいですか？').then(async () => {
+        try {
+          const { data } = await axios.post('/admin/delete_user', {
+            id: item.id
+          })
+          this.init()
+        } catch (error) {
+        }
+      })
     }
   }
 }

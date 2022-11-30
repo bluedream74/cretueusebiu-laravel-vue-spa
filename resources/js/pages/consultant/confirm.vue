@@ -86,6 +86,10 @@ export default {
   mounted() {
     this.init()
   },
+  created() {
+		window.document.title = '投稿詳細 | 支援者マイページ'
+		window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「投稿詳細」ページです。事業者相談フォームより投稿された事業者の、企業情報および相談内容の詳細をご確認いただけます。掲載期間中の投稿については支援者として回答を送信（応募）することができます。'
+	},
   methods: {
     async init() {
       this.answer = localStorage.getItem('answer')

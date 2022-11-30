@@ -100,6 +100,7 @@
 </template>
 <script>
 import moment from 'moment';
+import html2pdf from "html2pdf.js";
 export default {
   layout: 'basic',
   data() {
@@ -109,6 +110,10 @@ export default {
   },
   mounted() {
     this.current_date = moment().format('YYYY年MM月DD日')
+		html2pdf(document.getElementById("pdf_page"), {
+			margin: 1,
+			filename: "請求書.pdf",
+		});
   }
 }
 </script>

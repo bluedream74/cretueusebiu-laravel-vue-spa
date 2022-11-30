@@ -26,11 +26,7 @@ $config = [
   <meta name="format-detection" content="telephone=no">
   <title>補助金活用.COM | 補助金申請のことなら事業者×支援機関マッチングサイト</title>
   <link rel="shortcut icon" href="/asset/favicon.ico">
-  <link rel="stylesheet" type="text/css" href="/assets/common.css" media="all" />
-  <link rel="stylesheet" type="text/css" href="/assets/base.css" media="all" />
-  <link rel="stylesheet" type="text/css" href="/assets/module.css" media="all" />
-  <link rel="stylesheet" type="text/css" href="/assets/page.css" media="all" />
-  <link rel="stylesheet" type="text/css" href="/assets/print.css" media="print" />
+  
   <link rel="stylesheet" type="text/css" href="/assets/animation.css" media="all" />
 
   @if(str_contains($_SERVER['REQUEST_URI'], '/admin') )
@@ -39,6 +35,12 @@ $config = [
   <link rel="stylesheet" type="text/css" href="/admin/css/module.css" media="all" />
   <link rel="stylesheet" type="text/css" href="/admin/css/page.css" media="all" />
   <link rel="stylesheet" type="text/css" href="/admin/css/print.css" media="print" />
+  @else
+  <link rel="stylesheet" type="text/css" href="/assets/common.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/assets/base.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/assets/module.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/assets/page.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/assets/print.css" media="print" />
   @endif
   <script src="/assets/js/jquery.js"></script>
   <script src="/assets/js/jquery.inview.js"></script>
@@ -53,7 +55,7 @@ $config = [
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}">
 </head>
-<body id="top" class="home">
+<body class="home">
   <div id="app"></div>
   {{-- Global configuration object --}}
   <script>
@@ -66,5 +68,6 @@ $config = [
     <script src="{{ mix('dist/js/app.js') }}"></script>
     <!-- <script src="/assets/js/common.js"></script> -->
 		<script src="/assets/js/slick.min.js"></script>
+    <script src="/admin/js/tinymce/tinymce.min.js"></script>
 </body>
 </html>

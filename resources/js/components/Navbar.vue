@@ -7,7 +7,7 @@
         <router-link :to="{ name: 'login' }" class="btn">支援機関<br>ログイン</router-link>
       </div>
       <div class="login_menu" v-else>
-					<p class="nam">株式会社　{{ $store.getters['auth/user'].com_name }}様</p>
+					<p class="nam">{{ $store.getters['auth/user'].com_name }}様</p>
 					<a href="mypage" class="btn btn_ylw">マイページ</a>
 					<a @click="logout" class="btn">支援機関<br>ログアウト</a>
 				</div>

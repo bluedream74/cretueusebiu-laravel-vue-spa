@@ -46,6 +46,11 @@ let filters = {
     return moment.utc(date).local().format('YYYY/MM/DD')
   },
 
+  dateFormatEnDot(date){
+    if(!date) return ''
+    return moment.utc(date).local().format('YYYY.MM.DD')
+  },
+
   yearFormat(date) {
     if(!date) return ''
     return moment.utc(date).local().format('YYYY')

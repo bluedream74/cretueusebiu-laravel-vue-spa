@@ -27,7 +27,7 @@
 完了メールが届かない場合、【メールアドレスの間違い】や【メール受信設定されていない】または【迷惑メールフォルダ】に入ってしまっている可能性がありますので、ご確認ください。</p>
 						</div>
 						<div class="common_btn2 backbtn">
-							<li><router-link :to="{ name: 'home' }" class="blue"><span>TOPへ戻る</span></router-link></li>
+							<router-link :to="{ name: 'home' }" class="blue"><span>TOPへ戻る</span></router-link>
 						</div>
 					</div>
 				</section>
@@ -38,6 +38,9 @@
 </template>
 <script>
 export default {
-  
+  created() {
+    window.document.title = 'お問い合わせ'
+    window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「お問い合わせ 送信完了」ページです。お問い合わせの送信が完了しました。お問い合わせ内容を確認後、担当者よりご連絡いたしますので、恐れ入りますが、しばらくお待ちください。'
+  },
 }
 </script>

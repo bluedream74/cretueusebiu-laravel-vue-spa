@@ -54,6 +54,8 @@
 <script>
 import Spinner from '../../../components/Spinner.vue'
 export default {
+  layout: 'admin_auth',
+	middleware: 'admin',
   data() {
     return {
       is_public: 1,

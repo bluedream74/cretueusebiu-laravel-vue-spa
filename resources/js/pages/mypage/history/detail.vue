@@ -73,6 +73,10 @@ export default {
       SYSTEM_OTHER: SYSTEM_OTHER
     }
   },
+	created() {
+    window.document.title = '過去の回答一覧 | 支援者マイページ'
+    window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「過去の回答一覧」ページです。支援者が過去に詳細を確認した、マッチング事業者相談の履歴をリストからご確認いただけます。相談の詳細、回答の内容については詳細ページからご確認いただけます。'
+  },
   mounted() {
     this.init()
   },

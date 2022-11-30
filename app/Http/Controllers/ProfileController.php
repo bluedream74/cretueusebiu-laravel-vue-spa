@@ -224,7 +224,7 @@ class ProfileController extends Controller
   }
 
   public function getMatchingList(Request $request) {
-    $consultants = Consultant::with('confirms', 'misss', 'others')->get();
+    $consultants = Consultant::where('available', 1)->with('confirms', 'misss', 'others')->get();
     $available_amounts = AvailableAmount::where('user_id', $request->user()->id)->get();
     $available_contents = AvailableContent::where('user_id', $request->user()->id)->get();
     $available_jobs = AvailableJob::where('user_id', $request->user()->id)->get();

@@ -82,6 +82,10 @@ export default {
       content: ''
     }
   },
+	created() {
+    window.document.title = 'お問い合わせ'
+    window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「お問い合わせ」ページです。当サイトについてお気軽にお問合せください。担当者より折り返しご連絡いたします。支援機関の新規登録、事業相談は専用のフォームからお問い合わせください。'
+  },
   methods: {
     async sendContact() {
       if (this.name == '') {

@@ -699,13 +699,13 @@ class CommonController extends BaseController
 
     public function downloadContactCSV(Request $request) {
       $temp = [
-        ['氏名', 'フリガナ', 'メールアドレス', '電話番号', 'FAX', 'お問合せ内容']
+        ['問い合わせ日時', '氏名', 'フリガナ', 'メールアドレス', '電話番号', 'FAX', 'お問合せ内容']
       ];
 
       $contacts = Contact::orderByDesc('created_at')->get();
       foreach($contacts as $contact) {
         array_push($temp, [
-          $contact->name, $contact->huri_name, $contact->email, $contact->telephone, $contact->fax, $contact->content
+          $contact->created_at->format('Y/m/d'), $contact->name, $contact->huri_name, $contact->email, $contact->telephone, $contact->fax, $contact->content
         ]);
       }
       header('Content-Type: text/plain;charset=UTF-8');

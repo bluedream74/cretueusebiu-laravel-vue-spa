@@ -27,6 +27,7 @@ export default [
   // 事業者相談フォーム
   { path: '/consultant_form', name: 'consultant_form', component: page('consultant_form/index.vue') },
   { path: '/consultant_form/confirm', name: 'consultant_form.confirm', component: page('consultant_form/confirm.vue') },
+  { path: '/consultant_form/thanks', name: 'consultant_form.thanks', component: page('consultant_form/thanks.vue') },
   { path: '/consultant_form/complete', name: 'consultant_form.complete', component: page('consultant_form/complete.vue') },
 
   { path: '/consultant', name: 'consultant', component: page('consultant.vue') },

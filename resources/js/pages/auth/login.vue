@@ -49,6 +49,10 @@ export default {
       password: ''
     }
   },
+  created() {
+		window.document.title = '支援機関ログイン'
+		window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「支援機関ログイン」ページです。当サイトにて支援機関者登録が完了されている方は、会員情報を入力しマイページへログインしてください。パスワードを忘れた方、会員登録済み出ない方は専用フォームをご利用ください。'
+	},
   mounted() {
   },
   methods: {

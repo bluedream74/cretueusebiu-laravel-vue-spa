@@ -98,7 +98,7 @@ export default {
       })
     },
 		async deleteProc(id) {
-      this.$iosConfirm('削除します。よろしいでしょうか？').then(async () => {
+      this.$iosConfirm('一度削除した情報は復元できません。この情報を削除してもよろしいですか？').then(async () => {
         try {
           const { data } = await axios.post('/admin/delete_banner_proc', {
             id: id

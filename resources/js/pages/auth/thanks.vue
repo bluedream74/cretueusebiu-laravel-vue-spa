@@ -27,7 +27,7 @@
 							<p>メールが届かない場合、【メールアドレスの間違い】や【メール受信設定されていない】または【迷惑メールフォルダ】に入ってしまっている可能性がありますので、ご確認ください。</p>
 						</div>
 						<div class="common_btn2 backbtn">
-							<router-link :to="{ name: 'login' }" class="blue"><span>ログインへ</span></router-link>
+							<router-link :to="{ name: 'home' }" class="blue"><span>TOPへ</span></router-link>
 						</div>
 					</div>
 				</section>
@@ -42,6 +42,10 @@ export default {
     return {
       introduction: ""
     }
+  },
+  created() {
+    window.document.title = '支援機関新規登録 仮登録完了'
+    window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「支援機関新規登録 仮登録完了」ページです。支援機関新規登録はまだ完了しておりません。ご入力いただいたメールアドレス宛に、本登録用のURLを記載したメールを配信しております。'
   },
   mounted() {
   },

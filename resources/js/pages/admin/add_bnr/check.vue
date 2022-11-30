@@ -52,6 +52,7 @@
 </template>
 <script>
 export default {
-
+  layout: 'admin_auth',
+	middleware: 'admin',
 }
 </script>

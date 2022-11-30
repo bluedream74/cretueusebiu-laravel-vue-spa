@@ -1,6 +1,6 @@
 <template>
   <div class="common_page form_page consultation_form">
-    <main>
+    <main v-if="flag">
 			<section class="section mv_area">
 				<h1>登録完了</h1>
 				<div class="topicpath">
@@ -32,7 +32,26 @@
 </template>
 <script>
 export default {
-  
+  created() {
+		window.document.title = '支援機関新規登録 仮登録完了'
+		window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「事業者相談フォーム 登録完了」ページです。事業者相談の登録が完了しました。完了より6時間後に、送信いただいた相談内容が掲載されます。掲載された相談内容は随時支援機関とマッチングされます。'
+	},
+	data() {
+		return {
+			flag: false
+		}
+	},
+	async mounted() {
+		try {
+			const { data } = await axios.post('/api/accept_consultant', {
+				id: this.$route.query.id
+			})
+			if (data.flag) {
+				this.flag = true
+			}
+		} catch (error) {
+		}
+	}
 }
 </script>
 <style lang="scss" scoped>

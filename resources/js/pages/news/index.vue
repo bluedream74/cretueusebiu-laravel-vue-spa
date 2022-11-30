@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="common_page news_page">
     <main>
 			<section class="section mv_area">
 				<h1>お知らせ一覧</h1>
@@ -38,6 +38,10 @@ export default {
     return {
       news: []
     }
+  },
+  created() {
+    window.document.title = 'お知らせ一覧'
+    window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「お知らせ一覧」ページです。当サイトからの事業者・支援機関様へ向けたお知らせ情報を、掲載日付順にご覧いただけます。お知らせの詳細等についてはリスト内の各リンクをご参照ください。'
   },
   mounted() {
     this.init()

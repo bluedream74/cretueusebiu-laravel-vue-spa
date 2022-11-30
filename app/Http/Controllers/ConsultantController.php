@@ -23,6 +23,8 @@ use App\Models\Contact;
 use App\Models\Banner;
 use Carbon\Carbon;
 use App\Jobs\EmailVerification;
+use App\Jobs\ConsultantEmailJob;
+use App\Jobs\ContactFinishEmailJob;
 use App\Jobs\PasswordReset;
 use Laravel\Cashier\Cashier;
 
@@ -49,6 +51,7 @@ class ConsultantController extends Controller
       'message_title' => $request->input('message_title'),
       'message_content' => $request->input('message_content'),
       'expired_at' => $request->input('expired_at'),
+      'available' => 0
     ]);
 
     foreach($request->input('system_confirms') as $row) {
@@ -70,6 +73,13 @@ class ConsultantController extends Controller
         'consultant_id' => $consultant->id,
         'other_id' => $row
       ]);
+    }
+
+    $consultant = Consultant::where('id', $consultant->id)->with('confirms', 'misss', 'others', 'answers')->first();
+    try {
+      ConsultantEmailJob::dispatch($consultant);
+    } catch (Exception $e) {
+      return false;
     }
 
     return response()->json([
@@ -114,7 +124,7 @@ class ConsultantController extends Controller
   }
 
   public function getConsultantList(Request $request) {
-    $consultants = Consultant::orderByDesc('created_at')->with('confirms', 'misss', 'others')->get();
+    $consultants = Consultant::where('available', 1)->orderByDesc('created_at')->with('confirms', 'misss', 'others')->get();
 
     return response()->json([
       'consultants' => $consultants
@@ -167,13 +177,29 @@ class ConsultantController extends Controller
   }
 
   public function sendContact(Request $request) {
-    Contact::create([
+    $contact = Contact::create([
       'name' => $request->input('name'),
       'huri_name' => $request->input('huri_name'),
       'email' => $request->input('email'),
       'telephone' => $request->input('telephone'),
       'fax' => $request->input('fax'),
       'content' => $request->input('content'),
+    ]);
+
+    try {
+      ContactFinishEmailJob::dispatch($contact);
+    } catch (Exception $e) {
+      return false;
+    }
+
+    return response()->json([
+      'flag' => true
+    ]);
+  }
+
+  public function acceptConsultant(Request $request) {
+    Consultant::where('id', $request->input('id'))->update([
+      'available' => 1
     ]);
 
     return response()->json([
