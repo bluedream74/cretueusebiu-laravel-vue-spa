@@ -22,9 +22,9 @@
             <dl>
               <dt>特殊金額有効日</dt>
               <dd>
-                <input type="text" class="datepicker" v-model="master.from">
+                <input type="text"  id="masterFrom" class="datepicker" :value="master.from">
                 ～
-                <input type="text" class="datepicker" v-model="master.to">
+                <input type="text" id="masterTo" class="datepicker" :value="master.to">
               </dd>
             </dl>
             <div class="submit_wrap">
@@ -54,8 +54,8 @@ export default {
       try {
         const { data } = await axios.post('/admin/get_billing_data')
         this.master = data.master
-        this.master.from = !!data.master.from ? moment(data.master.from, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD') : null
-        this.master.to = !!data.master.to ? moment(data.master.to, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD') : null
+        this.master.from = !!data.master.from ? moment(data.master.from, 'YYYY-MM-DD HH:mm:ss').format('YYYY/MM/DD') : null
+        this.master.to = !!data.master.to ? moment(data.master.to, 'YYYY-MM-DD HH:mm:ss').format('YYYY/MM/DD') : null
         setTimeout(() => {
           $('.datepicker').datepicker({
             numberOfMonths:1,
@@ -65,6 +65,8 @@ export default {
       }
     },
     async saveMaster() {
+      this.master.from = $('#masterFrom').val()
+      this.master.to = $('#masterTo').val()
       if (!this.master.price || !this.master.special_price) {
         this.$swal('', '必須項目を入力してください')
         return

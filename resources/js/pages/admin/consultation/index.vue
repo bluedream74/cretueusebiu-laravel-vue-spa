@@ -20,9 +20,9 @@
             <dl class="date">
               <dt>登録日</dt>
               <dd>
-                <input type="text" class="datepicker" v-model="search.from">
+                <input type="text" id="searchFrom" class="datepicker" :value="search.from">
                 ～
-                <input type="text" class="datepicker" v-model="search.to">
+                <input type="text" id="searchTo" class="datepicker" :value="search.to">
               </dd>
             </dl>
             <dl class="input_txt">
@@ -107,6 +107,8 @@ export default {
       }
     },
     async init() {
+      this.search.from = $('#searchFrom').val()
+      this.search.to = $('#searchTo').val()
       this.temp = []
       this.consultants = []
       try {

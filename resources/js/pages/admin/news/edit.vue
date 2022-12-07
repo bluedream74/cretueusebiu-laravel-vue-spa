@@ -23,9 +23,9 @@
             <dl>
               <dt>公開期間<span>必須</span></dt>
               <dd>
-                <input type="text" class="datepicker" v-model="start_at">
+                <input type="text" id="startDate" class="datepicker" :value="start_at">
                 ～
-                <input type="text" class="datepicker" v-model="end_at">
+                <input type="text" id="endDate" class="datepicker" :value="end_at">
               </dd>
             </dl>
             <dl>
@@ -98,8 +98,8 @@ export default {
           id: this.$route.query.id
         })
         this.is_public = data.news.is_public
-        this.start_at = !!data.news.start_at ? moment(data.news.start_at, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD') : null
-        this.end_at = !!data.news.end_at ? moment(data.news.end_at, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD') : null
+        this.start_at = !!data.news.start_at ? moment(data.news.start_at, 'YYYY-MM-DD HH:mm:ss').format('YYYY/MM/DD') : null
+        this.end_at = !!data.news.end_at ? moment(data.news.end_at, 'YYYY-MM-DD HH:mm:ss').format('YYYY/MM/DD') : null
         this.title = data.news.title
         this.url = data.news.url
         this.pdf = data.news.pdf
@@ -120,6 +120,8 @@ export default {
       }
     },
     async createNews() {
+      this.start_at = $('#startDate').val()
+      this.end_at = $('#endDate').val()
       if (!this.start_at) {
         this.$swal('', '公開期間を指定してください')
         return
@@ -129,7 +131,6 @@ export default {
         this.$swal('', 'タイトルを入力してください。')
         return
       }
-
       let formData = new FormData()
       formData.append('is_public', this.is_public)
       formData.append('start_at', this.start_at)

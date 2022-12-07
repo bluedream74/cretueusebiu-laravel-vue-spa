@@ -31,9 +31,9 @@
             <dl>
               <dt>公開期間<span>必須</span></dt>
               <dd>
-                <input type="text" class="datepicker" v-model="start_at">
+                <input type="text" class="datepicker" id="startDate" :value="start_at">
                 ～
-                <input type="text" class="datepicker" v-model="end_at">
+                <input type="text" class="datepicker" id="endDate" :value="end_at">
               </dd>
             </dl>
             <dl>
@@ -92,8 +92,8 @@ export default {
         this.is_public = data.banner.is_public
         this.title = data.banner.title
         this.link = data.banner.link
-        this.start_at = !!data.banner.start_at ? moment(data.banner.start_at, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD') : null
-        this.end_at = !!data.banner.end_at ? moment(data.banner.end_at, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD') : null
+        this.start_at = !!data.banner.start_at ? moment(data.banner.start_at, 'YYYY-MM-DD HH:mm:ss').format('YYYY/MM/DD') : null
+        this.end_at = !!data.banner.end_at ? moment(data.banner.end_at, 'YYYY-MM-DD HH:mm:ss').format('YYYY/MM/DD') : null
         this.id = data.banner.id
         this.image_url = data.banner.image_url
       } catch (error) {
@@ -109,6 +109,8 @@ export default {
       }
     },
     async createNews() {
+      this.start_at = $('#startDate').val()
+      this.end_at = $('#endDate').val()
       if (!this.title) {
         this.$swal('', 'バナー名を入力してください。')
         return
