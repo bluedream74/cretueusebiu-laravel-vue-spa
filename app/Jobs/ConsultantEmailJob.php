@@ -9,6 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Invite;
 use App\Mail\ConsultantEmail;
+use App\Models\Consultant;
 use Illuminate\Support\Facades\Mail;
 
 class ConsultantEmailJob implements ShouldQueue
@@ -23,7 +24,7 @@ class ConsultantEmailJob implements ShouldQueue
      * @return void
      */
     public function __construct(
-        Invite $consultant
+        Consultant $consultant
     )
     {
         $this->consultant = $consultant;
