@@ -290,7 +290,7 @@ export default {
 				return
 			}
 
-			if (!this.job) {
+			if (this.job == null) {
 				this.$swal('', '業種を選択してください')
 				return
 			}
@@ -300,7 +300,7 @@ export default {
 				return
 			}
 
-			if (!this.prefecture) {
+			if (this.prefecture == null) {
 				this.$swal('', '都道府県を選択してください')
 				return
 			}
@@ -315,7 +315,7 @@ export default {
 				return
 			}
 
-			if (!this.income) {
+			if (this.income == null) {
 				this.$swal('', '年商を選択してください')
 				return
 			}
