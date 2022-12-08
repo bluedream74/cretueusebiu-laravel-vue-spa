@@ -30,10 +30,10 @@
             </dl>
             <dl>
               <dt>公開期間<span>必須</span></dt>
-              <dd>
-                <input type="text" class="datepicker" id="startDate" :value="start_at">
+              <dd class="datepicker_group">
+                <datepicker v-model="start_at" :language="ja" format="yyyy/MM/dd"></datepicker>
                 ～
-                <input type="text" class="datepicker" id="endDate" :value="end_at">
+                <datepicker v-model="end_at" :language="ja" format="yyyy/MM/dd"></datepicker>
               </dd>
             </dl>
             <dl>
@@ -59,7 +59,8 @@
   </div>
 </template>
 <script>
-import Spinner from '../../../components/Spinner.vue'
+import Datepicker from 'vuejs-datepicker';
+import {ja} from 'vuejs-datepicker/dist/locale'
 import moment from 'moment'
 export default {
   layout: 'admin_auth',
@@ -74,8 +75,12 @@ export default {
       end_at: null,
       id: null,
       image_url: null,
-      loading: false
+      loading: false,
+      ja: ja
     }
+  },
+  components: {
+    Datepicker
   },
   mounted() {
     $('.datepicker').datepicker({
@@ -109,8 +114,6 @@ export default {
       }
     },
     async createNews() {
-      this.start_at = $('#startDate').val()
-      this.end_at = $('#endDate').val()
       if (!this.title) {
         this.$swal('', 'バナー名を入力してください。')
         return

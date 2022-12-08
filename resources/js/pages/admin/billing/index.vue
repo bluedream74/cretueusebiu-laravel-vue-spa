@@ -9,7 +9,6 @@
           </ul>
         </div>
         <h2 class="h_style03"><span>課金額管理 (税抜きの金額で入力してください)</span></h2>
-        <!-- <input type="text" class="datepicker" v-model="master.from"> -->
         <form class="edit_form" @submit.prevent="saveMaster" v-if="master">
             <dl>
               <dt>基本金額</dt>
@@ -21,10 +20,10 @@
             </dl>
             <dl>
               <dt>特殊金額有効日</dt>
-              <dd>
-                <input type="text"  id="masterFrom" class="datepicker" :value="master.from">
+              <dd class="datepicker_group">
+                <datepicker v-model="master.from" :language="ja" format="yyyy/MM/dd"></datepicker>
                 ～
-                <input type="text" id="masterTo" class="datepicker" :value="master.to">
+                <datepicker v-model="master.to" :language="ja" format="yyyy/MM/dd"></datepicker>
               </dd>
             </dl>
             <div class="submit_wrap">
@@ -37,6 +36,8 @@
   </div>
 </template>
 <script>
+import Datepicker from 'vuejs-datepicker';
+import {ja} from 'vuejs-datepicker/dist/locale'
 import moment from 'moment'
 export default {
   layout: 'admin_auth',
@@ -44,9 +45,13 @@ export default {
   mounted() {
     this.init()
   },
+  components: {
+    Datepicker
+  },
   data() {
     return {
-      master: null
+      master: null,
+      ja: ja
     }
   },
   methods: {
@@ -65,8 +70,6 @@ export default {
       }
     },
     async saveMaster() {
-      this.master.from = $('#masterFrom').val()
-      this.master.to = $('#masterTo').val()
       if (!this.master.price || !this.master.special_price) {
         this.$swal('', '必須項目を入力してください')
         return

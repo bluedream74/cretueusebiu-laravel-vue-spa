@@ -22,10 +22,10 @@
             </dl>
             <dl>
               <dt>公開期間<span>必須</span></dt>
-              <dd>
-                <input type="text" id="startDate" class="datepicker" :value="start_at">
+              <dd class="datepicker_group">
+                <datepicker v-model="start_at" :language="ja" format="yyyy/MM/dd"></datepicker>
                 ～
-                <input type="text" id="endDate" class="datepicker" :value="end_at">
+                <datepicker v-model="end_at" :language="ja" format="yyyy/MM/dd"></datepicker>
               </dd>
             </dl>
             <dl>
@@ -60,6 +60,9 @@
   </div>
 </template>
 <script>
+import Datepicker from 'vuejs-datepicker';
+import moment from 'moment'
+import {ja} from 'vuejs-datepicker/dist/locale'
 export default {
   layout: 'admin_auth',
 	middleware: 'admin',
@@ -72,8 +75,12 @@ export default {
       url: null,
       pdf: null,
       pdf_title: null,
-      content: null
+      content: null,
+      ja: ja
     }
+  },
+  components: {
+    Datepicker
   },
   mounted() {
     $('.datepicker').datepicker({
@@ -93,8 +100,6 @@ export default {
       }
     },
     async createNews() {
-      this.start_at = $('#startDate').val()
-      this.end_at = $('#endDate').val()
       if (!this.start_at) {
         this.$swal('', '公開期間を指定してください')
         return

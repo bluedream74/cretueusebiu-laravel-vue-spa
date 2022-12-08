@@ -19,10 +19,10 @@
           <div class="flex_wrap">
             <dl class="date">
               <dt>登録日</dt>
-              <dd>
-                <input type="text" id="searchFrom" class="datepicker" :value="search.from">
+              <dd class="datepicker_group">
+                <datepicker v-model="search.from" :language="ja" format="yyyy/MM/dd"></datepicker>
                 ～
-                <input type="text" id="searchTo" class="datepicker" :value="search.to">
+                <datepicker v-model="search.to" :language="ja" format="yyyy/MM/dd"></datepicker>
               </dd>
             </dl>
             <dl class="input_txt">
@@ -73,13 +73,16 @@
   </div>
 </template>
 <script>
+import Datepicker from 'vuejs-datepicker';
+import {ja} from 'vuejs-datepicker/dist/locale'
 import Pagination from '../../../components/Pagination.vue'
 import moment from 'moment'
 export default {
   layout: 'admin_auth',
   middleware: 'admin',
   components: {
-    Pagination
+    Pagination,
+    Datepicker
   },
   data() {
     return {
@@ -89,7 +92,8 @@ export default {
         from: null,
         to: null,
         available: 1
-      }
+      },
+      ja: ja
     }
   },
   mounted() {
@@ -107,8 +111,6 @@ export default {
       }
     },
     async init() {
-      this.search.from = $('#searchFrom').val()
-      this.search.to = $('#searchTo').val()
       this.temp = []
       this.consultants = []
       try {

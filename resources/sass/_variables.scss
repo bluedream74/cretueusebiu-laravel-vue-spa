@@ -16,3 +16,14 @@ body {
 a {
   cursor: pointer;
 }
+.datepicker_group {
+  display: flex !important;
+  align-items: center !important;
+
+  .vdp-datepicker {
+    width: 200px;
+    input {
+      width: 100% !important;
+    }
+  }
+}
