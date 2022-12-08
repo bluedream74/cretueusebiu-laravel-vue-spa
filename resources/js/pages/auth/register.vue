@@ -347,7 +347,7 @@ export default {
 				return
 			}
 
-			if (this.kind != null) {
+			if (this.kind == null) {
 				this.$swal('', '種別を選択してください')
 				return
 			}
