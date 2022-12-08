@@ -70,6 +70,8 @@ export default {
       }
     },
     async saveMaster() {
+      this.master.from = moment(this.master.from).format('YYYY-MM-DD')
+      this.master.to = moment(this.master.to).format('YYYY-MM-DD')
       if (!this.master.price || !this.master.special_price) {
         this.$swal('', '必須項目を入力してください')
         return

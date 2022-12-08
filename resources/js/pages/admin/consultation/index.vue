@@ -113,6 +113,8 @@ export default {
     async init() {
       this.temp = []
       this.consultants = []
+      this.search.from = !!this.search.from ? moment(this.search.from).format('YYYY-MM-DD') : null
+      this.search.to = !!this.search.to ? moment(this.search.to).format('YYYY-MM-DD') : null
       try {
         const { data } = await axios.post('/admin/get_consultant_list')
         this.temp = data.consultants.filter(item => {

@@ -114,8 +114,8 @@ export default {
       formData.append('is_public', this.is_public)
       formData.append('title', this.title)
       formData.append('link', this.link)
-      formData.append('start_at', this.start_at)
-      formData.append('end_at', this.end_at)
+      formData.append('start_at', moment(this.start_at).format('YYYY-MM-DD'))
+      formData.append('end_at', moment(this.end_at).format('YYYY-MM-DD'))
       formData.append('image', this.image)
       await axios.post('/admin/create_banner', formData, { headers: { 'Content-Type': 'multipart/form-data' }})
       this.loading = false
