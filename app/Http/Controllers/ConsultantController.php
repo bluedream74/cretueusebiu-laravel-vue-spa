@@ -76,11 +76,11 @@ class ConsultantController extends Controller
     }
 
     $consultant = Consultant::where('id', $consultant->id)->with('confirms', 'misss', 'others', 'answers')->first();
-    // try {
-    //   ConsultantEmailJob::dispatch($consultant);
-    // } catch (Exception $e) {
-    //   return false;
-    // }
+    try {
+      ConsultantEmailJob::dispatch($consultant);
+    } catch (Exception $e) {
+      return false;
+    }
 
     return response()->json([
       'flag' => true

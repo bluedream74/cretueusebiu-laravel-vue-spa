@@ -101,7 +101,10 @@
   <div class="col-md-12 col-sm-12 notification-title">
     下記のとおり、事業者相談申し込みを受け付けました。<br/>
     <br/>
-    送信日時：{{ date_format($consultant->created_at, 'Y/m/d H:i:s') }}<br/>
+    <?php 
+      $date = date_create($consultant->created_at); 
+    ?>
+    送信日時：{{ date_format($date, 'Y/m/d H:i:s') }}<br/>
     ―――――――――――――――――――――――――――――――――――<br/>
     ■相談内容　　　　：<br/>
     @foreach($consultant->confirms as $confirm)
@@ -129,7 +132,10 @@
     {{ $consultant->message_title }}<br/>
     ■相談内容詳細　：<br/>
     {{ $consultant->message_content }}<br/>
-    ■掲載期限　　　：{{ date_format($consultant->expired_at, 'Y/m/d') }}<br/>
+    <?php 
+      $expire_date = date_create($consultant->expired_at); 
+    ?>
+    ■掲載期限　　　：{{ date_format($expire_date, 'Y/m/d') }}<br/>
     <br/>
     <br/>
     ―――――――――――――――――――――――――――――――――――<br/>
