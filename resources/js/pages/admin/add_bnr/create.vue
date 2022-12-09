@@ -54,6 +54,7 @@
 <script>
 import Datepicker from 'vuejs-datepicker';
 import {ja} from 'vuejs-datepicker/dist/locale'
+import moment from 'moment'
 import Spinner from '../../../components/Spinner.vue'
 export default {
   layout: 'admin_auth',
@@ -124,3 +125,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.sitewrap {
+  overflow: visible !important;
+}
+</style>

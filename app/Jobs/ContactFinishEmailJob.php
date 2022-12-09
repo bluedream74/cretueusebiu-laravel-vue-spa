@@ -23,7 +23,7 @@ class ContactFinishEmailJob implements ShouldQueue
      * @return void
      */
     public function __construct(
-        $contact,
+        $contact
     )
     {
         $this->contact = $contact;

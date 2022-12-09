@@ -9,7 +9,7 @@
     このたびは＜補助金活用.COM＞へお問い合わせいただきありがとうございます。<br/>
     お送りいただきました内容は以下になります。<br/>
     <br/>
-    送信日時：{{ date_format($consultant->created_at, 'Y/m/d H:i:s') }}<br/>
+    送信日時：{{ date_format($contact->created_at, 'Y/m/d H:i:s') }}<br/>
     ―――――――――――――――――――――――――――――――――――
     ■お名前　　　　　：{{ $contact->name }}<br/>
     ■フリガナ　　　　：{{ $contact->huri_name }}<br/>
