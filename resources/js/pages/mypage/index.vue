@@ -28,7 +28,7 @@
 									<dl class="overview"><dt>概要</dt><dd>{{ item.message_title }}</dd></dl>
 								</div>
 								<div class="common_btn2 arrow">
-									<a @click="showDetail(item)" class="modal-multi" :data-target="'modal-content-' + (index + 1)"><span>詳細を見る</span></a>
+									<a @click="showDetail(item, '#modal-content-' + (index + 1))" class="modal-multi"><span>詳細を見る</span></a>
 								</div>
 							</li>
 						</ul>
@@ -53,7 +53,7 @@
 				</div>
 				<div class="section send_area">
 					<div class="send_btns common_btn2">
-							<a @click="agreeKakin(item)"><span>同意</span></a>
+							<a @click="agreeKakin(item, '#modal-content-'+(index+1))"><span>同意</span></a>
 							<a href="javascript:void(0)" class="modal-close prev blue"><span>戻る</span></a>
 					</div>
 				</div>
@@ -97,7 +97,7 @@ export default {
         return index >= (page - 1) * 10 && index < (page * 10)
       })
     },
-		async agreeKakin(consultant) {
+		async agreeKakin(consultant, modalId) {
 			let find = this.consultant_kakins.find(item => {
 				return item.consultant_id == consultant.id
 			})
@@ -109,12 +109,12 @@ export default {
 					this.$router.push({ name: 'consultant_detail', query: {
 						id: consultant.id
 					} })
-					window.location.reload();
+					$(modalId).modal('hide');
 				} catch (error) {
 				}
 			}
 		},
-		showDetail(consultant) {
+		showDetail(consultant, modalId) {
 			let find = this.consultant_kakins.find(item => {
 				return item.consultant_id == consultant.id
 			})
@@ -122,7 +122,8 @@ export default {
 				this.$router.push({ name: 'consultant_detail', query: {
 					id: consultant.id
 				} })
-				window.location.reload();
+			} else {
+				$(modalId).modal('show');
 			}
 		},
 		async init() {
