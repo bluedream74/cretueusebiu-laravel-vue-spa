@@ -38,6 +38,6 @@ class ConsultantEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to('itcloud02147@gmail.com')->queue(new ConsultantEmail($this->consultant));
+        Mail::to($this->consultant->email)->queue(new ConsultantEmail($this->consultant));
     }
 }
