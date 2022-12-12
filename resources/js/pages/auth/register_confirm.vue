@@ -254,6 +254,9 @@
           } else if (data.status == 2) {
             this.$swal('', '強制退会済のユーザーです。登録できません')
             return
+          } else if (data.status == 3) {
+            this.$swal('', '認定支援機関ID番号が重複されています')
+            return
           } else if (data.status == 1) {
             this.user_id = data.user_id
             this.clearContent()

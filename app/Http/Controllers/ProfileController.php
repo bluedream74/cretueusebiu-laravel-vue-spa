@@ -39,6 +39,14 @@ class ProfileController extends Controller
       ]);
     }
 
+    $temp_user = User::where('kikan_id', $request->input('kikan_id'))->first();
+
+    if (!is_null($temp_user)) {
+      return response()->json([
+        'status' => 3
+      ]);
+    }
+
     User::where('email', $data['email'])->delete();
 
     $user = User::create([
