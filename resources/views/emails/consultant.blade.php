@@ -127,7 +127,7 @@
     ■担当者氏名　　：{{ $consultant->tanto_name }}<br/>
     ■部署名　　　　：{{ $consultant->department_name }}<br/>
     ■役職名　　　　：{{ $consultant->role_name }}<br/>
-    ■投資予定額　　：{{ $SUPPORT_PRICES[$consultant->price] }}<br/>
+    ■投資予定額　　：{{ !is_null($consultant->price) ? $SUPPORT_PRICES[$consultant->price] : '' }}<br/>
     ■相談内容概略　：<br/>
     {{ $consultant->message_title }}<br/>
     ■相談内容詳細　：<br/>
