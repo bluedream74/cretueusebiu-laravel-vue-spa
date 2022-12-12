@@ -108,13 +108,13 @@
     ―――――――――――――――――――――――――――――――――――<br/>
     ■相談内容　　　　：<br/>
     @foreach($consultant->confirms as $confirm)
-    {{ $SYSTEM_CONFIRM[$confirm->confirm_id] }}<br/>
+    {{ !is_null($confirm->confirm_id) ? $SYSTEM_CONFIRM[$confirm->confirm_id] : '' }}<br/>
     @endforeach
     @foreach($consultant->misss as $miss)
-    {{ $SYSTEM_MISS[$miss->miss_id] }}<br/>
+    {{ !is_null($miss->miss_id) ? $SYSTEM_MISS[$miss->miss_id] : '' }}<br/>
     @endforeach
     @foreach($consultant->others as $other)
-    {{ $SYSTEM_OTHER[$other->other_id] }}<br/>
+    {{ !is_null($other->other_id) ? $SYSTEM_OTHER[$other->other_id] : '' }}<br/>
     @endforeach
     ■会社名　　　　：{{ $consultant->com_name }}<br/>
     ■業種　　　　　：{{ $JOBS[$consultant->job] }}<br/>
