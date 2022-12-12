@@ -143,7 +143,6 @@ class ProfileController extends Controller
         'token_at' => null
     ]);
     $user = User::where('id', $user->id)->first();
-    $stripeCustomer = $user->createOrGetStripeCustomer();
     
     if ($user->token_at < Carbon::now()) {
         return response()->json([
