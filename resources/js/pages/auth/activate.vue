@@ -30,8 +30,7 @@ export default {
                     this.$swal('', 'URLの有効期限が過ぎました。')
                     this.$router.push({ name: 'home' })
                 } else if (data.status == 4) {
-                    this.$swal('', '本登録が完了しました。\nログイン画面よりログインしご利用ください。')
-                    this.$router.push({ name: 'complete', query: { id: data.user_id } })
+                    this.$router.push({ name: 'register_complete' })
                 }
             } catch (error) {
             }
