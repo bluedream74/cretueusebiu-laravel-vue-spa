@@ -114,7 +114,7 @@ export default {
     resetForm() {
       this.search = {
         name: '',
-        available: 1
+        available: null
       }
     },
     async init() {
@@ -124,9 +124,9 @@ export default {
         const { data } = await axios.post('/admin/get_register_list')
         this.temp = data.registers.filter(item => {
           if (this.search.name != '') {
-            return item.com_name.includes(this.search.name) && item.available == this.search.available
+            return item.com_name.includes(this.search.name) && (!!this.search.available ? item.available == this.search.available : true)
           } else {
-            return item.available == this.search.available
+            return (!!this.search.available ? item.available == this.search.available : true)
           }
         })
         this.registers = this.temp.filter((item, index) => {
