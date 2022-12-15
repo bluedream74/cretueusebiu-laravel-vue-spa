@@ -140,7 +140,9 @@ export default {
 		async init() {
 			try {
 				const { data } = await axios.post('/api/get_matching_list')
-				this.consultant_kakins = data.consultant_kakins
+				this.consultant_kakins = data.consultant_kakins.filter(item => {
+					return item.available == 1 && moment(item.expired_at).format('YYYYMMDD') >= moment().format('YYYYMMDD')
+				})
 				let available_amounts = data.available_amounts.map(it => {
 					return it.amount_id
 				})
