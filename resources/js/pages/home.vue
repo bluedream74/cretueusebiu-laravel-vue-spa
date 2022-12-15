@@ -103,7 +103,7 @@
     <section class="consultation_wrap">
       <div class="sitewrap">
         <h2 class="tit action ups"><b>ただいま、<br class="display_sp">掲載中のご相談</b></h2>
-        <p class="sub_tit action ups delay_2"><span>現在、{{ consultants.length }}件以上の<br class="display_sp">ご相談があります</span></p>
+        <p class="sub_tit action ups delay_2"><span>現在、500件以上の<br class="display_sp">ご相談があります</span></p>
         <div class="slider action holizon_open">
           <div class="items" v-for="(item, index) in consultants" :key="index">
             <p class="pref">都道府県：{{ item.prefecture }}</p>
@@ -111,7 +111,6 @@
               <dt>概 要</dt>
               <dd>{{ item.message_title }}</dd>
             </dl>
-            <p class="link_txt">詳細をみる</p>
             <div class="cat">
               <span class="type">{{ JOBS[item.job] }}</span>
               <span class="num">{{ AMOUNTS[item.amount] }}</span>
