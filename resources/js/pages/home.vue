@@ -46,8 +46,31 @@
           <div class="img"><img src="/assets/img/top/img_worry01.jpg" alt="悩む人の写真"></div>
           <div class="txt">
             <p>補助金申請の流れが分からない。</p>
-            <p>どんな補助金が受けられるのか<br class="display_pc">わからない。</p>
+            <p>どんな補助金が受けられるのかわからない。</p>
             <p>補助金申請する時間がない！</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="step_wrap">
+      <div class="sitewrap">
+        <h2 class="tit action ups">簡単な<b class="deco">3</b>ステップで<br class="display_sp"><b>マッチング！</b></h2>
+        <div class="list action feders delay_set">
+          <div class="items">
+            <h3 class="step_tit"><span>STEP<b>1</b></span></h3>
+            <div class="img"><img src="/assets/img/top/img_step01.png" alt="考えるイメージイラスト"></div>
+            <p class="text"><span>補助金</span>を使いたい。<br>
+              でも、誰に相談したら良いかわからない。</p>
+          </div>
+          <div class="items">
+            <h3 class="step_tit"><span>STEP<b>2</b></span></h3>
+            <div class="img"><img src="/assets/img/top/img_step02.png" alt="相談に受けるイメージイラスト"></div>
+            <p class="text"><span>まずは相談！</span><br>簡単な質問に答えて投稿するだけ</p>
+          </div>
+          <div class="items">
+            <h3 class="step_tit"><span>STEP<b>3</b></span></h3>
+            <div class="img"><img src="/assets/img/top/img_step03.png" alt="マッチングするイメージイラスト"></div>
+            <p class="text">あとは<span>自動でマッチング！</span><br>支援機関からメールが届きます！</p>
           </div>
         </div>
         <div class="common_btn action ups delay_4"><router-link :to="{ name: 'consultant_form' }"><span>認定支援機関に<b>無料相談</b>する</span></router-link></div>
@@ -60,17 +83,17 @@
           <div class="items">
             <div class="img"><img src="/assets/img/top/img_entrust01.jpg" alt="ものづくりのイメージ"></div>
             <h3 class="items_tit">ものづくり補助金</h3>
-            <p>補助金についての説明文です。これはダミー文です。これはダミー文です。これはダミー文です。これはダミー文です。これはダミー文です。これはダミー文です。これはダミー文です。</p>
+            <p>正式名称は、ものづくり・商業・サービス生産性向上促進補助金です。<br>製造業のほか小売業や飲食業のネットショップ構築など幅広い用途で活用されているので多くの方にお勧めできる補助金です。</p>
           </div>
           <div class="items">
             <div class="img"><img src="/assets/img/top/img_entrust02.jpg" alt="IT導入のイメージ"></div>
             <h3 class="items_tit">IT導入補助金</h3>
-            <p>補助金についての説明文です。これはダミー文です。これはダミー文です。これはダミー文です。これはダミー文です。これはダミー文です。これはダミー文です。これはダミー文です。</p>
+            <p>ソフトウェア等のIT ツールを導入する際に補助を受けることができます。会計ソフト・受発注ソフト・決済ソフト・ECソフトの導入やPC・タブレット・レジ等の導入も対象となります</p>
           </div>
           <div class="items">
             <div class="img"><img src="/assets/img/top/img_entrust03.jpg" alt="事業再構築するイメージ"></div>
             <h3 class="items_tit">事業再構築補助金</h3>
-            <p>補助金についての説明文です。これはダミー文です。これはダミー文です。これはダミー文です。これはダミー文です。これはダミー文です。これはダミー文です。これはダミー文です。</p>
+            <p>コロナ禍または原油価格・物価高騰等により業況が厳しい個人事業主や中小事業者が思い切った取組をする場合に活用できる補助金です。建物費や一時移転費も補助対象です。</p>
           </div>
         </div>
         <h3 class="sub_tit action ups"><span>他にも様々な補助金があります</span></h3>
@@ -82,7 +105,7 @@
         <h2 class="tit action ups"><b>ただいま、<br class="display_sp">掲載中のご相談</b></h2>
         <p class="sub_tit action ups delay_2"><span>現在、{{ consultants.length }}件以上の<br class="display_sp">ご相談があります</span></p>
         <div class="slider action holizon_open">
-          <a class="items" v-for="(item, index) in consultants" :key="index">
+          <div class="items" v-for="(item, index) in consultants" :key="index">
             <p class="pref">都道府県：{{ item.prefecture }}</p>
             <dl class="detail">
               <dt>概 要</dt>
@@ -94,7 +117,7 @@
               <span class="num">{{ AMOUNTS[item.amount] }}</span>
               <span class="sales">年商　{{ PRICES[item.income] }}</span>
             </div>
-          </a>
+          </div>
         </div>
         <div class="common_btn action ups"><router-link :to="{ name: 'consultant' }"><span>一覧をみる</span></router-link></div>
       </div>
@@ -150,7 +173,7 @@ export default {
   },
   created() {
     window.document.title = '補助金活用.COM | 補助金申請のことなら事業者×支援機関マッチングサイト'
-    window.document.description = '補助金活用.COMのホームページです。当サイトは事業者の方と国（経済産業大臣）が認定した「認定経営革新等支援機関」をマッチングするサイトです。事業者の方の悩み事、相談事を解決するためにご利用ください。'
+    $('meta[name=description]').attr('補助金活用.COMのホームページです。当サイトは事業者の方と国（経済産業大臣）が認定した「認定経営革新等支援機関」をマッチングするサイトです。事業者の方の悩み事、相談事を解決するためにご利用ください。')
   },
   mounted() {
     setTimeout(() => {
