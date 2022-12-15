@@ -28,7 +28,7 @@
 									<dl class="overview"><dt>概要</dt><dd>{{ item.message_title }}</dd></dl>
 								</div>
 								<div class="common_btn2 arrow">
-									<a @click="showDetail(item)" class="modal-multi" :data-target="'modal-content-' + (index + 1)"><span>詳細を見る</span></a>
+									<a @click="showDetail(item)" :data-target="'modal-content-' + (index + 1)"><span>詳細を見る</span></a>
 								</div>
 							</li>
 						</ul>
@@ -43,18 +43,20 @@
 			</div>
 		</main>
 
-		<div :id="'modal-content-'+(index+1)" v-for="(item, index) in list" :key="index" class="modal-content">
-			<a class="modal-close close_btn">×</a>
-			<div class="modal-wrap">
-				<div class="modal-ttl">詳細を閲覧するには課金が発生します。<br class="display_sp">宜しいでしょうか？</div>
-				<div class="texts">
-<p class="txt_indent"><b class="red">※掲載期間が終了したら応募が出来なくなります。ご注意ください。</b></p>
-<p><b class="red">初回メールをお送りしましたら電話番号が表示されます</b></p>
-				</div>
-				<div class="section send_area">
-					<div class="send_btns common_btn2">
-							<a @click="agreeKakin(item)"><span>同意</span></a>
-							<a href="javascript:void(0)" class="modal-close prev blue"><span>戻る</span></a>
+		<div id="modal-overlay" v-if="isShowModal">
+			<div class="modal-content">
+				<a class="modal-close close_btn" @click="closeKakin">×</a>
+				<div class="modal-wrap">
+					<div class="modal-ttl">詳細を閲覧するには課金が発生します。<br class="display_sp">宜しいでしょうか？</div>
+					<div class="texts">
+	<p class="txt_indent"><b class="red">※掲載期間が終了したら応募が出来なくなります。ご注意ください。</b></p>
+	<p><b class="red">初回メールをお送りしましたら電話番号が表示されます</b></p>
+					</div>
+					<div class="section send_area">
+						<div class="send_btns common_btn2">
+								<a @click="agreeKakin"><span>同意</span></a>
+								<a @click="closeKakin" class="modal-close prev blue"><span>戻る</span></a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -86,7 +88,10 @@ export default {
 			PRICES: PRICES,
 			AMOUNTS: AMOUNTS,
 			SUPPORT_PRICES: SUPPORT_PRICES,
-			consultant_kakins: []
+			consultant_kakins: [],
+
+			isShowModal: false,
+			tempConsultant: null
 		}
 	},
 	methods: {
@@ -98,7 +103,11 @@ export default {
         return index >= (page - 1) * 10 && index < (page * 10)
       })
     },
-		async agreeKakin(consultant) {
+		closeKakin() {
+			this.isShowModal = false
+		},
+		async agreeKakin() {
+			let consultant = this.tempConsultant
 			let find = this.consultant_kakins.find(item => {
 				return item.consultant_id == consultant.id
 			})
@@ -110,7 +119,7 @@ export default {
 					this.$router.push({ name: 'consultant_detail', query: {
 						id: consultant.id
 					} })
-					window.location.reload();
+					this.tempConsultant = null
 				} catch (error) {
 				}
 			}
@@ -123,7 +132,9 @@ export default {
 				this.$router.push({ name: 'consultant_detail', query: {
 					id: consultant.id
 				} })
-				window.location.reload();
+			} else {
+				this.tempConsultant = consultant
+				this.isShowModal = true
 			}
 		},
 		async init() {

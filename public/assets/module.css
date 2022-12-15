@@ -1149,13 +1149,14 @@ a:hover img.opacity{
 	padding: 20px 20px;
 	background: none;
 	position: fixed;
-	display: none;
 	z-index:1020;
 	background:#fff;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }
 #modal-overlay { 
 	z-index: 1000;
-	display: none;
 	position: fixed;
 	top: 0px;
 	left: 0px;
