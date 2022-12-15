@@ -66,6 +66,7 @@
 <script>
 import { JOBS, PRICES, AMOUNTS, SUPPORT_PRICES } from '../../const'
 import Pagination from '../../components/Pagination.vue'
+import moment from 'moment'
 export default {
   layout: 'default',
 	middleware: 'auth',

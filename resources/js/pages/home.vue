@@ -159,6 +159,7 @@
 </template>
 <script>
 import { JOBS, AMOUNTS, PRICES } from '../const'
+import moment from 'moment'
 export default {
   layout: 'default',
   data() {
@@ -191,6 +192,8 @@ export default {
         const { data } = await axios.post('/api/get_home_data')
         this.consultants = data.consultants.filter((item, index) => {
           return index < 10
+        }).filter(item => {
+          return moment(item.expired_at).format('YYYYMMDD') >= moment().format('YYYYMMDD')
         })
         this.news = data.news
         this.banners = data.banners
