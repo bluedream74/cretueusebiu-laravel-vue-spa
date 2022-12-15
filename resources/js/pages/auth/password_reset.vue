@@ -24,6 +24,10 @@ export default {
       email: "",
     }
   },
+  created() {
+		window.document.title = 'パスワードを忘れた方 | 補助金活用.COM'
+		window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「パスワードを忘れた方」ページです。支援機関者登録済みで、マイページへログインするためのパスワードを忘れた方は必要事項を入力してください。パスワード再設定用のメールをお送りします。'
+	},
   mounted() {
   },
   methods: {

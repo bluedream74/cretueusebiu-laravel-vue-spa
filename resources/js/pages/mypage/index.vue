@@ -71,8 +71,8 @@ export default {
 		Pagination
 	},
 	created() {
-		window.document.title = '支援者マイページ'
-		window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「支援者マイページ」です。各マッチング事業者の情報をリストからご確認いただけます。支援者マイページではこのほかマイプロフィール、過去の回答一覧、課金状況確認がご覧いただけます。'
+		window.document.title = '支援機関マイページ | 補助金活用.COM'
+		window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「支援機関マイページ」です。各マッチング事業者の情報をリストからご確認いただけます。支援機関マイページではこのほかマイプロフィール、過去の回答一覧、課金状況確認がご覧いただけます。'
 	},
 	mounted() {
 		this.init()

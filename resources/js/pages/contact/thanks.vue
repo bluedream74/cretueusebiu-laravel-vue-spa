@@ -39,7 +39,7 @@
 <script>
 export default {
   created() {
-    window.document.title = 'お問い合わせ'
+    window.document.title = 'お問い合わせ 送信完了 | 補助金活用.COM'
     window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「お問い合わせ 送信完了」ページです。お問い合わせの送信が完了しました。お問い合わせ内容を確認後、担当者よりご連絡いたしますので、恐れ入りますが、しばらくお待ちください。'
   },
 }

@@ -93,7 +93,7 @@ export default {
           id: this.$route.query.id
         })
         this.news = data.news
-				window.document.title = 'お知らせ詳細'+ this.news.title +' | お知らせ一覧'
+				window.document.title = 'お知らせ詳細'+ this.news.title +' | お知らせ一覧 | 補助金活用.COM'
     		window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMのお知らせ'+ this.news.title +'ページです。当サイトからの事業者・支援機関様へ向けたお知らせの詳細情報を掲載しています。その他のお知らせについてはお知らせ一覧ページよりご確認ください。'
       } catch (error) {
       }

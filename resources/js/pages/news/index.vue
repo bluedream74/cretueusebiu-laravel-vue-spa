@@ -40,7 +40,7 @@ export default {
     }
   },
   created() {
-    window.document.title = 'お知らせ一覧'
+    window.document.title = 'お知らせ一覧 | 補助金活用.COM'
     window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「お知らせ一覧」ページです。当サイトからの事業者・支援機関様へ向けたお知らせ情報を、掲載日付順にご覧いただけます。お知らせの詳細等についてはリスト内の各リンクをご参照ください。'
   },
   mounted() {

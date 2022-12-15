@@ -41,8 +41,8 @@ export default {
     }
   },
   created() {
-    window.document.title = 'パスワード再設定 | 支援者マイページ'
-    window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「パスワードの再設定」ページです。支援機関者登録済みの方がマイページへログインするためのパスワードを、入力した新規パスワードに変更します。新規パスワードは確認のため2回入力してください。'
+    window.document.title = 'パスワード再設定 | 支援機関マイページ | 補助金活用.COM'
+    window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「パスワードの再設定」ページです。支援機関登録済みの方がマイページへログインするためのパスワードを、入力した新規パスワードに変更します。新規パスワードは確認のため2回入力してください。'
   },
   methods: {
     async changePassword() {

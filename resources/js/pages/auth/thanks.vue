@@ -44,7 +44,7 @@ export default {
     }
   },
   created() {
-    window.document.title = '支援機関新規登録 仮登録完了'
+    window.document.title = '支援機関新規登録 仮登録完了 | 補助金活用.COM'
     window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「支援機関新規登録 仮登録完了」ページです。支援機関新規登録はまだ完了しておりません。ご入力いただいたメールアドレス宛に、本登録用のURLを記載したメールを配信しております。'
   },
   mounted() {

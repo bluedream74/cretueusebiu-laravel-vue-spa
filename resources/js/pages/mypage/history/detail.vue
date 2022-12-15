@@ -73,10 +73,6 @@ export default {
       SYSTEM_OTHER: SYSTEM_OTHER
     }
   },
-	created() {
-    window.document.title = '過去の回答一覧 | 支援者マイページ'
-    window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「過去の回答一覧」ページです。支援者が過去に詳細を確認した、マッチング事業者相談の履歴をリストからご確認いただけます。相談の詳細、回答の内容については詳細ページからご確認いただけます。'
-  },
   mounted() {
     this.init()
   },
@@ -87,6 +83,8 @@ export default {
           id: this.$route.query.id
         })
         this.consultant = data.consultant
+				window.document.title = `${this.consultant.com_name} | 過去の回答一覧 | 支援機関マイページ | 補助金活用.COM`
+    		window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの過去の回答「投稿詳細」ページです。過去に支援機関様が閲覧・回答を行った事業者の相談投稿の詳細をご確認いただけます。事業者の電話番号および、支援機関様の回答内容につてもこのページからご確認いただけます。'
       } catch (error) {
       }
     },

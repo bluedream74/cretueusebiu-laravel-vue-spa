@@ -31,6 +31,10 @@ export default {
       password_confirm: ""
     }
   },
+  created() {
+		window.document.title = 'パスワードの再設定 | 補助金活用.COM'
+		window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「パスワードの再設定」ページです。マイページへログインするためのパスワードをリセットし新規パスワードを設定します。パスワードリセットの申請に心当たりがない場合は対応不要です。'
+	},
   mounted() {
   },
   methods: {

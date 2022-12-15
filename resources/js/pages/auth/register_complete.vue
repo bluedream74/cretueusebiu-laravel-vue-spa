@@ -50,7 +50,7 @@
       }
     },
     created() {
-      window.document.title = '支援機関新規登録 登録完了'
+      window.document.title = '支援機関新規登録 登録完了 | 補助金活用.COM'
       window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「支援機関新規登録 登録完了」ページです。支援機関の新規登録が完了いたしました。支援機関ログインページより、登録したメールアドレス・パスワードを入力することでマイページ機能をご利用いただけます。'
     },
     mounted() {

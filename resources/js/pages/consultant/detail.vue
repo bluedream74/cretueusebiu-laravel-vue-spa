@@ -84,8 +84,6 @@ export default {
 			this.$router.push({ name: 'login' })
 			return
 		}
-		window.document.title = '支援者マイページ'
-		window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「相談一覧」ページです。各事業者の相談情報をリストからご確認いただけます。相談の概要および事業者情報については無料で閲覧いただけます。詳細情報の閲覧・相談への回答についてはご利用料が発生いたします。'
 	},
   mounted() {
     this.init()
@@ -100,6 +98,8 @@ export default {
           id: this.$route.query.id
         })
         this.consultant = data.consultant
+				window.document.title = `${ this.consultant.com_name } | 支援機関マイページ | 補助金活用.COM`
+				window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「投稿詳細」ページです。事業者相談フォームより投稿された事業者の、企業情報および相談内容の詳細をご確認いただけます。掲載期間中の投稿については支援者として回答を送信（応募）することができます。'
       } catch (error) {
       }
     },
@@ -109,7 +109,6 @@ export default {
           this.$swal('', '回答入力してください')
           return
         }
-
         localStorage.setItem('answer', this.answer)
         this.$router.push({ name: 'consultant_answer_confirm', query: { id: this.$route.query.id } })
         // try {

@@ -33,7 +33,7 @@
 <script>
 export default {
   created() {
-		window.document.title = '支援機関新規登録 仮登録完了'
+		window.document.title = '事業者相談フォーム 登録完了 | 補助金活用.COM'
 		window.document.description = '事業者×支援機関マッチングサイト補助金活用.COMの「事業者相談フォーム 登録完了」ページです。事業者相談の登録が完了しました。完了より6時間後に、送信いただいた相談内容が掲載されます。掲載された相談内容は随時支援機関とマッチングされます。'
 	},
 	data() {
