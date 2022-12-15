@@ -141,7 +141,6 @@ export default {
           id: item.id,
           flag: event.target.checked ? 1 : 0
         })
-        this.init()
       } catch (error) {
       }
     },
