@@ -99,7 +99,7 @@ export default {
         })
         this.consultant = data.consultant
 				window.document.title = `${ this.consultant.com_name } | 支援機関マイページ | 補助金活用.COM`
-				$('meta[name=description]').attr('事業者×支援機関マッチングサイト補助金活用.COMの「投稿詳細」ページです。事業者相談フォームより投稿された事業者の、企業情報および相談内容の詳細をご確認いただけます。掲載期間中の投稿については支援者として回答を送信（応募）することができます。')
+				$('meta[name=description]').attr('content','事業者×支援機関マッチングサイト補助金活用.COMの「投稿詳細」ページです。事業者相談フォームより投稿された事業者の、企業情報および相談内容の詳細をご確認いただけます。掲載期間中の投稿については支援者として回答を送信（応募）することができます。')
       } catch (error) {
       }
     },

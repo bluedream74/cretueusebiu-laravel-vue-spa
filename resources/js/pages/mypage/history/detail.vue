@@ -84,7 +84,7 @@ export default {
         })
         this.consultant = data.consultant
 				window.document.title = `${this.consultant.com_name} | 過去の回答一覧 | 支援機関マイページ | 補助金活用.COM`
-    		$('meta[name=description]').attr('事業者×支援機関マッチングサイト補助金活用.COMの過去の回答「投稿詳細」ページです。過去に支援機関様が閲覧・回答を行った事業者の相談投稿の詳細をご確認いただけます。事業者の電話番号および、支援機関様の回答内容につてもこのページからご確認いただけます。')
+    		$('meta[name=description]').attr('content','事業者×支援機関マッチングサイト補助金活用.COMの過去の回答「投稿詳細」ページです。過去に支援機関様が閲覧・回答を行った事業者の相談投稿の詳細をご確認いただけます。事業者の電話番号および、支援機関様の回答内容につてもこのページからご確認いただけます。')
       } catch (error) {
       }
     },
