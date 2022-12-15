@@ -103,7 +103,7 @@ export default {
       temp: [],
       search: {
         name: '',
-        available: 1
+        available: null
       }
     }
   },
