@@ -2,13 +2,13 @@
   <div id="pdf_page">
 		<p class="title">御 請 求 書</p>
 		<div class="access_wrap fix">
-			<div class="left_area">
-				<p class="com_nam">株式会社⼋咲</p>
+			<div class="left_area" v-if="!!profile">
+				<p class="com_nam">{{ profile.com_name }}</p>
 				<div class="address_txt">
-					<p>〒530-0001</p>
-					<p>⼤阪府 ⼤阪市北区梅⽥1-11-4-1000</p>
-					<p>⼤阪駅前第4ビル10階</p>
-					<p>管理本部 代表取締役社⻑ 中⻄弘和 様</p>
+					<p>〒{{ profile.zipcode }}</p>
+					<p>{{ profile.prefecture }} {{ profile.city }}</p>
+					<p>{{ profile.building }}</p>
+					<p>{{ profile.department_name }} {{ profile.role_name }} {{ profile.tanto_name }} 様</p>
 				</div>
 				<p class="greeting">⼤変お世話になっております。下記、ご請求申し上げます。</p>
 				<p class="price">合計⾦額 {{ $route.query.price }}円</p>
@@ -105,10 +105,13 @@ export default {
   layout: 'basic',
   data() {
     return {
-      current_date: ''
+      current_date: '',
+			profile: null
     }
   },
-  mounted() {
+  async mounted() {
+		const { data } = await axios.post('/api/get_profile_info')
+		this.profile = data.profile
     this.current_date = moment().format('YYYY年MM月DD日')
 		html2pdf(document.getElementById("pdf_page"), {
 			margin: 1,
