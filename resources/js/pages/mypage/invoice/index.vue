@@ -21,7 +21,7 @@
 								<h2 class="list_ttl">{{ item.date }}利用分</h2>
 								<div class="company_data">
 									<dl><dt>応募件数</dt><dd>{{ item.amount }}件</dd></dl>
-									<dl><dt>合計金額</dt><dd>￥{{ (item.amount * 500) * 1.1 | moneyFormat }}</dd></dl>
+									<dl><dt>合計金額</dt><dd>￥{{ parseInt((item.amount * 500) * 1.1) | moneyFormat }}</dd></dl>
 									<!-- <dl><dt>広告件数</dt><dd>2件</dd></dl> -->
 									<!-- <dl><dt>合計金額</dt><dd>￥5,000</dd></dl> -->
 								</div>
