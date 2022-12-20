@@ -87,7 +87,7 @@
             <dl>
               <dt>会社所在地<span>必須</span></dt>
               <dd>
-                〒<input type="text" name="" class="w_200 ml05">
+                〒<input type="text" name="" v-model="user_info.zipcode" class="w_200 ml05">
                 <div class="wrap ml20">
                   <select class="w_100" v-model="user_info.prefecture">
                     <option :value="null">--</option>

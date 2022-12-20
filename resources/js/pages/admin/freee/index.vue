@@ -42,11 +42,11 @@
           </div>
           <div class="select_wrap">
             <p>請求情報CSV出力</p>
-            <a href="javascript:void(0)" class="btn_blue" download="">ダウンロード</a>
+            <a @click="downloadInovice" class="btn_blue">ダウンロード</a>
           </div>
           <div class="select_wrap">
             <p>取引先情報CSV出力</p>
-            <a href="javascript:void(0)" class="btn_blue" download="">ダウンロード</a>
+            <a @click="downloadInovice" class="btn_blue">ダウンロード</a>
           </div>
         </form>
       </div>
@@ -62,6 +62,16 @@ export default {
     return {
       year: moment().format('YYYY'),
       month: moment().subtract(1, 'months').format('MM'),
+    }
+  },
+  methods: {
+    async downloadInovice() {
+      try {
+        time = this.year + '/' + this.month
+        let newWindow = window.open();
+        newWindow.location = 'https://' + window.location.hostname + `/admin/download_invoice_data?year=${this.year}&month=${this.month}`;
+      } catch (error) {
+      }
     }
   }
 }

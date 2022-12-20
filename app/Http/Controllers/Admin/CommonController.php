@@ -726,4 +726,37 @@ class CommonController extends BaseController
       }
       fclose($stream);
     }
+
+    public function downloadInvoiceData(Request $request) {
+      $data = $request->all();
+      $kakins = ConsultantKakin::whereYear('created_at', '=', $data['year'])->whereMonth('created_at', $data['month'])->get();
+
+      $temp = [
+        ['相談ID', 'ユーザーID']
+      ];
+
+      foreach($kakins as $kakin) {
+        array_push($temp, [
+          $kakin->consultant_id, $kakin->user_id
+        ]);
+      }
+
+      header('Content-Type: text/plain;charset=UTF-8');
+      $stream = fopen('../storage/請求情報CSV.csv', 'w');
+      foreach ($temp as $csvRecord) {
+        fputcsv($stream, $csvRecord);
+      }
+      fclose($stream);
+      $stream = fopen('../storage/請求情報CSV.csv', 'r');
+      header("Content-Type: application/octet-stream");
+
+      $now = new Carbon();
+      $filename = 'Contact-' . $now->format('Ymdhis') . '.csv';
+      header("Content-Disposition: attachment; filename=" . $filename);
+      while (!feof($stream)) {
+        $content = fread($stream, 1024);
+        echo mb_convert_encoding($content, 'SJIS', 'UTF-8');
+      }
+      fclose($stream);
+    }
 }
