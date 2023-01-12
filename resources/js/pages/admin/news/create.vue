@@ -83,6 +83,9 @@ export default {
     Datepicker
   },
   created() {
+    window.location.reload();
+  },
+  mounted() {
     $('.datepicker').datepicker({
       numberOfMonths:1,
     });
