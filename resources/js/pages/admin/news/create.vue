@@ -47,6 +47,14 @@
             <dl>
               <dt>本文</dt>
               <dd>
+                <Editor
+                  :init="{
+                    height: 200,
+                    relative_urls : false,
+                    plugins:'table jbimages link autolink preview textcolor image code fullscreen',
+                    toolbar  : 'table code fontsizeselect forecolor formatselect bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | jbimages image link | preview | fullscreen',
+                  }"
+                />
                 <textarea name="" class="tinymce" row="10" cols="30" rows="6" id="KnowledgeDetail2" v-model="content"></textarea>
               </dd>
             </dl>
@@ -61,6 +69,7 @@
 </template>
 <script>
 import Datepicker from 'vuejs-datepicker';
+import Editor from '@tinymce/tinymce-vue';
 import moment from 'moment'
 import {ja} from 'vuejs-datepicker/dist/locale'
 export default {
@@ -80,7 +89,8 @@ export default {
     }
   },
   components: {
-    Datepicker
+    Datepicker,
+    Editor
   },
   mounted() {
     $('.datepicker').datepicker({
