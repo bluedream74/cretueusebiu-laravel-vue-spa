@@ -47,7 +47,7 @@
             <dl>
               <dt>本文</dt>
               <dd>
-                <textarea name="" :class="'tinymce' + additionClass" row="10" cols="30" rows="6" id="KnowledgeDetail2" v-model="content"></textarea>
+                <textarea name="" class="tinymce" row="10" cols="30" rows="6" id="KnowledgeDetail2" v-model="content"></textarea>
               </dd>
             </dl>
             <div class="submit_wrap">
@@ -76,15 +76,11 @@ export default {
       pdf: null,
       pdf_title: null,
       content: null,
-      ja: ja,
-      additionClass: ''
+      ja: ja
     }
   },
   components: {
     Datepicker
-  },
-  created() {
-    this.additionClass = this.makeid(5)
   },
   mounted() {
     $('.datepicker').datepicker({
@@ -92,7 +88,7 @@ export default {
     });
     setTimeout(() => {
       tinymce.init({
-        selector: `.tinymce${this.additionClass}`,
+        selector: ".tinymce",
         language: "ja",
         height: 200,
         relative_urls : false,
@@ -104,15 +100,6 @@ export default {
   methods: {
     backProc() {
       this.$router.back()
-    },
-    makeid(length) {
-      var result           = '';
-      var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      var charactersLength = characters.length;
-      for ( var i = 0; i < length; i++ ) {
-          result += characters.charAt(Math.floor(Math.random() * charactersLength));
-      }
-      return result;
     },
     selectedPDF(event) {
       const file = event.target.files[0]
