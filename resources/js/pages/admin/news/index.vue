@@ -77,8 +77,8 @@ export default {
 	},
 	methods: {
 		toNewsCreate() {
-			window.location.reload();
 			this.$router.push({ name: 'admin.news.create' })
+			window.location.reload();
 		},
 		async changePublic(item, event) {
 			try {
