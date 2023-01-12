@@ -86,16 +86,15 @@ export default {
     $('.datepicker').datepicker({
       numberOfMonths:1,
     });
-    setTimeout(() => {
-      tinymce.init({
-        selector: ".tinymce",
-        language: "ja",
-        height: 200,
-        relative_urls : false,
-        plugins:'table jbimages link autolink preview textcolor image code fullscreen',
-        toolbar  : 'table code fontsizeselect forecolor formatselect bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | jbimages image link | preview | fullscreen',
-      });
-    }, 1000)
+    console.log('123123123')
+    tinymce.init({
+      selector: ".tinymce",
+      language: "ja",
+      height: 200,
+      relative_urls : false,
+      plugins:'table jbimages link autolink preview textcolor image code fullscreen',
+      toolbar  : 'table code fontsizeselect forecolor formatselect bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | jbimages image link | preview | fullscreen',
+    });
   },
   methods: {
     backProc() {
