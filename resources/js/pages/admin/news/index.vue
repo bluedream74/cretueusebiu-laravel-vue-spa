@@ -15,7 +15,7 @@
 			</div> -->
 			<div class="flex_btw_wrap">
 				<div class="load_btn"><a @click="init"><span>表示の更新</span></a></div>
-				<div class="new_btn"><router-link :to="{ name: 'admin.news.create' }"><span>新規登録</span></router-link></div>
+				<div class="new_btn"><a @click="toNewsCreate"><span>新規登録</span></a></div>
 			</div>
 			<div class="table_wrap">
 				<!-- <div class="pager_style">
@@ -76,6 +76,10 @@ export default {
 		this.init()
 	},
 	methods: {
+		toNewsCreate() {
+			window.location.reload();
+			this.$router.push({ name: 'admin.news.create' })
+		},
 		async changePublic(item, event) {
 			try {
 				const { data } = await axios.post('/admin/change_news_public', {

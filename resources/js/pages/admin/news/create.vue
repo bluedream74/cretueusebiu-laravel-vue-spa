@@ -86,7 +86,6 @@ export default {
     $('.datepicker').datepicker({
       numberOfMonths:1,
     });
-    console.log('123123123')
     setTimeout(() => {
       tinymce.init({
         selector: ".tinymce",
@@ -96,7 +95,7 @@ export default {
         plugins:'table jbimages link autolink preview textcolor image code fullscreen',
         toolbar  : 'table code fontsizeselect forecolor formatselect bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | jbimages image link | preview | fullscreen',
       });
-    }, 2000)
+    }, 1000)
   },
   methods: {
     backProc() {
