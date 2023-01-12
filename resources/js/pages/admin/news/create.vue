@@ -55,7 +55,6 @@
                     toolbar  : 'table code fontsizeselect forecolor formatselect bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | jbimages image link | preview | fullscreen',
                   }"
                 />
-                <textarea name="" class="tinymce" row="10" cols="30" rows="6" id="KnowledgeDetail2" v-model="content"></textarea>
               </dd>
             </dl>
             <div class="submit_wrap">
