@@ -1,6 +1,35 @@
 <template>
-  <div class="register__container">
-    <h2>パスワードリセット</h2>
+  <div>
+    <main>
+			<section class="section mv_area">
+				<h1>パスワードを忘れた方</h1>
+				<div class="topicpath">
+					<div class="sitewrap">
+						<ol id="pan">
+							<li><router-link :to="{ name: 'home' }">TOP</router-link></li>
+							<li><span>パスワードを忘れた方</span></li>
+						</ol>
+					</div>
+				</div>
+			</section>
+			<div class="content_area form_wrap">
+				<form @submit.prevent="passwordReset">
+					<div class="section login_area">
+						<div class="sitewrap">
+							<div class="center_form">
+								<p class="text">パスワード再設定用のメールをお送りします。以下の情報をご入力ください。</p>
+								<div class="form_el"><input type="text" required placeholder="会社名"></div>
+								<div class="form_el"><input v-model="email" type="email" required placeholder="メールアドレス"></div>
+									<div class="send_btns">
+									<label class="btn_warp next"><span><input type="submit" value="パスワード再設定用メール送信"></span></label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</main>
+    <!-- <h2>パスワードリセット</h2>
     <div class="form__part">
       <div class="form__row">
         <label><span class="must">*</span>登録したメールアドレスを入力してください</label>
@@ -11,7 +40,7 @@
       <div class="form__action">
         <button @click="passwordReset">パスワード再設定</button>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
