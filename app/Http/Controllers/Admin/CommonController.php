@@ -439,7 +439,7 @@ class CommonController extends BaseController
     }
 
     public function getNewsList(Request $request) {
-      $news = News::get();
+      $news = News::orderByDesc('created_at')->get();
       
       return response()->json([
         'news' => $news
