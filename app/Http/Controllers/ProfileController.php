@@ -18,6 +18,7 @@ use App\Models\Koukoku;
 use App\Models\ConsultantKakin;
 use Carbon\Carbon;
 use App\Jobs\EmailVerification;
+use App\Jobs\ProfileChangeEmailJob;
 use App\Jobs\PasswordReset;
 use Laravel\Cashier\Cashier;
 
@@ -214,6 +215,9 @@ class ProfileController extends Controller
         'amount_id' => $amount_id
       ]);
     }
+
+    $user = User::where('id', $request->user()->id)->first();
+    
 
     return response()->json([
       'flag' => true
