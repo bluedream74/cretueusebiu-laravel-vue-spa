@@ -48,6 +48,7 @@
               <dt>本文</dt>
               <dd>
                 <Editor
+                  v-model="content"
                   :init="{
                     height: 200,
                     relative_urls : false,

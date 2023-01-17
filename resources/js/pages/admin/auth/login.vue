@@ -6,11 +6,11 @@
         <form class="login_form" @submit.prevent="loginProc">
           <dl>
             <dt>ID</dt>
-            <dd><input type="text" v-model="id"></dd>
+            <dd><input type="text" v-model="id" name="email"></dd>
           </dl>
           <dl>
             <dt>PW</dt>
-            <dd><input type="text" v-model="password"></dd>
+            <dd><input type="text" v-model="password" name="password"></dd>
           </dl>
           <div class="form_btn_blue ico_login"><span><input type="submit" value="ログイン"></span></div>
         </form>
