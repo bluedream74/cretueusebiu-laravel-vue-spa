@@ -120,13 +120,13 @@
             <dl>
               <dt>担当名<span>必須</span></dt>
               <dd>
-                <input type="date" v-model="consultant.tanto_name">
+                <input type="text" v-model="consultant.tanto_name">
               </dd>
             </dl>
             <dl>
               <dt>役職<span>必須</span></dt>
               <dd>
-                <input type="date" v-model="consultant.role_name">
+                <input type="text" v-model="consultant.role_name">
               </dd>
             </dl>
             <dl>
