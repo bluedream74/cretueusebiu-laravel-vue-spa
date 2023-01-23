@@ -155,6 +155,10 @@ export default {
 					return it.price_id
 				})
 				this.temp = data.consultants.filter(item => {
+					return !item.answers.find(it => {
+						return it.user_id == this.$store.getters['auth/user'].id
+					})
+				}).filter(item => {
 					return item.available == 1 && moment(item.expired_at).format('YYYYMMDD') >= moment().format('YYYYMMDD')
 				}).filter(item => {
 					let confirms = item.confirms.map(it => {
