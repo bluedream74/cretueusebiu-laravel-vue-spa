@@ -21,7 +21,7 @@
 							<div class="table_style">
 								<dl class="required">
 									<dt>認定支援機関ID番号<i>必須</i></dt>
-									<dd><div class="form_el"><input type="tel" name="certificationId" v-model="kikan_id" required placeholder="※桁数は12桁となります。"></div></dd>
+									<dd><div class="form_el"><input type="tel" name="certificationId" v-model="kikan_id" required placeholder="※桁数は12桁となります。" disabled></div></dd>
 								</dl>
 								<dl class="required">
 									<dt>会社名<i>必須</i></dt>
@@ -94,7 +94,7 @@
 								</dl>
 								<dl class="required">
 									<dt>メールアドレス<i>必須</i></dt> 
-									<dd><div class="form_el"><input type="email" name="email" required placeholder="aaa@gmail.com" v-model="email" /></div></dd>
+									<dd><div class="form_el"><input type="email" name="email" required placeholder="aaa@gmail.com" v-model="email" disabled/></div></dd>
 								</dl>
 								<dl class="">
 									<dt>PRポイント</dt> 
