@@ -89,7 +89,7 @@ class ConsultantController extends Controller
   }
 
   public function getHomeData(Request $request) {
-    $consultants = Consultant::where('available', 1)->with('confirms', 'misss', 'others')->get();
+    $consultants = Consultant::where('available', 1)->with('confirms', 'misss', 'others')->orderByDesc('created_at')->get();
     $news = News::orderByDesc('created_at')->where('start_at', '<=', Carbon::now()->format('Y-m-d'))->where(function($query) {
       $query->where('end_at', '>=', Carbon::now()->format('Y-m-d'))
       ->orWhereNull('end_at');
