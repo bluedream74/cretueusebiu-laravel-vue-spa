@@ -111,6 +111,35 @@ class ProfileController extends Controller
       'user_id' => $user->id
     ]);
   }
+  
+  public function sendPasswordResetEmail(Request $request) {
+    $user = User::where('email', $request->input('email'))->first();
+    if (is_null($user)) {
+      return response()->json([
+          'status' => 0
+      ]);
+    }
+
+    $length = 10;    
+    $token = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,$length);
+    User::where('id', $user->id)->update([
+      'token' => $token,
+      'token_at' => Carbon::now()->addDay()
+    ]);
+
+    $user = User::where('id', $user->id)->first();
+
+    try {
+      PasswordReset::dispatch($user);
+    } catch (Exception $e) {
+      \Log::error($e);
+      return false;
+    }
+
+    return response()->json([
+        'status' => 1
+    ]);
+  }
 
   public function activateEmail(Request $request) {
     $email = $request->input('email');

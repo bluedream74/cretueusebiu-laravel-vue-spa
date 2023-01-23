@@ -26,6 +26,7 @@ use App\Jobs\EmailVerification;
 use App\Jobs\ConsultantEmailJob;
 use App\Jobs\ContactFinishEmailJob;
 use App\Jobs\PasswordReset;
+use App\Jobs\ConsultantAnswerEmailJob;
 use Laravel\Cashier\Cashier;
 
 class ConsultantController extends Controller
@@ -144,6 +145,8 @@ class ConsultantController extends Controller
       'user_id' => $request->input('user_id'),
       'consultant_id' => $request->input('id')
     ]);
+
+
 
     return response()->json([
       'flag' => true
