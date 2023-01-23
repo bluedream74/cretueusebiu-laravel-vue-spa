@@ -7,7 +7,7 @@
 					<div class="sitewrap">
 						<ol id="pan">
 							<li><router-link :to="{ name: 'home' }">TOP</router-link></li>
-							<li><router-link :to="{ name: 'mypage' }">支援者マイページ</router-link></li>
+							<li><router-link :to="{ name: 'mypage' }">支援機関マイページ</router-link></li>
 							<li><span>課金状況・明細</span></li>
 						</ol>
 					</div>

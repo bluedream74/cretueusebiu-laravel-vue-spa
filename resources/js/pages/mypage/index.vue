@@ -2,12 +2,12 @@
   <div class="common_page my_page">
     <main>
 			<section class="section mv_area">
-				<h1>支援者マイページ</h1>
+				<h1>支援機関マイページ</h1>
 				<div class="topicpath">
 					<div class="sitewrap">
 						<ol id="pan">
 							<li><router-link :to="{ name: 'home' }">TOP</router-link></li>
-							<li><span>支援者マイページ</span></li>
+							<li><span>支援機関マイページ</span></li>
 						</ol>
 					</div>
 				</div>

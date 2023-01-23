@@ -17,28 +17,6 @@
         </p>
       </div>
     </section>
-    <section class="step_wrap">
-      <div class="sitewrap">
-        <h2 class="tit action ups">簡単な<b class="deco">3</b>ステップで<br class="display_sp"><b>マッチング！</b></h2>
-        <div class="list action feders delay_set">
-          <div class="items">
-            <h3 class="step_tit"><span>STEP<b>1</b></span></h3>
-            <div class="img"><img src="/assets/img/top/img_step01.png" alt="考えるイメージイラスト"></div>
-            <p class="text"><span>補助金申請</span>を考えている。<br>でも、どの補助金が受けとれるか分からない。</p>
-          </div>
-          <div class="items">
-            <h3 class="step_tit"><span>STEP<b>2</b></span></h3>
-            <div class="img"><img src="/assets/img/top/img_step02.png" alt="相談に受けるイメージイラスト"></div>
-            <p class="text"><span>まずは相談！<br>全ておまかせで大丈夫！</span></p>
-          </div>
-          <div class="items">
-            <h3 class="step_tit"><span>STEP<b>3</b></span></h3>
-            <div class="img"><img src="/assets/img/top/img_step03.png" alt="マッチングするイメージイラスト"></div>
-            <p class="text">あとは<span>自動でマッチング！</span><br>支援機関からメールが届きます！</p>
-          </div>
-        </div>
-      </div>
-    </section>
     <section class="worry_wrap">
       <div class="sitewrap">
         <h2 class="tit action ups"><b>補助金申請</b>の<b class="deco">お悩み</b><br class="display_sp">ありませんか？</h2>
@@ -59,13 +37,12 @@
           <div class="items">
             <h3 class="step_tit"><span>STEP<b>1</b></span></h3>
             <div class="img"><img src="/assets/img/top/img_step01.png" alt="考えるイメージイラスト"></div>
-            <p class="text"><span>補助金</span>を使いたい。<br>
-              でも、誰に相談したら良いかわからない。</p>
+            <p class="text"><span>補助金申請</span>を考えている。<br>でも、どの補助金が受けとれるか分からない。</p>
           </div>
           <div class="items">
             <h3 class="step_tit"><span>STEP<b>2</b></span></h3>
             <div class="img"><img src="/assets/img/top/img_step02.png" alt="相談に受けるイメージイラスト"></div>
-            <p class="text"><span>まずは相談！</span><br>簡単な質問に答えて投稿するだけ</p>
+            <p class="text"><span>まずは相談！<br>全ておまかせで大丈夫！</span></p>
           </div>
           <div class="items">
             <h3 class="step_tit"><span>STEP<b>3</b></span></h3>
@@ -73,7 +50,6 @@
             <p class="text">あとは<span>自動でマッチング！</span><br>支援機関からメールが届きます！</p>
           </div>
         </div>
-        <div class="common_btn action ups delay_4"><router-link :to="{ name: 'consultant_form' }"><span>認定支援機関に<b>無料相談</b>する</span></router-link></div>
       </div>
     </section>
     <section class="entrust_wrap">
@@ -118,7 +94,7 @@
             </div>
           </div>
         </div>
-        <div class="common_btn action ups"><router-link :to="{ name: 'consultant' }"><span>一覧をみる</span></router-link></div>
+        <div class="common_btn action ups"><router-link :to="{ name: 'consultant' }"><span>最新の相談をみる</span></router-link></div>
       </div>
     </section>
     <section class="add_wrap">
@@ -134,7 +110,7 @@
       <div class="sitewrap">
         <div class="list action feders delay_set">
           <p class="register_tit">支援機関も募集しています。</p>
-          <div class="common_btn"><router-link :to="{ name: 'register' }"><span>支援者に新規登録する</span></router-link></div>
+          <div class="common_btn"><router-link :to="{ name: 'register' }"><span>支援機関に新規登録する</span></router-link></div>
         </div>
       </div>
     </section>

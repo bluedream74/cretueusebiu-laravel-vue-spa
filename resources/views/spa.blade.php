@@ -9,16 +9,23 @@ $config = [
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TZNDQB8');</script>
+<!-- End Google Tag Manager -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
   <meta name="referrer" content="origin-when-cross-origin">
-  <meta name="robots" content="index, follow" />
+  <!--meta name="robots" content="index, follow" /-->
+  <meta name="robots" content="noindex">
   <meta name="description"
     content="補助金活用.COMのホームページです。当サイトは事業者の方と国（経済産業大臣）が認定した「認定経営革新等支援機関」をマッチングするサイトです。事業者の方の悩み事、相談事を解決するためにご利用ください。" />
   <meta name="keyword" content="補助金支援,マッチングサイト,補助金申請" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://" />
-  <meta property="og:image" content="https://img/common/ogp.png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://hojyokin-katsuyou.com/img/common/ogp.png" />
   <meta property="og:site_name" content="補助金活用.COM | 補助金申請のことなら事業者×支援機関マッチングサイト" />
   <meta property="og:title" content="補助金活用.COM | 補助金申請のことなら事業者×支援機関マッチングサイト" />
   <meta property="og:description" content="補助金活用.COMのホームページです。当サイトは事業者の方と国（経済産業大臣）が認定した「認定経営革新等支援機関」をマッチングするサイトです。事業者の方の悩み事、相談事を解決するためにご利用ください。" />
@@ -56,6 +63,10 @@ $config = [
   <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}">
 </head>
 <body class="home">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TZNDQB8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
   <div id="app"></div>
   {{-- Global configuration object --}}
   <script>

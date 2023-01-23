@@ -7,7 +7,7 @@
 					<div class="sitewrap">
 						<ol id="pan">
 							<li><router-link :to="{ name: 'home' }">TOP</router-link></li>
-							<li><router-link :to="{ name: 'mypage' }">支援者マイページ</router-link></li>
+							<li><router-link :to="{ name: 'mypage' }">支援機関マイページ</router-link></li>
 							<li><span>マイプロフィール</span></li>
 						</ol>
 					</div>
@@ -163,7 +163,7 @@
       }
     },
     created() {
-      window.document.title = 'マイプロフィール | 支援者マイページ'
+      window.document.title = 'マイプロフィール | 支援機関マイページ'
       $('meta[name=description]').attr('content','事業者×支援機関マッチングサイト補助金活用.COMの「マイプロフィール」ページです。認定支援機関の登録情報および、支援可能条件についてはこちらから変更いただけます。必須項目を確認のうえ、フォームに必定な変更内容を入力してください。')
     },
     mounted() {

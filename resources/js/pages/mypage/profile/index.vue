@@ -7,7 +7,7 @@
 					<div class="sitewrap">
 						<ol id="pan">
 							<li><router-link :to="{ name: 'home' }">TOP</router-link></li>
-							<li><router-link :to="{ name: 'mypage' }">支援者マイページ</router-link></li>
+							<li><router-link :to="{ name: 'mypage' }">支援機関マイページ</router-link></li>
 							<li><span>マイプロフィール</span></li>
 						</ol>
 					</div>
@@ -67,7 +67,7 @@
 								<dl class="required">
 									<dt>会社所在地<i>必須</i></dt>
 									<dd><div class="form_el inline">
-										<span>〒</span><input type="tel" name="zip" v-model="zipcode" class="p-postal-code" size="8" maxlength="8" placeholder="000-0000">
+										<span>〒</span><input type="tel" name="zip" v-model="zipcode" class="p-postal-code" size="8" maxlength="8" placeholder="0000000">
 										<div class="select_wrap">
 											<select name="pref" class="p-region-id" v-model="prefecture">
 												<option :value="null">--</option>
@@ -90,7 +90,7 @@
 								</dl>
 								<dl class="">
 									<dt>FAX</dt>
-									<dd><div class="form_el"><input type="tel" name="fax" placeholder="03-0000-0001" v-model="fax" /></div></dd>
+									<dd><div class="form_el"><input type="tel" name="fax" placeholder="0300000001" v-model="fax" /></div></dd>
 								</dl>
 								<dl class="required">
 									<dt>メールアドレス<i>必須</i></dt> 
