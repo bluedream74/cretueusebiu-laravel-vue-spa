@@ -1276,17 +1276,6 @@ footer ul li a:hover:before{
 footer small{
 	font-size:0.75rem;
 }
-body a.page_link {
-	margin-top: -80px;
-	padding-top: 80px;
-	display: block;
-	position:relative;
-	z-index:-5;
-}
-body a.page_link.fvbtn {
-	margin-top: -160px;
-	padding-top: 160px;
-}
 @media screen and (max-width:768px) {
 	#pageTop {
 		width: 49px;
@@ -1303,9 +1292,9 @@ body a.page_link.fvbtn {
 	footer ul{
 		display:none;
 	}
-	body a.page_link,
-	body a.page_link.fvbtn{
+	.page_link {
 		margin-top: -60px;
-		padding-top: 60px;
+		padding-top: 60px !important;
+		display: block;
 	}
 }
