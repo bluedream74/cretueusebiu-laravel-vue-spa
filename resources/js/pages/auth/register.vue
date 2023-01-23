@@ -111,7 +111,7 @@
 								</dl>
 								<dl class="required">
 									<dt>マイページパスワード<i>必須</i></dt> 
-									<dd><div class="form_el"><input type="password" name="password" required v-model="password" placeholder="8桁の半角英数字にて入力ください" maxlength="8" minlength="8" /></div></dd>
+									<dd><div class="form_el"><input type="password" name="password" required v-model="password" placeholder="8桁の半角英数字にて入力ください" maxlength="12" minlength="8" /></div></dd>
 								</dl>
 								<dl class="">
 									<dt>PRポイント</dt> 
@@ -373,13 +373,8 @@ export default {
 				return
 			}
 
-			if (!this.password) {
-				this.$swal('', 'マイページパスワードを入力してください')
-				return
-			}
-
-			if (this.password.length < 8) {
-				this.$swal('', 'マイページパスワードは8桁の半角英数字にて入力ください')
+			if (this.password.match(/^[^\x01-\x7E\uFF61-\uFF9F]+$/)) {
+				this.$swal('', 'マイページパスワードは半角大文字アルファベット、半角小文字アルファベット、半角数字で入力してください')
 				return
 			}
 
