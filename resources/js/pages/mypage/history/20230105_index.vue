@@ -7,7 +7,7 @@
 					<div class="sitewrap">
 						<ol id="pan">
 							<li><a href="../../">TOP</a></li>
-							<li><a href="../">支援機関マイページ</a></li>
+							<li><a href="../">支援者マイページ</a></li>
 							<li><span>過去の回答一覧</span></li>
 						</ol>
 					</div>

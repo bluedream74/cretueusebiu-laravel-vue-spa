@@ -7,7 +7,7 @@
 					<div class="sitewrap">
 						<ol id="pan">
 							<li><a href="../../../">TOP</a></li>
-							<li><a href="../">支援機関マイページ</a></li>
+							<li><a href="../">支援者マイページ</a></li>
 							<li><span>投稿詳細</span></li>
 						</ol>
 					</div>
@@ -18,7 +18,7 @@
 					<section class="section lead">
 						<div class="sitewrap" v-if="!!consultant">
 							<h2 class="h_style01">投稿詳細 回答確認</h2>
-							<p class="lead_style">支援機関として回答を送信（応募）します。内容をご確認の上、送信ボタンを押してください。</p>
+							<p class="lead_style">支援者として回答を送信（応募）します。内容をご確認の上、送信ボタンを押してください。</p>
 							<div class="matching_list consultation_detail">
 								<div class="ttl_wrap">
 									<h2 class="list_ttl">{{ consultant.com_name }}</h2>
@@ -87,9 +87,9 @@ export default {
     this.init()
   },
   created() {
-		window.document.title = '投稿詳細 | 支援機関マイページ'
-		$('meta[name=description]').attr('content','事業者×支援機関マッチングサイト補助金活用.COMの「投稿詳細」ページです。事業者相談フォームより投稿された事業者の、企業情報および相談内容の詳細をご確認いただけます。掲載期間中の投稿については支援機関として回答を送信（応募）することができます。')
-    $('meta[name=og:description]').attr('content','事業者×支援機関マッチングサイト補助金活用.COMの「投稿詳細」ページです。事業者相談フォームより投稿された事業者の、企業情報および相談内容の詳細をご確認いただけます。掲載期間中の投稿については支援機関として回答を送信（応募）することができます。')
+		window.document.title = '投稿詳細 | 支援者マイページ'
+		$('meta[name=description]').attr('content','事業者×支援機関マッチングサイト補助金活用.COMの「投稿詳細」ページです。事業者相談フォームより投稿された事業者の、企業情報および相談内容の詳細をご確認いただけます。掲載期間中の投稿については支援者として回答を送信（応募）することができます。')
+    $('meta[name=og:description]').attr('content','事業者×支援機関マッチングサイト補助金活用.COMの「投稿詳細」ページです。事業者相談フォームより投稿された事業者の、企業情報および相談内容の詳細をご確認いただけます。掲載期間中の投稿については支援者として回答を送信（応募）することができます。')
 	},
   methods: {
     async init() {

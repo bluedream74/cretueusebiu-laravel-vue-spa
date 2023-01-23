@@ -2,13 +2,12 @@
   <div class="register__container common_page form_page register_form">
     <main>
 			<section class="section mv_area">
-				<h1>マイプロフィール</h1>
+				<h1>支援機関新規登録</h1>
 				<div class="topicpath">
 					<div class="sitewrap">
 						<ol id="pan">
 							<li><router-link :to="{ name: 'home' }">TOP</router-link></li>
-							<li><router-link :to="{ name: 'mypage' }">支援機関マイページ</router-link></li>
-							<li><span>マイプロフィール</span></li>
+							<li><span>支援機関新規登録</span></li>
 						</ol>
 					</div>
 				</div>
@@ -16,8 +15,22 @@
 			<div class="content_area form_wrap">
 				<div class="h-adr">
 					<span class="p-country-name" style="display:none;">Japan</span>
+					<section class="section lead">
+						<div class="sitewrap">
+							<h2 class="h_style01">支援機関を新規登録する</h2>
+							<p class="lead_style">以下のフォームより登録内容をご入力ください。</p>
+							<ul class="txt_indent texts text_link">
+								<li>・事業者相談、その他のお問い合わせは専用のフォームからお問い合わせください。</li>
+								<li>・赤色の<b class="red">（必須）</b>がついた項目は必須入力項目です。 お忘れのないようご入力ください。</li>
+								<li>・ご入力いただいた情報は、<a href="../privacy/" target="_blank">プライバシーポリシー</a>に基き厳重に管理いたします。</li>
+								<li>・尚、反映までにお時間がかかる場合がございますのでご了承ください。</li>
+								<li>※営業時間： 月曜～土曜／9:00～18:00　定休日： 日曜・祝日</li>
+							</ul>
+						</div>
+					</section>
 					<section class="section area01">
 						<div class="sitewrap">
+							<h2 class="h_style01">認定支援機関情報入力欄</h2>
 							<div class="table_style">
 								<dl class="required">
 									<dt>認定支援機関ID番号<i>必須</i></dt>
@@ -67,7 +80,7 @@
 								<dl class="required">
 									<dt>会社所在地<i>必須</i></dt>
 									<dd><div class="form_el inline">
-										<span>〒</span><input type="tel" name="zip" v-model="zipcode" class="p-postal-code" size="8" maxlength="8" placeholder="0000000">
+										<span>〒</span><input type="tel" name="zip" @change="changeZip" v-model="zipcode" class="p-postal-code" size="8" maxlength="8" placeholder="000-0000">
 										<div class="select_wrap">
 											<select name="pref" class="p-region-id" v-model="prefecture">
 												<option :value="null">--</option>
@@ -90,11 +103,15 @@
 								</dl>
 								<dl class="">
 									<dt>FAX</dt>
-									<dd><div class="form_el"><input type="tel" name="fax" placeholder="0300000001" v-model="fax" /></div></dd>
+									<dd><div class="form_el"><input type="tel" name="fax" placeholder="03-0000-0001" v-model="fax" /></div></dd>
 								</dl>
 								<dl class="required">
 									<dt>メールアドレス<i>必須</i></dt> 
 									<dd><div class="form_el"><input type="email" name="email" required placeholder="aaa@gmail.com" v-model="email" /></div></dd>
+								</dl>
+								<dl class="required">
+									<dt>マイページパスワード<i>必須</i></dt> 
+									<dd><div class="form_el"><input type="password" name="password" required v-model="password" placeholder="8桁の半角英数字にて入力ください" maxlength="8" minlength="8" /></div></dd>
 								</dl>
 								<dl class="">
 									<dt>PRポイント</dt> 
@@ -148,10 +165,11 @@
   </div>
 </template>
 <script>
-import { JOB_KINDS, CONTENTS, JOBS, PRICES, AMOUNTS, PREFECTURES } from '../../../const';
+import { JOB_KINDS, CONTENTS, JOBS, PRICES, AMOUNTS, PREFECTURES } from '../../const';
+var postal_code = require('japan-postal-code')
 export default {
   layout: 'default',
-  middleware: 'auth',
+  middleware: 'guest',
   components: {
   },
   data() {
@@ -186,15 +204,15 @@ export default {
 			available_amounts: []
     }
   },
-	created() {
-		window.document.title = 'マイプロフィール | 支援機関マイページ | 補助金活用.COM'
-		$('meta[name=description]').attr('content','事業者×支援機関マッチングサイト補助金活用.COMの「マイプロフィール」ページです。認定支援機関の登録情報および、支援可能条件についてはこちらから変更いただけます。必須項目を確認のうえ、フォームに必定な変更内容を入力してください。')
-		$('meta[name=og:description]').attr('content','事業者×支援機関マッチングサイト補助金活用.COMの「マイプロフィール」ページです。認定支援機関の登録情報および、支援可能条件についてはこちらから変更いただけます。必須項目を確認のうえ、フォームに必定な変更内容を入力してください。')
-	},
   mounted() {
 		// this.clearContent()
 		this.init()
   },
+	created() {
+		window.document.title = '支援機関新規登録 | 補助金活用.COM'
+		$('meta[name=description]').attr('content','事業者×支援機関マッチングサイト補助金活用.COMの「支援機関新規登録」ページです。支援機関を新規登録する場合、本フォームより「認定支援機関情報入力欄」「支援可能条件入力欄」を入力してください。事業者相談、その他のお問い合わせは専用のフォームからお問い合わせください。')
+		$('meta[name=og:description]').attr('content','事業者×支援機関マッチングサイト補助金活用.COMの「支援機関新規登録」ページです。支援機関を新規登録する場合、本フォームより「認定支援機関情報入力欄」「支援可能条件入力欄」を入力してください。事業者相談、その他のお問い合わせは専用のフォームからお問い合わせください。')
+	},
   methods: {
 		clearContent() {
 			localStorage.removeItem('kikan_id')
@@ -219,39 +237,38 @@ export default {
 			localStorage.removeItem('available_prices')
 			localStorage.removeItem('available_amounts')
 		},
-		async init() {
-      try {
-        const { data } = await axios.post('/api/get_profile_info')
-        this.kikan_id = data.profile.kikan_id
-        this.com_name = data.profile.com_name,
-        this.com_huri_name = data.profile.com_huri_name
-        this.tanto_name = data.profile.tanto_name
-        this.department_name = data.profile.department_name
-        this.role_name = data.profile.role_name
-        this.is_personal = data.profile.is_personal
-        this.kind = data.profile.kind
-        this.zipcode = data.profile.zipcode
-        this.prefecture = data.profile.prefecture
-        this.city = data.profile.city
-        this.building = data.profile.building
-        this.telephone = data.profile.telephone
-        this.fax = data.profile.fax
-        this.email = data.profile.email
-        this.introduction = data.profile.introduction
-        this.available_contents = data.profile.available_contents.map(item => {
-          return item.content_id
-        })
-        this.available_jobs = data.profile.available_jobs.map(item => {
-          return item.job_id
-        })
-        this.available_prices = data.profile.available_prices.map(item => {
-          return item.price_id
-        })
-        this.available_amounts = data.profile.available_amounts.map(item => {
-          return item.amount_id
-        })
-      } catch (error) {
-      }
+		init() {
+			if (!!localStorage.getItem('kikan_id')) {
+				this.kikan_id = localStorage.getItem('kikan_id')
+				this.com_name = localStorage.getItem('com_name')
+				this.com_huri_name = localStorage.getItem('com_huri_name')
+				this.tanto_name = localStorage.getItem('tanto_name')
+				this.department_name = localStorage.getItem('department_name')
+				this.role_name = localStorage.getItem('role_name')
+				this.is_personal = parseInt(localStorage.getItem('is_personal'))
+				this.kind = parseInt(localStorage.getItem('kind'))
+				this.zipcode = localStorage.getItem('zipcode')
+				this.prefecture = localStorage.getItem('prefecture')
+				this.city = localStorage.getItem('city')
+				this.building = localStorage.getItem('building')
+				this.telephone = localStorage.getItem('telephone')
+				this.fax = localStorage.getItem('fax')
+				this.email = localStorage.getItem('email')
+				this.password = localStorage.getItem('password')
+				this.introduction = localStorage.getItem('introduction')
+				this.available_contents = localStorage.getItem('available_contents').split('、').map(item => {
+					return parseInt(item)
+				})
+				this.available_jobs = localStorage.getItem('available_jobs').split('、').map(item => {
+					return parseInt(item)
+				})
+				this.available_prices = localStorage.getItem('available_prices').split('、').map(item => {
+					return parseInt(item)
+				})
+				this.available_amounts = localStorage.getItem('available_amounts').split('、').map(item => {
+					return parseInt(item)
+				})
+			}
 		},
 		changeContent(event, content, index) {
 			if (event.target.checked == true) {
@@ -262,6 +279,18 @@ export default {
 				temp.splice(idex, 1)
 				this.available_contents = temp
 			}
+		},
+		async changeZip() {
+			if (!this.zipcode || this.zipcode.length != 7) {
+        this.$swal('', '郵便番号の形式が違います')
+        return
+      }
+
+      let self = this
+      postal_code.get(this.zipcode, function(address) {
+        self.prefecture = address.prefecture
+        self.city = address.city + address.area
+      })
 		},
 		changeJob(event, job, index) {
 			if (event.target.checked == true) {
@@ -319,7 +348,7 @@ export default {
 				return
 			}
 
-			if (!this.kind) {
+			if (this.kind == null) {
 				this.$swal('', '種別を選択してください')
 				return
 			}
@@ -329,7 +358,7 @@ export default {
 				return
 			}
 
-			if (!this.prefecture) {
+			if (this.prefecture == null) {
 				this.$swal('', '会社所在地の都道府県を選択してください')
 				return
 			}
@@ -341,6 +370,16 @@ export default {
 
 			if (!this.email) {
 				this.$swal('', 'メールアドレスを入力してください')
+				return
+			}
+
+			if (!this.password) {
+				this.$swal('', 'マイページパスワードを入力してください')
+				return
+			}
+
+			if (this.password.length < 8) {
+				this.$swal('', 'マイページパスワードは8桁の半角英数字にて入力ください')
 				return
 			}
 
@@ -386,7 +425,7 @@ export default {
 			localStorage.setItem('available_prices', this.available_prices.join('、'))
 			localStorage.setItem('available_amounts', this.available_amounts.join('、'))
 
-			this.$router.push({ name: 'profile.check' })
+			this.$router.push({ name: 'register_confirm' })
 		}
   }
 }

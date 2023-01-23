@@ -145,6 +145,17 @@
 	font-weight:500;
 	margin-bottom:1.5em;
 }
+.edit_wrap > * + h2,
+.edit_wrap > * + h3{
+    margin-top:4rem;
+}
+.edit_wrap > * + h4{
+    margin-top:2.5rem;
+}
+.edit_wrap > h2 + h3,
+.edit_wrap > h3 + h4{
+    margin-top:2rem;
+}
 .edit_wrap ul > li{
     position:relative;
 	padding-left:1em;
@@ -162,6 +173,54 @@
 }
 .edit_wrap li + li{
     margin-top:0.5em;
+}
+.edit_wrap ol{
+  counter-reset: my-counter;
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;	
+}
+.edit_wrap ol > li{
+	position:relative;
+	padding-left: 2.5em;
+}
+.edit_wrap ol > li:before{
+	content: counter(my-counter);
+	counter-increment: my-counter;
+	color: #333;
+	position: absolute;
+	top:0.1em;
+	left:0;
+	width:1.75rem;
+	font-size:0.85em;
+	text-align:center;
+}
+.edit_wrap ol > li:after{
+	content:"（　）";
+	position: absolute;
+	top:0.05em;
+	left:-0.5em;
+	font-size:0.9em;
+}
+.edit_wrap ol ol li{
+	list-style:decimal;
+	padding-left:0;
+	margin-left:1.25em;
+	text-indent:0em;
+}
+.edit_wrap ol ol li:before,
+.edit_wrap ol ol li:after{
+	display:none;
+}
+.edit_wrap ol ol ol li{
+	list-style:lower-alpha;
+}
+.edit_wrap li,
+.edit_wrap li p{
+	line-height:1.4;
+}
+.edit_wrap li > * + *{
+	margin-top:0.5em;
 }
 .edit_wrap table {
 	max-width:100%;
@@ -181,10 +240,72 @@
 .edit_wrap a:hover{
 	text-decoration:none;
 }
+.article_wrap + .article_wrap{
+	margin-top:80px;
+}
 @media screen and (max-width:768px) {
 	.edit_wrap table th,
 	.edit_wrap table td{
 	    padding:1rem 0.5em;
 		font-size:0.875rem;
+	}
+}
+
+.page_nav{
+		margin-bottom:4rem;
+}
+.page_nav a + a{
+		margin-left:2rem;
+}
+.page_nav a:after{
+	content:"";
+	display:block;
+	width:9px;
+	height:9px;
+	border-top:solid 2px #333;
+	border-right:solid 2px #333;
+	position:absolute;
+	top:0;
+	bottom:0;
+	right:20px;
+	margin:auto;
+	transform:rotate(135deg);
+	z-index:10;
+}
+@media screen and (max-width:768px) {
+	.page_nav .common_btn2{
+		flex-wrap:wrap;
+	}
+	.page_nav .common_btn2 a {
+		margin:0 auto;
+		width:100%;
+	}
+	.page_nav .common_btn2 a + a{
+		margin:1.5rem auto 0;
+	}
+	.page_nav .common_btn2 a:after{
+		right:10px;
+		width:7px;
+		height:7px;
+	}
+}
+
+.terms_box{
+	margin:40px 0 0;
+}
+.terms_box .scroll_wrap{
+	height:400px;
+	overflow:auto;
+	padding:40px 20px;
+	border:solid 1px #ddd;
+}
+
+@media screen and (max-width:768px) {
+	.terms_box{
+		margin:20px 0 0;
+	}
+	.terms_box .scroll_wrap{
+		height:300px;
+		padding:20px 10px;
 	}
 }
