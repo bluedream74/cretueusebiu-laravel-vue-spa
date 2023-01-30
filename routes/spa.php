@@ -12,10 +12,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "spa" middleware group.
 |
 */
-// Route::group(['middleware' => 'basicauth'], function() {
-//   // ここに対象のページを記述
-//   // 例）
-  
-// });
-
-Route::get('{path}', 'SpaController')->where('path', '(.*)');
+Route::group(['middleware' => 'basicauth'], function() {
+  // ここに対象のページを記述
+  // 例）
+  Route::get('{path}', 'SpaController')->where('path', '(.*)');
+});
