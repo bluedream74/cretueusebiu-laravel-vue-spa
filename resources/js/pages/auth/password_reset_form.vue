@@ -5,13 +5,13 @@
       <div class="form__row">
         <label><span class="must">*</span>新しいパスワード</label>
         <p>
-          <input type="password" placeholder="新しいパスワード" v-model="password"/>
+          <input type="password" placeholder="新しいパスワード" v-model="password" maxlength="12" minlength="8"/>
         </p>
       </div>
       <div class="form__row">
         <label>確認のための<br/>新しいパスワード</label>
         <p>
-          <input type="password" placeholder="確認のための新しいパスワード" v-model="password_confirm"/>
+          <input type="password" placeholder="確認のための新しいパスワード" v-model="password_confirm" maxlength="12" minlength="8"/>
         </p>
       </div>
       <div class="form__action">

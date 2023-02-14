@@ -224,32 +224,32 @@ export default {
 				return
 			}
 
-			if (!this.consultant.job) {
+			if (this.consultant.job == null) {
 				this.$swal('', '業種を選択してください')
 				return
 			}
 
-			if (!this.consultant.zipcode) {
+			if (this.consultant.zipcode == null) {
 				this.$swal('', '郵便番号を入力してください')
 				return
 			}
 
-			if (!this.consultant.prefecture) {
+			if (this.consultant.prefecture == null) {
 				this.$swal('', '都道府県を選択してください')
 				return
 			}
 
-			if (!this.consultant.city) {
+			if (this.consultant.city == null) {
 				this.$swal('', '市区町村番地を入力してください')
 				return
 			}
 
-			if (!this.consultant.amount) {
+			if (this.consultant.amount == null) {
 				this.$swal('', '従業員規模を選択してください')
 				return
 			}
 
-			if (!this.consultant.income) {
+			if (this.consultant.income == null) {
 				this.$swal('', '年商を選択してください')
 				return
 			}

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="common_page form_page forget_form">
     <main>
 			<section class="section mv_area">
 				<h1>パスワードを忘れた方</h1>

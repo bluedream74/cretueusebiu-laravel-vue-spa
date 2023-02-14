@@ -18,7 +18,7 @@
 					<div class="section login_area">
 						<div class="sitewrap">
 							<div class="center_form">
-								<div class="form_el"><input type="password" v-model="password" required placeholder="新規パスワード"></div>
+								<div class="form_el"><input type="password" v-model="password" required placeholder="新規パスワード" maxlength="12" minlength="8"></div>
 								<div class="form_el"><input type="password" v-model="confirm_password" required placeholder="新規パスワード(確認用)" maxlength="12" minlength="8"></div>
 									<div class="send_btns">
 									<label class="btn_warp next"><span><input @click="changePassword" type="button" value="確定"></span></label>

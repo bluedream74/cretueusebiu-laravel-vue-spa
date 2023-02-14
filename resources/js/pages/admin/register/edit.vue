@@ -251,47 +251,52 @@ export default {
 				return
 			}
 
-			if (!this.user_info.com_name) {
+			if (this.user_info.com_name == null) {
 				this.$swal('', '会社名を入力してください')
 				return
 			}
 
-			if (!this.user_info.com_huri_name) {
+			if (this.user_info.com_huri_name == null) {
 				this.$swal('', '会社名(フリガナ)を入力してください')
 				return
 			}
 
-			if (!this.user_info.tanto_name) {
+			if (this.user_info.tanto_name == null) {
 				this.$swal('', '担当者氏名を入力してください')
 				return
 			}
 
-			if (!this.user_info.kind) {
+			if (this.user_info.kind == null) {
 				this.$swal('', '種別を選択してください')
 				return
 			}
 
-			if (!this.user_info.zipcode) {
+			if (this.user_info.zipcode == null) {
 				this.$swal('', '会社所在地の郵便番号を入力してください')
 				return
 			}
 
-			if (!this.user_info.prefecture) {
+			if (this.user_info.prefecture == null) {
 				this.$swal('', '会社所在地の都道府県を選択してください')
 				return
 			}
 
-			if (!this.user_info.city) {
+			if (this.user_info.city == null) {
 				this.$swal('', '市区町村番地を入力してください')
 				return
 			}
 
-			if (!this.user_info.email) {
+      // if (this.user_info.telephone == null) {
+			// 	this.$swal('', '電話番号を入力してください')
+			// 	return
+			// }
+
+			if (this.user_info.email == null) {
 				this.$swal('', 'メールアドレスを入力してください')
 				return
 			}
 
-			if (!this.user_info.password) {
+			if (this.user_info.password == null) {
 				this.$swal('', 'マイページパスワードを入力してください')
 				return
 			}
