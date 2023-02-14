@@ -40,6 +40,7 @@
   </div>
 </template>
 <script>
+import moment from 'moment'
 import Pagination from '../components/Pagination.vue'
 import { JOBS, PRICES, AMOUNTS, SUPPORT_PRICES } from '../const'
 export default {
@@ -67,7 +68,9 @@ export default {
   methods: {
     async init() {
       const { data } = await axios.post('/api/get_consultant_list')
-      this.temp = data.consultants
+      this.temp = data.consultants.filter(item => {
+		return moment(item.expired_at).format('YYYYMMDD') >= moment().format('YYYYMMDD')
+	  })
       this.consultants = this.temp.filter((item, index) => {
         return index < 10
       })

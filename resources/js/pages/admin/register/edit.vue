@@ -66,6 +66,12 @@
               </dd>
             </dl>
             <dl>
+              <dt>役職名<span>必須</span></dt>
+              <dd>
+                <input type="text" v-model="user_info.role_name">
+              </dd>
+            </dl>
+            <dl>
               <dt>法人／個人事業主<span>必須</span></dt>
               <dd>
                 <input type="radio" id="corporation" name="registration_cat" :checked="user_info.is_personal == 0" @click="user_info.is_personal = 0">
