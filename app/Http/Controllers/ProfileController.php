@@ -254,9 +254,20 @@ class ProfileController extends Controller
   }
 
   public function updatePassword(Request $request) {
-    $user = $request->user();
-    $user->password = bcrypt($request->input('password'));
-    $user->save();
+    $user = User::where('email', $request->input('email'))->first();
+
+    if (is_null($user)) {
+      return response()->json([
+        'flag' => false
+      ]);
+    }
+
+    if ($user->token == $request->input('token')) {
+      $user->password = bcrypt($request->input('password'));
+      $user->token = null;
+      $user->token_at = null;
+      $user->save();
+    }
 
     return response()->json([
       'flag' => true

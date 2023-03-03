@@ -43,11 +43,14 @@ export default [
   { path: '/news/detail', name: 'news.detail', component: page('news/detail.vue') },
 
   { path: '/password_reset', name: 'forget', component: page('auth/password_reset.vue') },
+  { path: '/password_reset_complete', name: 'password_reset_complete', component: page('auth/password_reset_complete.vue') },
   { path: '/password_reset_form', name: 'password_reset_form', component: page('auth/password_reset_form.vue') },
   { path: '/login', name: 'login', component: page('auth/login.vue') },
   { path: '/complete', name: 'complete', component: page('auth/complete.vue') },
   { path: '/search', name: 'search', component: page('search.vue') },
   { path: '/home', name: 'home1', component: page('home.vue') },
+  { path: '/terms', name: 'terms', component: page('terms.vue') },
+  { path: '/privacy', name: 'privacy', component: page('privacy.vue') },
   { path: '/account/activate', name: 'account.activate', component: page('auth/activate.vue') },
   { path: '/user/detail', name: 'user.detail', component: page('user/detail.vue') },
 

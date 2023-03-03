@@ -45,6 +45,7 @@ class ConsultantController extends Controller
       'income' => $request->input('income'),
       'fax' => $request->input('fax'),
       'email' => $request->input('email'),
+      'telephone' => $request->input('telephone'),
       'tanto_name' => $request->input('tanto_name'),
       'department_name' => $request->input('department_name'),
       'role_name' => $request->input('role_name'),

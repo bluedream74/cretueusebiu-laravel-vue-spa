@@ -1,23 +1,33 @@
 <template>
-  <div class="register__container">
-    <h2>パスワードリセット</h2>
-    <div class="form__part">
-      <div class="form__row">
-        <label><span class="must">*</span>新しいパスワード</label>
-        <p>
-          <input type="password" placeholder="新しいパスワード" v-model="password" maxlength="12" minlength="8"/>
-        </p>
-      </div>
-      <div class="form__row">
-        <label>確認のための<br/>新しいパスワード</label>
-        <p>
-          <input type="password" placeholder="確認のための新しいパスワード" v-model="password_confirm" maxlength="12" minlength="8"/>
-        </p>
-      </div>
-      <div class="form__action">
-        <button @click="resetPassword">変更する</button>
-      </div>
-    </div>
+  <div class="common_page form_page forget_form">
+    <main>
+			<section class="section mv_area">
+				<h1>パスワードの再設定</h1>
+				<div class="topicpath">
+					<div class="sitewrap">
+						<ol id="pan">
+							<li><a href="../">TOP</a></li>
+							<li><span>パスワードの再設定</span></li>
+						</ol>
+					</div>
+				</div>
+			</section>
+			<div class="content_area form_wrap">
+				<form @submit.prevent="resetPassword">
+					<div class="section login_area">
+						<div class="sitewrap">
+							<div class="center_form">
+								<div class="form_el"><input type="password" v-model="password" required placeholder="新規パスワード"></div>
+								<div class="form_el"><input type="password" v-model="password_confirm" required placeholder="新規パスワード(確認用)"></div>
+									<div class="send_btns">
+									<label class="btn_warp next"><span><input type="submit" value="確定"></span></label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</main>
   </div>
 </template>
 <script>
@@ -65,18 +75,8 @@ export default {
               token: this.$route.query.token,
               password: this.password
           })
-          if (data.status == 0) {
-              this.$swal('', 'エラーが発生しました。')
-              return
-          } else if (data.status == 1) {
-              this.$swal('', 'トークンの有効時間を過ぎました。')
-              return
-          } else if (data.status == 2) {
-              this.$swal('', 'トークンが違います。')
-              return
-          } else {
-              this.$swal('', 'パスワードリセットしました。')
-              this.$router.push({ name: 'login' })
+          if (data.status) {
+              this.$router.push({ name: 'password_reset_complete' })
           }
       } catch (error) {
       }

@@ -34,7 +34,7 @@ Route::group(['middleware' => 'guest:api'], function() {
   Route::post('update_introduction', 'ProfileController@updateIntroduction');
   Route::post('/admin_login', 'Admin\Auth\LoginController@login');
   Route::post('send_password_reset_email', 'ProfileController@sendPasswordResetEmail');
-  Route::post('reset_password', 'ProfileController@resetPassword');
+  Route::post('reset_password', 'ProfileController@updatePassword');
 });
 
 Route::post('regsiter_avatar', 'ProfileController@registerAvatar');
