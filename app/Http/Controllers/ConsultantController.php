@@ -26,6 +26,7 @@ use App\Jobs\EmailVerification;
 use App\Jobs\ConsultantEmailJob;
 use App\Jobs\ContactFinishEmailJob;
 use App\Jobs\PasswordReset;
+use App\Jobs\AnswerEmailJob;
 use App\Jobs\ConsultantAnswerEmailJob;
 use Laravel\Cashier\Cashier;
 
@@ -141,13 +142,16 @@ class ConsultantController extends Controller
   }
 
   public function sendConsultantAnswer(Request $request) {
-    ConsultantAnswer::create([
+    $answer = ConsultantAnswer::create([
       'answer' => $request->input('answer'),
       'user_id' => $request->input('user_id'),
       'consultant_id' => $request->input('id')
     ]);
 
+    $user = $request->user();
+    $consultant = Consultant::where('id', $request->input('id'))->first();
 
+    AnswerEmailJob::dispatch($user, $answer, $consultant);
 
     return response()->json([
       'flag' => true

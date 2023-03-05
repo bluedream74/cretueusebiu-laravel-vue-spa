@@ -47,14 +47,14 @@
 			<div class="modal-content">
 				<a class="modal-close close_btn" @click="closeKakin">×</a>
 				<div class="modal-wrap">
-					<div class="modal-ttl">詳細を閲覧するには課金が発生します。<br class="display_sp">宜しいでしょうか？</div>
+					<div class="modal-ttl">詳細情報の閲覧には、当サイトの「<a href="/terms/#terms02" target="_blank">利用規約</a>」に基づき、月末締めで閲覧回数に応じた利用料金が請求されます。宜しいでしょうか？</div>
 					<div class="texts">
-	<p class="txt_indent"><b class="red">※掲載期間が終了したら応募が出来なくなります。ご注意ください。</b></p>
-	<p><b class="red">初回メールをお送りしましたら電話番号が表示されます</b></p>
+<p class="txt_indent"><b class="red">※掲載期間が終了したら応募が出来なくなります。ご注意ください。</b></p>
+<p><b class="red">初回メールをお送りしましたら電話番号が表示されます</b></p>
 					</div>
 					<div class="section send_area">
 						<div class="send_btns common_btn2">
-								<a @click="agreeKakin"><span>同意</span></a>
+								<a @click="agreeKakin"><span>規約に同意して閲覧</span></a>
 								<a @click="closeKakin" class="modal-close prev blue"><span>戻る</span></a>
 						</div>
 					</div>
@@ -109,6 +109,7 @@ export default {
 		},
 		async agreeKakin() {
 			let consultant = this.tempConsultant
+			// confirm(`利用サービス：「${this.tempConsultant.com_name}」有料相談者情報の開示\n利用料：￥500\n利用者：${this.$store.getters['auth/user'].com_name}\n利用日：${ moment().format('YYYY/MM/DD') }\n請求日：${moment().endOf('month').format('YYYY/MM/DD')}`);
 			let find = this.consultant_kakins.find(item => {
 				return item.consultant_id == consultant.id
 			})
