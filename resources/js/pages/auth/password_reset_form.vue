@@ -75,7 +75,7 @@ export default {
               token: this.$route.query.token,
               password: this.password
           })
-          if (data.status) {
+          if (data.flag) {
               this.$router.push({ name: 'password_reset_complete' })
           }
       } catch (error) {
