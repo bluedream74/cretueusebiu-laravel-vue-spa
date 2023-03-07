@@ -341,9 +341,11 @@ class CommonController extends BaseController
     public function getRegisterInvoices(Request $request) {
       $kakins = ConsultantKakin::where('user_id', $request->input('user_id'))->get();
       $koukokus = Koukoku::where('user_id', $request->input('user_id'))->get();
+      $user = User::where('id', $request->input('user_id'))->first();
       return response()->json([
         'kakins' => $kakins,
-        'koukokus' => $koukokus
+        'koukokus' => $koukokus,
+        'user' => $user
       ]);
     }
 

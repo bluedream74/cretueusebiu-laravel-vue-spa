@@ -85,3 +85,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.edit_form {
+  padding-bottom: 500px;
+}
+</style>

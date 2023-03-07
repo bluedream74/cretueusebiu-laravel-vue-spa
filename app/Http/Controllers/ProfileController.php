@@ -15,6 +15,7 @@ use App\Models\AvailablePrice;
 use App\Models\AvailableAmount;
 use App\Models\Consultant;
 use App\Models\Koukoku;
+use App\Models\Master;
 use App\Models\ConsultantKakin;
 use Carbon\Carbon;
 use App\Jobs\EmailVerification;
@@ -281,13 +282,15 @@ class ProfileController extends Controller
     $available_jobs = AvailableJob::where('user_id', $request->user()->id)->get();
     $available_prices = AvailablePrice::where('user_id', $request->user()->id)->get();
     $consultant_kakins = ConsultantKakin::where('user_id', $request->user()->id)->get();
+    $master = Master::first();
     return response()->json([
       'consultants' => $consultants,
       'available_amounts' => $available_amounts,
       'available_contents' => $available_contents,
       'available_jobs' => $available_jobs,
       'available_prices' => $available_prices,
-      'consultant_kakins' => $consultant_kakins
+      'consultant_kakins' => $consultant_kakins,
+      'master' => $master
     ]);
   }
 
@@ -295,6 +298,7 @@ class ProfileController extends Controller
     ConsultantKakin::create([
       'consultant_id' => $request->input('consultant_id'),
       'user_id' => $request->user()->id,
+      'price' => $request->input('price')
     ]);
 
     return response()->json([

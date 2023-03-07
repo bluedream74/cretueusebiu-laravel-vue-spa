@@ -92,7 +92,8 @@ export default {
 			consultant_kakins: [],
 
 			isShowModal: false,
-			tempConsultant: null
+			tempConsultant: null,
+			master: null
 		}
 	},
 	methods: {
@@ -109,21 +110,26 @@ export default {
 		},
 		async agreeKakin() {
 			let consultant = this.tempConsultant
-			// confirm(`利用サービス：「${this.tempConsultant.com_name}」有料相談者情報の開示\n利用料：￥500\n利用者：${this.$store.getters['auth/user'].com_name}\n利用日：${ moment().format('YYYY/MM/DD') }\n請求日：${moment().endOf('month').format('YYYY/MM/DD')}`);
-			let find = this.consultant_kakins.find(item => {
-				return item.consultant_id == consultant.id
-			})
-			if (!find) {
-				try {
-					const { data } = await axios.post('/api/agree_kakin', {
-						consultant_id: consultant.id
-					})
-					this.$router.push({ name: 'consultant_detail', query: {
-						id: consultant.id
-					} })
-					this.tempConsultant = null
-				} catch (error) {
+			let price = 0
+			if (!!this.master.from && !!this.master.to) {
+				if (moment().isBetween(moment(this.master.from), moment(this.master.to))) {
+					price = this.master.special_price
+				} else {
+					price = this.master.price
 				}
+			}
+			
+			if (confirm(`利用サービス：「${this.tempConsultant.com_name}」有料相談者情報の開示\n利用料：￥${price}\n利用者：${this.$store.getters['auth/user'].com_name}\n利用日：${ moment().format('YYYY/MM/DD') }\n請求日：${moment().endOf('month').format('YYYY/MM/DD')}`)) {
+				const { data } = await axios.post('/api/agree_kakin', {
+					consultant_id: consultant.id,
+					price: price
+				})
+				this.$router.push({ name: 'consultant_detail', query: {
+					id: consultant.id
+				} })
+				this.tempConsultant = null
+			} else {
+				this.isShowModal = false
 			}
 		},
 		showDetail(consultant) {
@@ -143,6 +149,7 @@ export default {
 			try {
 				const { data } = await axios.post('/api/get_matching_list')
 				this.consultant_kakins = data.consultant_kakins
+				this.master = data.master
 				let available_amounts = data.available_amounts.map(it => {
 					return it.amount_id
 				})

@@ -7,6 +7,7 @@ class ConsultantKakin extends Model {
     'consultant_id',
     'user_id',
     'status', //default 1
+    'price'
   ];
 
   protected $table = 'consultant_kakins';

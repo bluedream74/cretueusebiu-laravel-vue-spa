@@ -6,10 +6,10 @@
           <ul>
             <li><router-link :to="{ name: 'admin.dashboard' }">HOME</router-link></li>
             <li><router-link :to="{ name: 'admin.register' }">支援機関管理一覧</router-link></li>
-            <li><span>AA株式会社 請求情報</span></li>
+            <li><span>{{ user.com_name }} 請求情報</span></li>
           </ul>
         </div>
-        <h2 class="h_style03"><span>AA株式会社 請求情報一覧</span></h2>
+        <h2 class="h_style03"><span>{{ user.com_name }} 請求情報一覧</span></h2>
         <div class="table_wrap">
           <!-- <div class="pager_style">
             <ul>
@@ -34,7 +34,7 @@
               <tr v-for="(item, index) in kakins" :key="index">
                 <td>{{ item.date }}</td>
                 <td>{{ item.amount }}件</td>
-                <td>￥{{ item.amount * 500 | moneyFormat }}</td>
+                <td>￥{{ item.total | moneyFormat }}</td>
                 <td>￥{{ !!item.koukoku ? (item.koukoku.price) : '' }}</td>
                 <td><router-link :to="{ name: 'admin.register.koukoku_add', query: { user_id: $route.query.user_id, date: item.date } }" class="eidt_btn table_btns">広告費入力</router-link></td>
                 <td><router-link :to="{ name: 'admin.register.invoice_pdf', query: { user_id: $route.query.user_id, date: item.date, price: (item.amount * 500 + (!!item.koukoku ? item.koukoku.price : 0)), amount: item.amount, koukoku_amount: (!!item.koukoku ? item.koukoku.amount : 0), koukoku_unit: (!!item.koukoku ? item.koukoku.unit : ''), koukoku_price: (!!item.koukoku ? item.koukoku.price: 0) } }" target="_blank" class="browsing_btn table_btns">PDF出力</router-link></td>
@@ -48,6 +48,7 @@
   </div>
 </template>
 <script>
+import moment from 'moment'
 export default {
   layout: 'admin_auth',
   middleware: 'admin',
@@ -56,7 +57,8 @@ export default {
   },
   data() {
     return {
-      kakins: []
+      kakins: [],
+      user: null
     }
   },
   methods: {
@@ -65,21 +67,36 @@ export default {
         user_id: this.$route.query.user_id
       })
       let temp = []
-      let temp1 = ['2022年10月']
+      this.user = data.user
+      let temp1 = []
+      const fromDate = moment('2022-10-01')
+      const now = moment();
+      const monthsDiff = now.diff(fromDate, 'months')
+      console.log(monthsDiff, 'monthsDiff')
+      for(let i=0; i<monthsDiff; i++) {
+        temp1.push(fromDate.clone().add(i, 'months').format('YYYY年MM月'))
+      }
+      console.log(temp1, 'temp1temp1temp1')
       temp1.forEach(item => {
         let filter = data.kakins.filter(it => {
           return moment(it.created_at).format('YYYY年MM月') == item
+        })
+        let total_price = 0
+        filter.forEach(it => {
+          total_price += it.price
         })
         let koukoku_filter = data.koukokus.find(it => {
           return item == it.date
         })
         temp.push({
           amount: filter.length,
+          total: total_price,
           date: item,
           koukoku: koukoku_filter
         })
       })
       this.kakins = temp
+      console.log(this.kakins, 'this.kakinsthis.kakins')
     }
   }
 }

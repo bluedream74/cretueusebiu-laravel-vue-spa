@@ -17,6 +17,7 @@
                 <select class="w_150" v-model="year">
                   <option value=""></option>
                   <option value="2022">2022</option>
+                  <option value="2022">2023</option>
                 </select>
               </div>
               <span>年</span>
