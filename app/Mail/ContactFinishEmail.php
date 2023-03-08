@@ -30,7 +30,7 @@ class ContactFinishEmail extends Mailable
      */
     public function build()
     {
-        return $this->from(['address' => 'noreply@hozyokin.jp', 'name' => 'HOZYOKIN'])
+        return $this->from(['address' => 'info@hojyokin-katsuyou.com', 'name' => 'HOZYOKIN'])
                     ->subject('【補助金活用.COM】お問い合わせを受け付けました')
                     ->view('emails.contact_finish')
                     ->with([
@@ -40,7 +40,7 @@ class ContactFinishEmail extends Mailable
 
     public function render()
     {
-      return $this->from(['address' => 'noreply@hozyokin.jp', 'name' => 'HOZYOKIN'])
+      return $this->from(['address' => 'info@hojyokin-katsuyou.com', 'name' => 'HOZYOKIN'])
                     ->subject('【補助金活用.COM】お問い合わせを受け付けました')
                     ->view('emails.contact_finish')
                     ->with([

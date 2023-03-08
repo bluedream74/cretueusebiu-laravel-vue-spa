@@ -34,7 +34,7 @@ class AnswerEmail extends Mailable
      */
     public function build()
     {
-        return $this->from(['address' => 'noreply@hozyokin.jp', 'name' => 'HOZYOKIN'])
+        return $this->from(['address' => 'info@hojyokin-katsuyou.com', 'name' => 'HOZYOKIN'])
                     ->subject('【補助金活用.COM】事業者相談回答が完了しました')
                     ->view('emails.answer')
                     ->with([
@@ -46,7 +46,7 @@ class AnswerEmail extends Mailable
 
     public function render()
     {
-        return $this->from(['address' => 'noreply@hozyokin.jp', 'name' => 'HOZYOKIN'])
+        return $this->from(['address' => 'info@hojyokin-katsuyou.com', 'name' => 'HOZYOKIN'])
                     ->subject('【補助金活用.COM】事業者相談回答が完了しました')
                     ->view('emails.answer')
                     ->with([

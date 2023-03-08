@@ -28,7 +28,7 @@ class EmailVerification extends Mailable
      */
     public function build()
     {
-        return $this->from(['address' => 'noreply@hozyokin.jp', 'name' => 'HOZYOKIN'])
+        return $this->from(['address' => 'info@hojyokin-katsuyou.com', 'name' => 'HOZYOKIN'])
                     ->subject('【補助金活用.COM】支援機関新規登録の仮登録が完了しました')
                     ->view('emails.verify-email')
                     ->with([
@@ -39,7 +39,7 @@ class EmailVerification extends Mailable
 
     public function render()
     {
-        return $this->from(['address' => 'noreply@hozyokin.jp', 'name' => 'HOZYOKIN'])
+        return $this->from(['address' => 'info@hojyokin-katsuyou.com', 'name' => 'HOZYOKIN'])
                     ->subject('【補助金活用.COM】支援機関新規登録の仮登録が完了しました')
                     ->view('emails.verify-email')
                     ->with([

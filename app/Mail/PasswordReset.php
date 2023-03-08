@@ -28,7 +28,7 @@ class PasswordReset extends Mailable
      */
     public function build()
     {
-        return $this->from(['address' => 'noreply@hozyokin.jp', 'name' => 'HOZYOKIN'])
+        return $this->from(['address' => 'info@hojyokin-katsuyou.com', 'name' => 'HOZYOKIN'])
                     ->subject('【補助金活用.COM】パスワード再設定URLを発行しました')
                     ->view('emails.password-reset')
                     ->with([
@@ -39,7 +39,7 @@ class PasswordReset extends Mailable
 
     public function render()
     {
-        return $this->from(['address' => 'noreply@hozyokin.jp', 'name' => 'HOZYOKIN'])
+        return $this->from(['address' => 'info@hojyokin-katsuyou.com', 'name' => 'HOZYOKIN'])
                     ->subject('【補助金活用.COM】パスワード再設定URLを発行しました')
                     ->view('emails.password-reset')
                     ->with([

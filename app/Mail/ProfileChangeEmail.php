@@ -30,7 +30,7 @@ class ProfileChangeEmail extends Mailable
      */
     public function build()
     {
-        return $this->from(['address' => 'noreply@hozyokin.jp', 'name' => 'HOZYOKIN'])
+        return $this->from(['address' => 'info@hojyokin-katsuyou.com', 'name' => 'HOZYOKIN'])
                     ->subject('【補助金活用.COM】マイプロフィール変更が完了しました')
                     ->view('emails.profile_changed')
                     ->with([
@@ -40,7 +40,7 @@ class ProfileChangeEmail extends Mailable
 
     public function render()
     {
-        return $this->from(['address' => 'noreply@hozyokin.jp', 'name' => 'HOZYOKIN'])
+        return $this->from(['address' => 'info@hojyokin-katsuyou.com', 'name' => 'HOZYOKIN'])
                     ->subject('【補助金活用.COM】マイプロフィール変更が完了しました')
                     ->view('emails.profile_changed')
                     ->with([

@@ -30,7 +30,7 @@ class ConsultantEmail extends Mailable
      */
     public function build()
     {
-        return $this->from(['address' => 'noreply@hozyokin.jp', 'name' => 'HOZYOKIN'])
+        return $this->from(['address' => 'info@hojyokin-katsuyou.com', 'name' => 'HOZYOKIN'])
                     ->subject('【事業者相談申し込み】ホームページより受付')
                     ->view('emails.consultant')
                     ->with([
@@ -41,7 +41,7 @@ class ConsultantEmail extends Mailable
 
     public function render()
     {
-        return $this->from(['address' => 'noreply@hozyokin.jp', 'name' => 'HOZYOKIN'])
+        return $this->from(['address' => 'info@hojyokin-katsuyou.com', 'name' => 'HOZYOKIN'])
                     ->subject('【事業者相談申し込み】ホームページより受付')
                     ->view('emails.consultant')
                     ->with([
