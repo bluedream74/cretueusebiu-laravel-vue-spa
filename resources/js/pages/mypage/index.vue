@@ -111,9 +111,11 @@ export default {
 		async agreeKakin() {
 			let consultant = this.tempConsultant
 			let price = 0
+			let status = 1 // 1: 通常、2：特殊
 			if (!!this.master.from && !!this.master.to) {
 				if (moment().isBetween(moment(this.master.from), moment(this.master.to))) {
 					price = this.master.special_price
+					status = 2
 				} else {
 					price = this.master.price
 				}
@@ -122,7 +124,8 @@ export default {
 			if (confirm(`利用サービス：「${this.tempConsultant.com_name}」有料相談者情報の開示\n利用料：￥${price}\n利用者：${this.$store.getters['auth/user'].com_name}\n利用日：${ moment().format('YYYY/MM/DD') }\n請求日：${moment().endOf('month').format('YYYY/MM/DD')}`)) {
 				const { data } = await axios.post('/api/agree_kakin', {
 					consultant_id: consultant.id,
-					price: price
+					price: price,
+					status: status
 				})
 				this.$router.push({ name: 'consultant_detail', query: {
 					id: consultant.id

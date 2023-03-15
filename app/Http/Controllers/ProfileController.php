@@ -298,7 +298,8 @@ class ProfileController extends Controller
     ConsultantKakin::create([
       'consultant_id' => $request->input('consultant_id'),
       'user_id' => $request->user()->id,
-      'price' => $request->input('price')
+      'price' => $request->input('price'),
+      'status' => $request->input('status')
     ]);
 
     return response()->json([

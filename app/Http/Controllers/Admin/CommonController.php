@@ -370,6 +370,8 @@ class CommonController extends BaseController
       $available_jobs = AvailableJob::where('user_id', $request->input('user_id'))->get();
       $available_amounts = AvailableAmount::where('user_id', $request->input('user_id'))->get();
       $available_prices = AvailablePrice::where('user_id', $request->input('user_id'))->get();
+      $consultant_kakins = ConsultantKakin::where('user_id', $request->input('user_id'))->get();
+      $koukous = Koukoku::where('user_id', $request->input('user_id'))->get();
 
       return response()->json([
         'user_info' => $user_info,
@@ -377,6 +379,8 @@ class CommonController extends BaseController
         'available_jobs' => $available_jobs,
         'available_amounts' => $available_amounts,
         'available_prices' => $available_prices,
+        'consultant_kakins' => $consultant_kakins,
+        'koukous' => $koukous
       ]);
     }
 

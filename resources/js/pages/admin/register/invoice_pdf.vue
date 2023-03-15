@@ -1,28 +1,46 @@
 <template>
-  <div id="pdf_page">
+	<div>
+		<vue-html2pdf
+            :show-layout="true"
+            :float-layout="true"
+            :enable-download="true"
+            :preview-modal="true"
+            :paginate-elements-by-height="1400"
+            filename="領収書"
+            :pdf-quality="2"
+            :manual-pagination="false"
+            pdf-format="a4"
+            pdf-orientation="portrait"
+            pdf-content-width="800px"
+            ref="html2Pdf"
+        >
+		<div id="pdf_page" slot="pdf-content"><div class="page_wrap">
 		<p class="title">御 請 求 書</p>
-		<div class="access_wrap fix">
+		<div class="access_wrap fix" v-if="!!user">
 			<div class="left_area">
-				<p class="com_nam">株式会社⼋咲</p>
+				<p class="com_nam">{{ user.com_name }}</p>
 				<div class="address_txt">
-					<p>〒530-0001</p>
-					<p>⼤阪府 ⼤阪市北区梅⽥1-11-4-1000</p>
-					<p>⼤阪駅前第4ビル10階</p>
-					<p>管理本部 代表取締役社⻑ 中⻄弘和 様</p>
+					<p>〒{{ user.zipcode }}</p>
+					<p>{{ user.prefecture }} {{ user.city }}</p>
+					<p>{{ user.building }}</p>
+					<p>{{ user.department_name }} {{ user.role_name }} {{ user.tanto_name }}様</p>
 				</div>
-				<p class="greeting">⼤変お世話になっております。下記、ご請求申し上げます。</p>
-				<p class="price">合計⾦額 {{ $route.query.price }}円</p>
+				<p class="greeting">大変お世話になっております。下記、ご請求申し上げます。</p>
+				<p class="price">合計金額 合計金額円</p>
 			</div>
 			<div class="right_area">
 				<table class="day_area">
 					<tr>
-						<td class="tit">⽇付 :</td>
-						<td class="days_txt">{{ current_date }}</td>
+						<td class="tit">日付:</td>
+						<td class="days_txt"><p>{{ current_date }}</p></td>
+					</tr>
+					<tr>
+						<td class="tit">請求書番号 :</td>
+						<td class="days_txt"><p>W{{ invoiceNumber }}-{{ user.id }}</p></td>
 					</tr>
 				</table>
 				<div class="cam_area fix">
-					<div class="compnay_address"><img src="/admin/img/pdf_address.png"></div>
-					<div class="logo"><img src="/admin/img/pdf_logo.png"></div>
+					<div class="compnay_address"><img src="/admin/img/cp_seals.png"></div>
 				</div>
 			</div>
 		</div>
@@ -31,22 +49,62 @@
 				<table>
 					<tbody>
 						<tr>
-							<th width="60%" class="t_center">詳細</th>
-							<th width="10%" class="t_center">数量</th>
+							<th width="55%" class="t_center">詳細</th>
+							<th width="15%" class="t_center">数量</th>
 							<th width="15%" class="t_center">単価</th>
-							<th width="15%" class="t_center">⾦額</th>
+							<th width="15%" class="t_center">金額</th>
 						</tr>
 						<tr>
-							<td>マッチングシステム利⽤料、{{ $route.query.date }}分</td>
-							<td class="t_right">{{ $route.query.amount }}件</td>
-							<td class="t_right">500</td>
-							<td class="t_right">{{ $route.query.amount * 500 | moneyFormat }}</td>
+							<td>マッチングシステム利用料、{{ text1 }}分</td>
+							<td class="t_right">{{ filterCount(1) }}</td>
+							<td class="t_right">通常単価</td>
+							<td class="t_right">{{ clacNormalPrice() }}</td>
+						</tr>
+						<!-- if:特殊金額適用中の利用履歴がある場合-->
+						<tr v-if="filterCount(2) > 0">
+							<td>マッチングシステム利用料、{{ text1 }}分</td>
+							<td class="t_right">{{ filterCount(2) }}</td>
+							<td class="t_right">特殊単価</td>
+							<td class="t_right">{{ clacSpecialPrice() }}</td>
+						</tr>
+						<!-- endif:特殊金額適用中の利用履歴がある場合-->
+						<!-- if:広告費の利用履歴がある場合-->
+						<tr v-if="!!koukou">
+							<td>広告費:{{ koukou.description }}</td>
+							<td class="t_right">{{ koukou.amount }}{{ koukou.unit }}</td>
+							<td class="t_right">{{ koukou.price }}</td>
+							<td class="t_right">{{ koukou.price * koukou.amount }}</td>
+						</tr>
+						<!-- endif:広告費の利用履歴がある場合-->
+						<tr>
+							<td></td>
+							<td class="t_right"></td>
+							<td class="t_right"></td>
+							<td class="t_right"></td>
 						</tr>
 						<tr>
-							<td>広告掲載料、{{ $route.query.date }}</td>
-							<td class="t_right">{{ $route.query.koukoku_amount }}{{ $route.query.koukoku_unit }}</td>
-							<td class="t_right">{{ $route.query.koukoku_price }}</td>
-							<td class="t_right">{{ $route.query.koukoku_price }}</td>
+							<td> </td>
+							<td class="t_right"></td>
+							<td class="t_right"></td>
+							<td class="t_right"></td>
+						</tr>
+						<tr>
+							<td> </td>
+							<td class="t_right"></td>
+							<td class="t_right"></td>
+							<td class="t_right"></td>
+						</tr>
+						<tr>
+							<td> </td>
+							<td class="t_right"></td>
+							<td class="t_right"></td>
+							<td class="t_right"></td>
+						</tr>
+						<tr>
+							<td> </td>
+							<td class="t_right"></td>
+							<td class="t_right"></td>
+							<td class="t_right"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -57,14 +115,14 @@
 				<table>
 					<tbody>
 						<tr>
-							<th width="30%">振込期⽇</th>
-							<td width="70%">{{ $route.query.date }}30⽇</td>
+							<th width="30%">振込期日</th>
+							<td width="70%">{{ monthLastDay }}</td>
 						</tr>
 						<tr>
 							<th>振込先</th>
-							<td>株式会社⼋咲 カ）ハツサク<br>
-								■三菱UFJ銀⾏ ⼤阪駅前⽀店 普通0189359<br>
-								■三井住友銀⾏ 梅⽥⽀店 普通6763424</td>
+							<td>株式会社八咲 カ）ハツサク<br>
+								■三菱UFJ銀行 大阪駅前支店 普通0189359<br>
+								■三井住友銀行 梅田支店 普通6763424</td>
 						</tr>
 					</tbody>
 				</table>
@@ -73,16 +131,16 @@
 				<table>
 					<tbody>
 						<tr>
-							<th width="40%" class="t_center">⼩計</th>
-							<td width="60%" class="t_right">{{ $route.query.price | moneyFormat }}円</td>
+							<th width="40%" class="t_center">小計</th>
+							<td width="60%" class="t_right">{{ clacNormalPrice() + clacSpecialPrice() + (!!koukou ? koukou.price * koukou.amount : 0) }}円</td>
 						</tr>
 						<tr>
 							<th class="t_center">消費税</th>
-							<td class="t_right">{{ $route.query.price | moneyFormat }}円</td>
+							<td class="t_right">{{ Math.ceil((clacNormalPrice() + clacSpecialPrice() + (!!koukou ? koukou.price * koukou.amount : 0)) / 10) }}円</td>
 						</tr>
 						<tr class="f_big">
-							<th class="t_center">合計⾦額</th>
-							<td class="t_right">{{ $route.query.price | moneyFormat }}円</td>
+							<th class="t_center">合計金額</th>
+							<td class="t_right">{{ Math.ceil((clacNormalPrice() + clacSpecialPrice() + (!!koukou ? koukou.price * koukou.amount : 0)) * 1.1) }}円</td>
 						</tr>
 					</tbody>
 				</table>
@@ -90,25 +148,86 @@
 		</div>
 		<div class="remarks_wrap">
 			<p><span>備考欄</span><br>
-				いつもありがとうございます。<br>
-				お⼿数をおかけいたしますが、よろしくお願いします。<br>
-				※ 明細をご確認のうえ、お振込み期限までに上記⼝座へお振込みをお願いいたします。<br>
-				※ まことに勝⼿ながら、振込⼿数料は貴社にてご負担いただきますようお願いいたします。<br>
-				※ 消費税率は全て10%になります。 適格請求書発⾏事業者番号：T1-1200-0120-2929</p>
+				明細をご確認のうえ、お振込み期限までに上記口座へお振込みをお願いいたします。<br>
+				まことに勝手ながら、振込手数料は貴社にてご負担いただきますようお願いいたします。<br>
+				消費税率は全て10%になります。 適格請求書発行事業者番号：T1-1200-0120-2929</p>
+			<p>お手数をおかけいたしますが、よろしくお願いします。</p>
 		</div>
+	</div></div>
+		</vue-html2pdf>
 	</div>
 </template>
 <script>
 import moment from 'moment';
+import VueHtml2pdf from 'vue-html2pdf'
 export default {
   layout: 'basic',
+  components: {
+        VueHtml2pdf
+    },
   data() {
     return {
-      current_date: ''
+      current_date: '',
+	  user: null,
+	  invoiceNumber: '',
+	  monthLastDay: '',
+	  text1: '',
+	  consultant_kakins: [],
+	  koukous: null
     }
   },
   mounted() {
+	this.init()
     this.current_date = moment().format('YYYY年MM月DD日')
+	this.invoiceNumber = moment().format('YYYYMM')
+	this.monthLastDay = moment().endOf('month').format('YYYY年MM月DD日')
+	this.text1 = moment().format('YYYY年MM月')
+  },
+  methods: {
+	async init() {
+		try {
+			const { data } = await axios.post('/admin/get_user_info', {
+				user_id: this.$route.query.user_id
+			})
+			this.user = data.user_info
+			this.koukou = data.koukous.find(item => {
+				return item.date == moment().format('YYYY年MM月')
+			})
+			this.consultant_kakins = data.consultant_kakins.filter(item => {
+				return moment(item.created_at).format('YYYYMM') == moment().format('YYYYMM')
+			})
+
+			setTimeout(() => {
+                    this.$refs.html2Pdf.generatePdf()
+                }, 1000)
+		} catch (error) {
+		}
+	},
+	filterCount(status) {
+		return this.consultant_kakins.filter(item => {
+			return item.status == status
+		}).length
+	},
+	clacNormalPrice() {
+		let price = 0
+		this.consultant_kakins.forEach(item => {
+			if (item.status == 1) {
+				price += item.price
+			}
+		})
+
+		return price
+	},
+	clacSpecialPrice() {
+		let price = 0
+		this.consultant_kakins.forEach(item => {
+			if (item.status == 2) {
+				price += item.price
+			}
+		})
+
+		return price
+	}
   }
 }
 </script>
@@ -123,10 +242,13 @@ export default {
 	font-family:  'MS Gothic', sans-serif;
 	font-size:14px;
 	line-height:1.4;
-	width: 210mm;
-	height: 297mm;
+	width: 100%;
+	min-height: 100vh;
 	padding: 0;
 	margin: 0 auto;
+	text-align: left;
+	padding: 20px;
+	padding-top: 30px;
 }
 table {
 	font-size:100%;
