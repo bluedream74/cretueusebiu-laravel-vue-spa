@@ -119,6 +119,8 @@ export default {
 				} else {
 					price = this.master.price
 				}
+			} else {
+				price = this.master.price
 			}
 			
 			if (confirm(`利用サービス：「${this.tempConsultant.com_name}」有料相談者情報の開示\n利用料：￥${price}\n利用者：${this.$store.getters['auth/user'].com_name}\n利用日：${ moment().format('YYYY/MM/DD') }\n請求日：${moment().endOf('month').format('YYYY/MM/DD')}`)) {
