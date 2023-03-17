@@ -73,7 +73,7 @@ export default {
       const now = moment();
       const monthsDiff = now.diff(fromDate, 'months')
       console.log(monthsDiff, 'monthsDiff')
-      for(let i=0; i<monthsDiff; i++) {
+      for(let i=0; i<monthsDiff+1; i++) {
         temp1.push(fromDate.clone().add(i, 'months').format('YYYY年MM月'))
       }
       console.log(temp1, 'temp1temp1temp1')
