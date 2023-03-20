@@ -26,7 +26,7 @@
 					<p>{{ user.department_name }} {{ user.role_name }} {{ user.tanto_name }}様</p>
 				</div>
 				<p class="greeting">大変お世話になっております。下記、ご請求申し上げます。</p>
-				<p class="price">合計金額 合計金額円</p>
+				<p class="price">合計金額 {{ Math.ceil(clacNormalPrice() + clacSpecialPrice() + (!!koukou ? koukou.price * koukou.amount : 0)) + Math.ceil((clacNormalPrice() + clacSpecialPrice() + (!!koukou ? koukou.price * koukou.amount : 0)) / 10) }}円</p>
 			</div>
 			<div class="right_area">
 				<table class="day_area">
@@ -55,16 +55,16 @@
 							<th width="15%" class="t_center">金額</th>
 						</tr>
 						<tr>
-							<td>マッチングシステム利用料、{{ text1 }}分</td>
-							<td class="t_right">{{ filterCount(1) }}</td>
-							<td class="t_right">通常単価</td>
+							<td>マッチングシステム利用料、{{ $route.query.date }}分</td>
+							<td class="t_right">{{ filterCount(1) }}件</td>
+							<td class="t_right">{{ this.master.price }}円</td>
 							<td class="t_right">{{ clacNormalPrice() }}</td>
 						</tr>
 						<!-- if:特殊金額適用中の利用履歴がある場合-->
 						<tr v-if="filterCount(2) > 0">
 							<td>マッチングシステム利用料、{{ text1 }}分</td>
 							<td class="t_right">{{ filterCount(2) }}</td>
-							<td class="t_right">特殊単価</td>
+							<td class="t_right">{{ this.master.special_price }}円</td>
 							<td class="t_right">{{ clacSpecialPrice() }}</td>
 						</tr>
 						<!-- endif:特殊金額適用中の利用履歴がある場合-->
@@ -72,7 +72,7 @@
 						<tr v-if="!!koukou">
 							<td>広告費:{{ koukou.description }}</td>
 							<td class="t_right">{{ koukou.amount }}{{ koukou.unit }}</td>
-							<td class="t_right">{{ koukou.price }}</td>
+							<td class="t_right">{{ koukou.price }}円</td>
 							<td class="t_right">{{ koukou.price * koukou.amount }}</td>
 						</tr>
 						<!-- endif:広告費の利用履歴がある場合-->
@@ -132,7 +132,7 @@
 					<tbody>
 						<tr>
 							<th width="40%" class="t_center">小計</th>
-							<td width="60%" class="t_right">{{ clacNormalPrice() + clacSpecialPrice() + (!!koukou ? koukou.price * koukou.amount : 0) }}円</td>
+							<td width="60%" class="t_right">{{ Math.ceil(clacNormalPrice() + clacSpecialPrice() + (!!koukou ? koukou.price * koukou.amount : 0)) }}円</td>
 						</tr>
 						<tr>
 							<th class="t_center">消費税</th>
@@ -140,7 +140,7 @@
 						</tr>
 						<tr class="f_big">
 							<th class="t_center">合計金額</th>
-							<td class="t_right">{{ Math.ceil((clacNormalPrice() + clacSpecialPrice() + (!!koukou ? koukou.price * koukou.amount : 0)) * 1.1) }}円</td>
+							<td class="t_right">{{ Math.ceil(clacNormalPrice() + clacSpecialPrice() + (!!koukou ? koukou.price * koukou.amount : 0)) + Math.ceil((clacNormalPrice() + clacSpecialPrice() + (!!koukou ? koukou.price * koukou.amount : 0)) / 10) }}円</td>
 						</tr>
 					</tbody>
 				</table>
@@ -173,14 +173,15 @@ export default {
 	  monthLastDay: '',
 	  text1: '',
 	  consultant_kakins: [],
-	  koukous: null
+	  koukous: null,
+	  master: null
     }
   },
   mounted() {
 	this.init()
     this.current_date = moment().format('YYYY年MM月DD日')
 	this.invoiceNumber = moment().format('YYYYMM')
-	this.monthLastDay = moment().endOf('month').format('YYYY年MM月DD日')
+	this.monthLastDay = moment(this.$route.query.date, 'YYYY年MM月').endOf('month').format('YYYY年MM月DD日')
 	this.text1 = moment().format('YYYY年MM月')
   },
   methods: {
@@ -196,6 +197,7 @@ export default {
 			this.consultant_kakins = data.consultant_kakins.filter(item => {
 				return moment(item.created_at).format('YYYYMM') == moment().format('YYYYMM')
 			})
+			this.master = data.master
 
 			setTimeout(() => {
                     this.$refs.html2Pdf.generatePdf()
