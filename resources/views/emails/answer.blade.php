@@ -78,7 +78,9 @@
         {{ $consultant->message_title }}<br/>
         ■相談内容詳細　　　　：<br/>
         {{ $consultant->message_content }}<br/>
+        @if(!is_null($expire_date))
         ■掲載期限　　　　　　：{{ date_format($expire_date, 'Y/m/d') }}<br/>
+        @endif
         <br/>
         ■回答者会社名　　　　：{{ $user->com_name }}<br/>
         ■フリガナ　　　　　　：{{ $user->com_huri_name }}<br/>
