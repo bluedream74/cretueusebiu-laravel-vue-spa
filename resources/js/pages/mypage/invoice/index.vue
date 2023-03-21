@@ -22,11 +22,11 @@
 								<div class="company_data">
 									<dl><dt>応募件数</dt><dd>{{ item.amount }}件</dd></dl>
 									<dl><dt>合計金額</dt><dd>￥{{ parseInt((item.amount * 500) * 1.1) | moneyFormat }}</dd></dl>
-									<!-- <dl><dt>広告件数</dt><dd>2件</dd></dl> -->
-									<!-- <dl><dt>合計金額</dt><dd>￥5,000</dd></dl> -->
+									<dl><dt>広告件数</dt><dd>{{ !!item.koukoku ? item.koukoku.amount : 0 }}件</dd></dl>
+									<dl><dt>合計金額</dt><dd>￥{{ (!!item.koukoku ? item.koukoku.amount * item.koukoku.price : 0) | moneyFormat }}</dd></dl>
 								</div>
 								<div class="common_btn2 arrow">
-									<router-link :to="{ name: 'invoice.pdf', query: { user_id: $store.getters['auth/user'].id, date: item.date, price: (item.amount * 500 * 1.1 + (!!item.koukoku ? item.koukoku.price : 0)), amount: item.amount, koukoku_amount: (!!item.koukoku ? item.koukoku.amount : 0), koukoku_unit: (!!item.koukoku ? item.koukoku.unit : ''), koukoku_price: (!!item.koukoku ? item.koukoku.price: 0) } }" target="_blank" class="browsing_btn table_btns"><span>請求書PDF</span></router-link>
+									<router-link :to="{ name: 'invoice.pdf', query: { user_id: $store.getters['auth/user'].id, date: item.date, price: (item.amount * 500 * 1.1 + (!!item.koukoku ? item.koukoku.price * item.koukoku.amount : 0)), amount: item.amount, koukoku_amount: (!!item.koukoku ? item.koukoku.amount : 0), koukoku_unit: (!!item.koukoku ? item.koukoku.unit : ''), koukoku_price: (!!item.koukoku ? item.koukoku.price: 0) } }" target="_blank" class="browsing_btn table_btns"><span>請求書PDF</span></router-link>
 								</div>
 							</li>
 						</ul>
@@ -60,21 +60,25 @@ export default {
       try {
         const { data } = await axios.post('/api/get_all_invoices')
         let temp = []
-        let temp1 = ['2022年10月', '2022年11月', '2022年12月', '2023年1月', '2023年2月', '2023年3月']
+		let temp1 = []
+        const fromDate = moment('2022-10-01')
+		const now = moment();
+		const monthsDiff = now.diff(fromDate, 'months')
+		for(let i=0; i<monthsDiff+1; i++) {
+			temp1.push(fromDate.clone().add(i, 'months').format('YYYY年MM月'))
+		}
         temp1.forEach(item => {
-          let filter = data.consultant_kakins.filter(it => {
-            return moment(it.created_at).format('YYYY年MM月') == item
-          })
-					let koukoku_filter = data.koukokus.find(it => {
-						return item == it.date
-					})
-					if (filter.length > 0) {
-						temp.push({
-							amount: filter.length,
-							date: item,
-							koukoku: koukoku_filter
-						})
-					}
+			let filter = data.consultant_kakins.filter(it => {
+				return moment(it.created_at).format('YYYY年MM月') == item
+			})
+			let koukoku_filter = data.koukokus.find(it => {
+				return item == it.date
+			})
+			temp.push({
+				amount: filter.length,
+				date: item,
+				koukoku: koukoku_filter
+			})
         })
         this.invoices = temp
       } catch (error) {

@@ -32,7 +32,7 @@
 				<table class="day_area">
 					<tr>
 						<td class="tit">日付:</td>
-						<td class="days_txt"><p>{{ current_date }}</p></td>
+						<td class="days_txt"><p>{{ monthLastDay }}</p></td>
 					</tr>
 					<tr>
 						<td class="tit">請求書番号 :</td>
@@ -116,7 +116,7 @@
 					<tbody>
 						<tr>
 							<th width="30%">振込期日</th>
-							<td width="70%">{{ monthLastDay }}</td>
+							<td width="70%">{{ monthLastDay1 }}</td>
 						</tr>
 						<tr>
 							<th>振込先</th>
@@ -171,6 +171,7 @@ export default {
 	  user: null,
 	  invoiceNumber: '',
 	  monthLastDay: '',
+	  monthLastDay1: '',
 	  text1: '',
 	  consultant_kakins: [],
 	  koukous: null,
@@ -182,6 +183,7 @@ export default {
     this.current_date = moment().format('YYYY年MM月DD日')
 	this.invoiceNumber = moment().format('YYYYMM')
 	this.monthLastDay = moment(this.$route.query.date, 'YYYY年MM月').endOf('month').format('YYYY年MM月DD日')
+	this.monthLastDay1 = moment(this.$route.query.date, 'YYYY年MM月').add(1, 'month').endOf('month').format('YYYY年MM月DD日')
 	this.text1 = moment().format('YYYY年MM月')
   },
   methods: {
@@ -192,10 +194,10 @@ export default {
 			})
 			this.user = data.user_info
 			this.koukou = data.koukous.find(item => {
-				return item.date == moment().format('YYYY年MM月')
+				return item.date == this.$route.query.date
 			})
 			this.consultant_kakins = data.consultant_kakins.filter(item => {
-				return moment(item.created_at).format('YYYYMM') == moment().format('YYYYMM')
+				return moment(item.created_at).format('YYYYMM') == moment(this.$route.query.date, 'YYYY年MM月').format('YYYYMM')
 			})
 			this.master = data.master
 

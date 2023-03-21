@@ -17,7 +17,7 @@
 				<table class="day_area">
 					<tr>
 						<td class="tit">⽇付 :</td>
-						<td class="days_txt">{{ current_date }}</td>
+						<td class="days_txt">{{ $route.query.date }}30⽇</td>
 					</tr>
 				</table>
 				<div class="cam_area fix">
@@ -39,14 +39,14 @@
 						<tr>
 							<td>マッチングシステム利⽤料、{{ $route.query.date }}分</td>
 							<td class="t_right">{{ $route.query.amount }}件</td>
-							<td class="t_right">500</td>
-							<td class="t_right">{{ $route.query.amount * 500 | moneyFormat }}</td>
+							<td class="t_right">500円</td>
+							<td class="t_right">{{ $route.query.amount * 500 | moneyFormat }}円</td>
 						</tr>
-						<tr>
+						<tr v-if="$route.query.koukoku_amount">
 							<td>広告掲載料、{{ $route.query.date }}</td>
 							<td class="t_right">{{ $route.query.koukoku_amount }}{{ $route.query.koukoku_unit }}</td>
-							<td class="t_right">{{ $route.query.koukoku_price }}</td>
-							<td class="t_right">{{ $route.query.koukoku_price }}</td>
+							<td class="t_right">{{ $route.query.koukoku_price | moneyFormat }}円</td>
+							<td class="t_right">{{ $route.query.koukoku_price * $route.query.koukoku_amount | moneyFormat }}円</td>
 						</tr>
 					</tbody>
 				</table>

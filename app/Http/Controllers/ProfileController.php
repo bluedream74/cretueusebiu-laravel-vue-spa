@@ -309,7 +309,7 @@ class ProfileController extends Controller
 
   public function getAllInvoices(Request $request) {
     $consultant_kakins = ConsultantKakin::where('user_id', $request->user()->id)->orderByDesc('created_at')->get();
-    $koukokus = Koukoku::where('user_id', $request->user()->i)->get();
+    $koukokus = Koukoku::where('user_id', $request->user()->id)->get();
 
     return response()->json([
       'consultant_kakins' => $consultant_kakins,
