@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\ConsultantKakin;
+use App\Models\Koukoku;
+use App\Models\Master;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -216,4 +219,26 @@ class ConsultantController extends Controller
       'flag' => true
     ]);
   }
+
+    public function getUserInfo(Request $request) {
+        $user_info = User::where('id', $request->input('user_id'))->first();
+        $available_contents = AvailableContent::where('user_id', $request->input('user_id'))->get();
+        $available_jobs = AvailableJob::where('user_id', $request->input('user_id'))->get();
+        $available_amounts = AvailableAmount::where('user_id', $request->input('user_id'))->get();
+        $available_prices = AvailablePrice::where('user_id', $request->input('user_id'))->get();
+        $consultant_kakins = ConsultantKakin::where('user_id', $request->input('user_id'))->get();
+        $koukous = Koukoku::where('user_id', $request->input('user_id'))->get();
+        $master = Master::first();
+
+        return response()->json([
+            'user_info' => $user_info,
+            'available_contents' => $available_contents,
+            'available_jobs' => $available_jobs,
+            'available_amounts' => $available_amounts,
+            'available_prices' => $available_prices,
+            'consultant_kakins' => $consultant_kakins,
+            'koukous' => $koukous,
+            'master' => $master
+        ]);
+    }
 }

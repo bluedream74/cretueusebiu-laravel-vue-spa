@@ -26,7 +26,7 @@
 									<dl><dt>合計金額</dt><dd>￥{{ (!!item.koukoku ? item.koukoku.amount * item.koukoku.price : 0) | moneyFormat }}</dd></dl>
 								</div>
 								<div class="common_btn2 arrow">
-									<router-link :to="{ name: 'invoice.pdf', query: { user_id: $store.getters['auth/user'].id, date: item.date, price: (item.amount * 500 * 1.1 + (!!item.koukoku ? item.koukoku.price * item.koukoku.amount : 0)), amount: item.amount, koukoku_amount: (!!item.koukoku ? item.koukoku.amount : 0), koukoku_unit: (!!item.koukoku ? item.koukoku.unit : ''), koukoku_price: (!!item.koukoku ? item.koukoku.price: 0) } }" target="_blank" class="browsing_btn table_btns"><span>請求書PDF</span></router-link>
+									<router-link :to="{ name: 'invoice.pdf', query: { user_id: $store.getters['auth/user'].id, date: item.date, price: (item.amount * 500 + (!!item.koukoku ? item.koukoku.price : 0)), amount: item.amount, koukoku_amount: (!!item.koukoku ? item.koukoku.amount : 0), koukoku_unit: (!!item.koukoku ? item.koukoku.unit : ''), koukoku_price: (!!item.koukoku ? item.koukoku.price: 0) } }" target="_blank" class="browsing_btn table_btns"><span>請求書PDF</span></router-link>
 								</div>
 							</li>
 						</ul>
