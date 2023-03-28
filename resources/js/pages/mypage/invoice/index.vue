@@ -78,7 +78,7 @@ export default {
 				amount: filter.length,
 				date: item,
 				koukoku: koukoku_filter,
-                isFuture: moment().isBefore(moment(item, 'YYYY年MM月').startOf('month'))
+                isFuture: moment().isBefore(moment(item, 'YYYY年MM月').endOf('month'))
 			})
         })
         this.invoices = temp
