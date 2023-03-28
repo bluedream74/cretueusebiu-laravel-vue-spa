@@ -33,7 +33,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="format-detection" content="telephone=no">
   <title>補助金活用.COM | 補助金申請のことなら事業者×支援機関マッチングサイト</title>
   <link rel="shortcut icon" href="/asset/favicon.ico">
-  
+
   <link rel="stylesheet" type="text/css" href="/assets/animation.css" media="all" />
 
   @if(str_contains($_SERVER['REQUEST_URI'], '/admin') )
@@ -62,7 +62,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}">
 </head>
+@if(Request::url() == url('/mypage/invoice/pdf'))
+<body>
+@else
 <body class="home">
+@endif
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TZNDQB8"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
