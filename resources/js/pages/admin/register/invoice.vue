@@ -69,7 +69,7 @@ export default {
       let temp = []
       this.user = data.user
       let temp1 = []
-      const fromDate = moment('2022-10-01')
+      const fromDate = moment(data.user.created_at).startOf('month')
       const now = moment();
       const monthsDiff = now.diff(fromDate, 'months')
       console.log(monthsDiff, 'monthsDiff')
