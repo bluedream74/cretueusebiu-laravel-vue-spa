@@ -50,8 +50,8 @@ class MatchingDailyEmail extends Command
         foreach ($users as $user) {
             // ユーザーにマッチングされている案件を取得する
             $available_contents = AvailableContent::where('user_id', $user->id)->get();
-            $available_amounts = AvailableAmount::where('user_id', $request->user()->id)->get();
-            $available_jobs = AvailableJob::where('user_id', $request->user()->id)->get();
+            $available_amounts = AvailableAmount::where('user_id', $user->id)->get();
+            $available_jobs = AvailableJob::where('user_id', $user->id)->get();
             $consultants = Consultant::where('available', 1)->get();
             $filtered = $consultants->filter(function($item) {
                 $consultant = $item->answers->find(function($answer) {
@@ -161,8 +161,10 @@ class MatchingDailyEmail extends Command
                 return Carbon::parse($item->created_at)->isFuture(Carbon::now()->subDay());
             });
 
-            //　MatchingDailyEmailJobを利用して、メールを送信する
-            MatchingDailyEmailJob::dispatch($user, $filtered, $newJobs);
+            if (count($newJobs) > 0) {
+                //　MatchingDailyEmailJobを利用して、メールを送信する
+                MatchingDailyEmailJob::dispatch($user, $filtered, $newJobs);
+            }
         }
     }
 
