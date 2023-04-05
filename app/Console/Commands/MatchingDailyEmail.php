@@ -54,7 +54,7 @@ class MatchingDailyEmail extends Command
             $available_amounts = AvailableAmount::where('user_id', $user->id)->get();
             $available_jobs = AvailableJob::where('user_id', $user->id)->get();
             $consultants = Consultant::where('available', 1)->get();
-            $filtered = $consultants->filter(function($item) {
+            $filtered = $consultants->filter(function($item) use ($user) {
                 if (count($item->answers) == 0) {
                     return true;
                 }
