@@ -8,6 +8,7 @@ use App\Models\Consultant;
 use App\Models\AvailableContent;
 use App\Models\AvailableAmount;
 use App\Models\AvailableJob;
+use App\Models\ConsultantAnswer;
 // Carbonをインポート
 use Carbon\Carbon;
 // MatchingDailyEmailJobをインポート
@@ -57,7 +58,9 @@ class MatchingDailyEmail extends Command
                 if (count($item->answers) == 0) {
                     return true;
                 }
-                $consultant = $item->answers->find(function($answer) {
+                
+                $answers = ConsultantAnswer::where('consultant_id', $item->id)->get();
+                $consultant = $answers->find(function($answer) {
                     return $answer->user_id == $user->id;
                 });
 
