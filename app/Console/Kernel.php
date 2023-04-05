@@ -24,8 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        // 毎日9時に`matching:daily_email`を実行する
+        $schedule->command('matching:daily_email')->dailyAt('09:00');
     }
 
     /**
