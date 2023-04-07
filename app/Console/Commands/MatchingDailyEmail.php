@@ -69,7 +69,7 @@ class MatchingDailyEmail extends Command
             });
 
             $filtered = $filtered->filter(function($item) {
-                return $item->available == 1 && Carbon::parse($item->expired_at).isFuture(Carbon::now());
+                return $item->available == 1 && Carbon::parse($item->expired_at)->isFuture(Carbon::now());
             });
 
             $filtered = $filtered->filter(function($item) {
