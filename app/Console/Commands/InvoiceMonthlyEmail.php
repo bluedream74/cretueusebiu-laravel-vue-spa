@@ -7,6 +7,7 @@ use App\Models\ConsultantKaikin;
 use App\Models\Koukoku;
 use Carbon\Carbon;
 use App\Jobs\InvoiceEmailJob;
+use App\User;
 
 class InvoiceMonthlyEmail extends Command
 {
