@@ -51,7 +51,7 @@ class InvoiceMonthlyEmail extends Command
         $thisMonth25th = Carbon::now()->startOfMonth()->addDays(24);
         $formattedThisMonth25th = $thisMonth25th->format('Y年m月d日');
         foreach ($users as $user) {
-            $kakin = ConsultantKaikin::whereBetween('created_at', [$startOfLastMonth, $endOfLastMonth])->where('user_id', $user->id)->first();
+            $kakin = ConsultantKakin::whereBetween('created_at', [$startOfLastMonth, $endOfLastMonth])->where('user_id', $user->id)->first();
             $koukoku = Koukoku::where('date', $formattedLastMonth)->where('user_id', $user->id)->first();
 
             if (!is_null($kakin) || !is_null($koukoku)) {
