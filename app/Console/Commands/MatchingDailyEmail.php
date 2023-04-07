@@ -62,6 +62,10 @@ class MatchingDailyEmail extends Command
             $available_jobs = $available_jobs->map(function($item) {
                 return $item->job_id;
             })->toArray();
+            $available_prices = AvailablePrice::where('user_id', $user->id)->get();
+            $available_prices = $available_prices->map(function($item) {
+                return $item->price_id;
+            })->toArray();
             $consultants = Consultant::where('available', 1)->get();
             $filtered = $consultants->filter(function($item) use ($user) {
                 $answers = ConsultantAnswer::where('consultant_id', $item->id)->get();
@@ -81,7 +85,7 @@ class MatchingDailyEmail extends Command
                 return $item->available == 1 && Carbon::parse($item->expired_at)->isFuture(Carbon::now());
             });
 
-            $filtered = $filtered->filter(function($item) use ($available_amounts, $available_jobs, $available_contents) {
+            $filtered = $filtered->filter(function($item) use ($available_amounts, $available_jobs, $available_contents, $available_prices) {
                 $confirms = $item->confirms->map(function($confirm) {
                     return $confirm->confirm_id;
                 })->toArray();
