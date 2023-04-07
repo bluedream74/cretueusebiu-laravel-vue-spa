@@ -8,6 +8,7 @@ use App\Models\Consultant;
 use App\Models\AvailableContent;
 use App\Models\AvailableAmount;
 use App\Models\AvailableJob;
+use App\Models\AvailablePrice;
 use App\Models\ConsultantAnswer;
 // Carbonをインポート
 use Carbon\Carbon;
