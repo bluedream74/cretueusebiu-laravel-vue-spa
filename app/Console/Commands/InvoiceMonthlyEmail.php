@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Models\ConsultantKaikin;
+use App\Models\ConsultantKakin;
 use App\Models\Koukoku;
 use Carbon\Carbon;
 use App\Jobs\InvoiceEmailJob;
