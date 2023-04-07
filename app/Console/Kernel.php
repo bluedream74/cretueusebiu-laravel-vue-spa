@@ -26,6 +26,9 @@ class Kernel extends ConsoleKernel
     {
         // 毎日9時に`matching:daily_email`を実行する
         $schedule->command('matching:daily_email')->dailyAt('09:00');
+
+        // 毎月1日9時に`invoice:monthly_email`を実行する
+        $schedule->command('invoice:monthly_email')->monthlyOn(1, '09:00');
     }
 
     /**
