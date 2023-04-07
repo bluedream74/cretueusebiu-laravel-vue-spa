@@ -181,6 +181,7 @@ class MatchingDailyEmail extends Command
                 // 24時間以内のものをFilterする
                 return Carbon::parse($item->created_at)->isFuture(Carbon::now()->subDay());
             });
+            \Log::info($newJobs);
 
             if (count($newJobs) > 0) {
                 \Log::info($user->email.' '.count($newJobs));
