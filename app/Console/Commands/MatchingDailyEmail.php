@@ -123,13 +123,13 @@ class MatchingDailyEmail extends Command
                 });
 
                 $flag1 = false;
-                if (count(intersection($available_contents, $confirms)) > 0) {
+                if (count($this->intersection($available_contents, $confirms)) > 0) {
                     $flag1 = true;
                 }
 
                 $flag = false;
                 foreach($misss as $miss) {
-                    if (count(intersection($available_contents, $miss)) > 0) {
+                    if (count($this->intersection($available_contents, $miss)) > 0) {
                         $flag = true;
                     }
                 }
