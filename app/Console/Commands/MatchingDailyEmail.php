@@ -55,11 +55,12 @@ class MatchingDailyEmail extends Command
             $available_jobs = AvailableJob::where('user_id', $user->id)->get();
             $consultants = Consultant::where('available', 1)->get();
             $filtered = $consultants->filter(function($item) use ($user) {
-                if (count($item->answers) == 0) {
+                $answers = ConsultantAnswer::where('consultant_id', $item->id)->get();
+                $answers_count = ConsultantAnswer::where('consultant_id', $item->id)->count();
+
+                if ($answers_count == 0) {
                     return true;
                 }
-                
-                $answers = ConsultantAnswer::where('consultant_id', $item->id)->get();
                 $consultant = $answers->find(function($answer) {
                     return $answer->user_id == $user->id;
                 });
