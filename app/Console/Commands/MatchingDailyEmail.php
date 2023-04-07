@@ -53,15 +53,15 @@ class MatchingDailyEmail extends Command
             $available_contents = AvailableContent::where('user_id', $user->id)->get();
             $available_contents = $available_contents->map(function($item) {
                 return $item->content_id;
-            });
+            })->toArray();
             $available_amounts = AvailableAmount::where('user_id', $user->id)->get();
             $available_amounts = $available_amounts->map(function($item) {
                 return $item->amount_id;
-            });
+            })->toArray();
             $available_jobs = AvailableJob::where('user_id', $user->id)->get();
             $available_jobs = $available_jobs->map(function($item) {
                 return $item->job_id;
-            });
+            })->toArray();
             $consultants = Consultant::where('available', 1)->get();
             $filtered = $consultants->filter(function($item) use ($user) {
                 $answers = ConsultantAnswer::where('consultant_id', $item->id)->get();
