@@ -41,7 +41,7 @@ class InvoiceEmail extends Mailable
     public function build()
     {
         return $this->from(['address' => 'info@hojyokin-katsuyou.com', 'name' => 'HOZYOKIN'])
-                    ->subject('【補助金活用.COM】'.$month.'のご請求内容のお知らせ')
+                    ->subject('【補助金活用.COM】'.$this->month.'のご請求内容のお知らせ')
                     ->view('emails.invoice')
                     ->with([
                         'user' => $this->user,
@@ -55,7 +55,7 @@ class InvoiceEmail extends Mailable
     public function render()
     {
         return $this->from(['address' => 'info@hojyokin-katsuyou.com', 'name' => 'HOZYOKIN'])
-                    ->subject('【補助金活用.COM】'.$month.'のご請求内容のお知らせ')
+                    ->subject('【補助金活用.COM】'.$this->month.'のご請求内容のお知らせ')
                     ->view('emails.invoice')
                     ->with([
                         'user' => $this->user,
