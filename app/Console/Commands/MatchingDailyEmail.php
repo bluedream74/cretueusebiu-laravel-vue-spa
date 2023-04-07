@@ -72,7 +72,7 @@ class MatchingDailyEmail extends Command
                 return $item->available == 1 && Carbon::parse($item->expired_at)->isFuture(Carbon::now());
             });
 
-            $filtered = $filtered->filter(function($item) {
+            $filtered = $filtered->filter(function($item) use ($available_amounts, $available_jobs, $available_contents) {
                 $confirms = $item->confirms->map(function($confirm) {
                     return $confirm->confirm_id;
                 });
