@@ -180,7 +180,7 @@ class MatchingDailyEmail extends Command
             $newJobs = $filtered->filter(function($item) {
                 // 24時間以内のものをFilterする
                 \Log::info($item->created_at);
-                return Carbon::parse($item->created_at)->isFuture(Carbon::now()->subDay());
+                return Carbon::parse($item->created_at)->gt(Carbon::now()->subDay());
             });
             
 
