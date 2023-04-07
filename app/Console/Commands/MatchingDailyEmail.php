@@ -51,8 +51,17 @@ class MatchingDailyEmail extends Command
         foreach ($users as $user) {
             // ユーザーにマッチングされている案件を取得する
             $available_contents = AvailableContent::where('user_id', $user->id)->get();
+            $available_contents = $available_contents->map(function($item) {
+                return $item->content_id;
+            });
             $available_amounts = AvailableAmount::where('user_id', $user->id)->get();
+            $available_amounts = $available_amounts->map(function($item) {
+                return $item->amount_id;
+            });
             $available_jobs = AvailableJob::where('user_id', $user->id)->get();
+            $available_jobs = $available_jobs->map(function($item) {
+                return $item->job_id;
+            });
             $consultants = Consultant::where('available', 1)->get();
             $filtered = $consultants->filter(function($item) use ($user) {
                 $answers = ConsultantAnswer::where('consultant_id', $item->id)->get();
