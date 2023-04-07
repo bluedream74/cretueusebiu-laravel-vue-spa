@@ -61,7 +61,7 @@ class MatchingDailyEmail extends Command
                 if ($answers_count == 0) {
                     return true;
                 }
-                $consultant = $answers->find(function($answer) use ($user) {
+                $consultant = $answers->first(function($answer) use ($user) {
                     return $answer->user_id == $user->id;
                 });
 
