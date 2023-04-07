@@ -177,14 +177,13 @@ class MatchingDailyEmail extends Command
                 return true;
             });
 
-            \Log::info($filtered);
-
             $newJobs = $filtered->filter(function($item) {
                 // 24時間以内のものをFilterする
                 return Carbon::parse($item->created_at)->isFuture(Carbon::now()->subDay());
             });
 
             if (count($newJobs) > 0) {
+                \Log::info($user->email.' '.count($newJobs));
                 //　MatchingDailyEmailJobを利用して、メールを送信する
                 MatchingDailyEmailJob::dispatch($user, $filtered, $newJobs);
             }
