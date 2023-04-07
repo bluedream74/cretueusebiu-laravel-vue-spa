@@ -84,7 +84,7 @@ class MatchingDailyEmail extends Command
             $filtered = $filtered->filter(function($item) use ($available_amounts, $available_jobs, $available_contents) {
                 $confirms = $item->confirms->map(function($confirm) {
                     return $confirm->confirm_id;
-                });
+                })->toArray();
                 $misss = $item->misss->map(function($miss) {
                     return $miss->miss_id;
                 })->map(function($miss) {
@@ -177,10 +177,10 @@ class MatchingDailyEmail extends Command
                 return Carbon::parse($item->created_at)->isFuture(Carbon::now()->subDay());
             });
 
-            if (count($newJobs) > 0) {
+            // if (count($newJobs) > 0) {
                 //　MatchingDailyEmailJobを利用して、メールを送信する
                 MatchingDailyEmailJob::dispatch($user, $filtered, $newJobs);
-            }
+            // }
         }
     }
 
