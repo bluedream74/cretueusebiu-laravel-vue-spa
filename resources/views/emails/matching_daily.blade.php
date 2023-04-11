@@ -51,8 +51,8 @@
         <br/>
         いつも＜補助金活用.COM＞をご利用いただきありがとうございます。<br/>
         <br/>
-        設定頂いた支援条件とマッチングする事業者相談を新たに{{ count($filtered) }}件公開いたしました。<br/>
-        上記を含め現在{{ count($newJobs) }}件の未確認事業者相談をマイページに掲載しております。<br/>
+        設定頂いた支援条件とマッチングする事業者相談を新たに{{ count($newJobs) }}件公開いたしました。<br/>
+        上記を含め現在{{ count($filtered) }}件の未確認事業者相談をマイページに掲載しております。<br/>
         <br/>
         <a href="https://hojyokin-katsuyou.com/mypage">https://hojyokin-katsuyou.com/mypage</a><br/>
         <br/>
@@ -63,12 +63,10 @@
         <br/>
         ************************マッチング案件一覧****************************<br/>
         <br/>
-        @foreach ($newJobs as $key => $job)
+        @foreach ($newJobs->values() as $key => $job)
         {{ $key + 1 }}/{{count($newJobs)}}件目の新着事業者相談<br/>
         ―――――――――――――――――――――――――――――――――――<br/>
         ■相談者会社名　　　　：{{ $job->com_name }}<br/>
-        ■電話番号　　　　　　：{{ $job->telephone }}<br/>
-        ■メールアドレス　　　：{{ $job->email }}<br/>
         ■担当者氏名　　　　　：{{ $job->tanto_name }}<br/>
         ■相談内容　　　　　　：<br/>
         【使いたい補助金や制度が決まっている方】<br/>
@@ -85,8 +83,6 @@
         @endforeach
         ■相談内容概略　　　　：<br/>
         {{ $job->message_title }}<br/>
-        ■相談内容詳細　　　　：<br/>
-        {{ $job->message_content }}<br/>
         <?php 
             $expire_date = date_create($job->expired_at); 
         ?>
