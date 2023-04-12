@@ -124,9 +124,9 @@ export default {
         const { data } = await axios.post('/admin/get_register_list')
         this.temp = data.registers.filter(item => {
           if (this.search.name != '') {
-            return item.com_name.includes(this.search.name) && (!!this.search.available ? item.available == this.search.available : true)
+            return item.com_name.includes(this.search.name) && (this.search.available != null ? item.available == this.search.available : true)
           } else {
-            return (!!this.search.available ? item.available == this.search.available : true)
+            return (this.search.available != null ? item.available == this.search.available : true)
           }
         })
         this.registers = this.temp.filter((item, index) => {

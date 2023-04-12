@@ -54,10 +54,30 @@ export default {
       description: null,
       amount: null,
       unit: null,
-      price: null
+      price: null,
+      koukoku_id: null
     }
   },
+  mounted() {
+    this.init()
+  },
   methods: {
+    async init() {
+      try {
+        const { data } = await axios.post('/admin/get_koukoku', {
+          user_id: this.$route.query.user_id,
+          date: this.$route.query.date
+        })
+        if (data.koukoku) {
+          this.description = data.koukoku.description
+          this.amount = data.koukoku.amount
+          this.unit = data.koukoku.unit
+          this.price = data.koukoku.price
+          this.koukoku_id = data.koukoku.id
+        }
+      } catch (error) {
+      }
+    },
     async addKoukoku() {
       if (!this.description) {
         this.$swal('', '詳細を入力してください')
@@ -96,7 +116,8 @@ export default {
           description: this.description,
           amount: this.amount,
           unit: this.unit,
-          price: this.price
+          price: this.price,
+          id: this.koukoku_id
         })
         this.$router.back()
       } catch (error) {

@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth.admin:admin'], function () {
     Route::post('/add_koukoku', 'CommonController@addKoukoku');
     Route::post('/get_user_info', 'CommonController@getUserInfo');
     Route::post('/user_info_edit', 'CommonController@userInfoEdit');
+    Route::post('/get_koukoku', 'CommonController@getKoukoku');
 
     // お知らせ
     Route::post('/get_news_list', 'CommonController@getNewsList');
@@ -59,6 +60,7 @@ Route::group(['middleware' => 'auth.admin:admin'], function () {
 });
 
 Route::get('/download_csv', 'CommonController@downloadCSV');
+Route::get('/download_csv_for_answers', 'CommonController@downloadCSVForAnswers');
 Route::get('/download_contact_csv', 'CommonController@downloadContactCSV');
 Route::get('/download_consultants_csv', 'CommonController@downloadConsultantsCSV');
 Route::get('/download_invoice_data', 'CommonController@downloadInvoiceData');

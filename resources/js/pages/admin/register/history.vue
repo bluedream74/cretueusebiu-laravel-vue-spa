@@ -15,64 +15,60 @@
             <p>回答履歴CSV出力</p>
             <div class="months_select">
               <div class="wrap year">
-                <select>
-                  <option value=""></option>
-                  <option value="">2021</option>
-                  <option value="">2020</option>
-                  <option value="">2019</option>
-                  <option value="">2018</option>
+                <select v-model="from.year" @change="changedFromYear">
+                  <option :value="null"></option>
+                  <option :value="2023">2023</option>
+                  <option :value="2022">2022</option>
                 </select>
               </div>
               <span>年</span>
               <div class="wrap month">
-                <select>
-                  <option value=""></option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                  <option value="">4</option>
-                  <option value="">5</option>
-                  <option value="">6</option>
-                  <option value="">7</option>
-                  <option value="">8</option>
-                  <option value="">9</option>
-                  <option value="">10</option>
-                  <option value="">11</option>
-                  <option value="">12</option>
+                <select v-model="from.month">
+                  <option :value="null"></option>
+                  <option :value="1">1</option>
+                  <option :value="2">2</option>
+                  <option :value="3">3</option>
+                  <option :value="4">4</option>
+                  <option :value="5">5</option>
+                  <option :value="6">6</option>
+                  <option :value="7">7</option>
+                  <option :value="8">8</option>
+                  <option :value="9">9</option>
+                  <option :value="10">10</option>
+                  <option :value="11">11</option>
+                  <option :value="12">12</option>
                 </select>
               </div>
               <span>月</span>
               <span>～</span>
               <div class="wrap year">
-                <select>
-                  <option value=""></option>
-                  <option value="">2021</option>
-                  <option value="">2020</option>
-                  <option value="">2019</option>
-                  <option value="">2018</option>
+                <select v-model="to.year" @change="changedToYear">
+                  <option :value="null"></option>
+                  <option :value="2023">2023</option>
+                  <option :value="2022">2022</option>
                 </select>
               </div>
               <span>年</span>
               <div class="wrap month">
-                <select>
-                  <option value=""></option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                  <option value="">4</option>
-                  <option value="">5</option>
-                  <option value="">6</option>
-                  <option value="">7</option>
-                  <option value="">8</option>
-                  <option value="">9</option>
-                  <option value="">10</option>
-                  <option value="">11</option>
-                  <option value="">12</option>
+                <select v-model="to.month">
+                  <option :value="null"></option>
+                  <option :value="1">1</option>
+                  <option :value="2">2</option>
+                  <option :value="3">3</option>
+                  <option :value="4">4</option>
+                  <option :value="5">5</option>
+                  <option :value="6">6</option>
+                  <option :value="7">7</option>
+                  <option :value="8">8</option>
+                  <option :value="9">9</option>
+                  <option :value="10">10</option>
+                  <option :value="11">11</option>
+                  <option :value="12">12</option>
                 </select>
               </div>
               <span>月</span>
             </div>
-            <a href="javascript:void(0)" class="btn_blue" download="">ダウンロード</a>
+            <a @click="downloadCSV" class="btn_blue">ダウンロード</a>
           </div>
         </form>
         <div class="table_wrap">
@@ -110,7 +106,15 @@ export default {
   data() {
     return {
       histories: [],
-      temp: []
+      temp: [],
+      from: {
+        year: null,
+        month: null
+      },
+      to: {
+        year: null,
+        month: null
+      }
     }
   },
   methods: {
@@ -132,6 +136,44 @@ export default {
         return index >= (page - 1) * 10 && index < (page * 10)
       })
     },
+
+    changedFromYear(event) {
+      if (!!event.target.value) {
+        this.from.month = 1
+      }
+    },
+
+    changedToYear(event) {
+      if (!!event.target.value) {
+        this.to.month = 12
+      }
+    },
+
+    downloadCSV() {
+      let from = null
+      let to = null
+      if (this.from.year) {
+        from = this.from.year + this.from.month
+      }
+      if (this.to.year) {
+        to = this.to.year + this.to.month
+      }
+      
+      const answers = this.temp.filter(item => {
+        if (from && to) {
+          return moment(item.created_at).format('YYYYMM') >= from && moment(item.created_at).format('YYYYMM') <= to
+        } else if (from) {
+          return moment(item.created_at).format('YYYYMM') >= from
+        } else if (to) {
+          return moment(item.created_at).format('YYYYMM') <= to
+        } else {
+          return true
+        }
+      }).map(item => item.id)
+
+      let newWindow = window.open();
+      newWindow.location = 'https://' + window.location.hostname + `/admin/download_csv_for_answers?answers=${JSON.stringify(answers)}`;
+    }
   }
 }
 </script>

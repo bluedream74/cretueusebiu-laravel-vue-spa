@@ -193,6 +193,38 @@ class CommonController extends BaseController
       fclose($stream);
     }
 
+    public function downloadCSVForAnswers(Request $request) {
+      $data = $request->all();
+      $targets = json_decode($data['answers']);
+
+      $temp = [
+        ['ID', '回答日', '事業者名']
+      ];
+      foreach($targets as $answer_id) {
+        $answer = ConsultantAnswer::where('id', $answer_id)->first();
+        $consultant = Consultant::where('id', $answer->consultant_id)->first();
+        array_push($temp, [$answer_id, $answer->created_at, $consultant->com_name]);
+      }
+
+      header('Content-Type: text/plain;charset=UTF-8');
+      $stream = fopen('../storage/test.csv', 'w');
+      foreach ($temp as $csvRecord) {
+        fputcsv($stream, $csvRecord);
+      }
+      fclose($stream);
+      $stream = fopen('../storage/test.csv', 'r');
+      header("Content-Type: application/octet-stream");
+
+      $now = new Carbon();
+      $filename = 'Answer-' . $now->format('Ymdhis') . '.csv';
+      header("Content-Disposition: attachment; filename=" . $filename);
+      while (!feof($stream)) {
+        $content = fread($stream, 1024);
+        echo mb_convert_encoding($content, 'SJIS', 'UTF-8');
+      }
+      fclose($stream);
+    }
+
     public function downloadConsultantsCSV(Request $request) {
       $data = $request->all();
       $targets = json_decode($data['consultants']);
@@ -316,7 +348,7 @@ class CommonController extends BaseController
         foreach($others as $other) {
           $others_str .= $SYSTEM_OTHER[$other->other_id].',';
         }
-        array_push($temp, [$consultant->id, $consultant->available == 1 ? '公開' : '非公開', $consultant->created_at, $confirms_str.' '.$misss_str.' '.$others_str, $consultant->com_name, $JOBS[$consultant->job], $consultant->prefecture, $AMOUNTS[$consultant->amount], $PRICES[$consultant->income], $consultant->telephone, $consultant->email, $consultant->tanto_name, $consultant->role_name, $SUPPORT_PRICES[$consultant->price], $consultant->message_title , $consultant->message_content, $consultant->expired_at]);
+        array_push($temp, [$consultant->id, $consultant->available == 1 ? '公開' : '非公開', $consultant->created_at, $confirms_str.' '.$misss_str.' '.$others_str, $consultant->com_name, is_null($consultant->job) ? '' : $JOBS[$consultant->job], $consultant->prefecture, is_null($consultant->amount) ? '' : $AMOUNTS[$consultant->amount], is_null($consultant->income) ? '' : $PRICES[$consultant->income], $consultant->telephone, $consultant->email, $consultant->tanto_name, $consultant->role_name, is_null($consultant->price) ? '' : $SUPPORT_PRICES[$consultant->price], $consultant->message_title , $consultant->message_content, $consultant->expired_at]);
       }
 
       header('Content-Type: text/plain;charset=UTF-8');
@@ -350,14 +382,24 @@ class CommonController extends BaseController
     }
 
     public function addKoukoku(Request $request) {
-      Koukoku::create([
-        'user_id' => $request->input('user_id'),
-        'date' => $request->input('date'),
-        'description' => $request->input('description'),
-        'amount' => $request->input('amount'),
-        'unit' => $request->input('unit'),
-        'price' => $request->input('price'),
-      ]);
+      if(is_null($request->input('id'))) {
+        Koukoku::create([
+          'user_id' => $request->input('user_id'),
+          'date' => $request->input('date'),
+          'description' => $request->input('description'),
+          'amount' => $request->input('amount'),
+          'unit' => $request->input('unit'),
+          'price' => $request->input('price'),
+        ]);
+      } else {
+        $koukoku = Koukoku::where('id', $request->input('id'))->first();
+        $koukoku->date = $request->input('date');
+        $koukoku->description = $request->input('description');
+        $koukoku->amount = $request->input('amount');
+        $koukoku->unit = $request->input('unit');
+        $koukoku->price = $request->input('price');
+        $koukoku->save();
+      }
 
       return response()->json([
         'flag' => true
@@ -383,6 +425,13 @@ class CommonController extends BaseController
         'consultant_kakins' => $consultant_kakins,
         'koukous' => $koukous,
         'master' => $master
+      ]);
+    }
+
+    public function getKoukoku(Request $request) {
+      $koukoku = Koukoku::where('user_id', $request->input('user_id'))->where('date', $request->input('date'))->first();
+      return response()->json([
+        'koukoku' => $koukoku
       ]);
     }
 
