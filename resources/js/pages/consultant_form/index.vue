@@ -415,6 +415,7 @@ export default {
     }
   },
 	created() {
+		this.expired_at = moment().add(1, 'month').format('YYYY-MM-DD')
 		window.document.title = '事業者相談フォーム | 補助金活用.COM'
 		$('meta[name=description]').attr('content','事業者×支援機関マッチングサイト補助金活用.COMの「事業者相談フォーム」ページです。事業者として相談をするする場合、本フォームより「事業者相談入力欄」を入力してください。支援機関新規登録、その他のお問い合わせは専用のフォームからお問い合わせください。')
 		$('meta[name=og:description]').attr('content','事業者×支援機関マッチングサイト補助金活用.COMの「事業者相談フォーム」ページです。事業者として相談をするする場合、本フォームより「事業者相談入力欄」を入力してください。支援機関新規登録、その他のお問い合わせは専用のフォームからお問い合わせください。')

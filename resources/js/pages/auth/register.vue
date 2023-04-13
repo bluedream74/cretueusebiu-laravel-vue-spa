@@ -642,6 +642,11 @@ export default {
 				return
 			}
 
+			if (this.password.length < 8) {
+				this.$swal('', 'マイページパスワードは8文字以上で入力してください')
+				return
+			}
+
 			if (this.password.match(/^[^\x01-\x7E\uFF61-\uFF9F]+$/)) {
 				this.$swal('', 'マイページパスワードは半角大文字アルファベット、半角小文字アルファベット、半角数字で入力してください')
 				return

@@ -112,6 +112,12 @@
               </dd>
             </dl>
             <dl>
+              <dt>FAX</dt>
+              <dd>
+                <input type="text" class="w_200" v-model="consultant.fax">
+              </dd>
+            </dl>
+            <dl>
               <dt>メールアドレス<span>必須</span></dt>
               <dd>
                 <input type="text" v-model="consultant.email">
@@ -121,6 +127,12 @@
               <dt>担当名<span>必須</span></dt>
               <dd>
                 <input type="text" v-model="consultant.tanto_name">
+              </dd>
+            </dl>
+            <dl>
+              <dt>部署名<span>必須</span></dt>
+              <dd>
+                <input type="text" v-model="consultant.department_name">
               </dd>
             </dl>
             <dl>
@@ -259,6 +271,11 @@ export default {
 				return
 			}
 
+      if (!this.consultant.fax || this.consultant.fax == '') {
+				this.$swal('', 'FAXを入力してください')
+				return
+			}
+
 			if (!this.consultant.email || this.consultant.email == '') {
 				this.$swal('', 'メールアドレスを入力してください')
 				return
@@ -271,6 +288,11 @@ export default {
 
 			if (!this.consultant.tanto_name || this.consultant.tanto_name == '') {
 				this.$swal('', '担当者氏名を入力してください')
+				return
+			}
+
+      if (!this.consultant.department_name || this.consultant.department_name == '') {
+				this.$swal('', '部署名を入力してください')
 				return
 			}
 

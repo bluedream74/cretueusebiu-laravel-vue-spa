@@ -90,6 +90,12 @@
             </dd>
           </dl>
           <dl>
+            <dt>FAX<span>必須</span></dt>
+            <dd>
+              <p>{{ fax }}</p>
+            </dd>
+          </dl>
+          <dl>
             <dt>メールアドレス<span>必須</span></dt>
             <dd>
               <p>{{ email }}</p>
@@ -105,6 +111,12 @@
             <dt>役職<span>必須</span></dt>
             <dd>
               <p>{{ role_name }}</p>
+            </dd>
+          </dl>
+          <dl>
+            <dt>部署名<span>必須</span></dt>
+            <dd>
+              <p>{{ department_name }}</p>
             </dd>
           </dl>
           <dl>

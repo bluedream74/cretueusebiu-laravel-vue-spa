@@ -319,7 +319,7 @@ export default {
 				return
 			}
 
-			if (!this.kind) {
+			if (this.kind == null) {
 				this.$swal('', '種別を選択してください')
 				return
 			}
@@ -329,7 +329,7 @@ export default {
 				return
 			}
 
-			if (!this.prefecture) {
+			if (this.prefecture == null) {
 				this.$swal('', '会社所在地の都道府県を選択してください')
 				return
 			}
