@@ -15,6 +15,7 @@ class BasicAuthMiddleware
      */
     public function handle($request, Closure $next)
     {
+        return $next($request);
         $username = $request->getUser();
         $password = $request->getPassword();
 
