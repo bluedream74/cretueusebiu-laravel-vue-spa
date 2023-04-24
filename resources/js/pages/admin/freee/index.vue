@@ -17,22 +17,22 @@
                 <select class="w_150" v-model="year">
                   <option value=""></option>
                   <option value="2022">2022</option>
-                  <option value="2022">2023</option>
+                  <option value="2023">2023</option>
                 </select>
               </div>
               <span>年</span>
               <div class="wrap month">
                 <select class="w_100" v-model="month">
                   <option :value="null"></option>
-                  <option value="01">1</option>
-                  <option value="02">2</option>
-                  <option value="03">3</option>
-                  <option value="04">4</option>
-                  <option value="05">5</option>
-                  <option value="06">6</option>
-                  <option value="07">7</option>
-                  <option value="08">8</option>
-                  <option value="09">9</option>
+                  <option value="01" v-if="year != '2022'">1</option>
+                  <option value="02" v-if="year != '2022'">2</option>
+                  <option value="03" v-if="year != '2022'">3</option>
+                  <option value="04" v-if="year != '2022'">4</option>
+                  <option value="05" v-if="year != '2022'">5</option>
+                  <option value="06" v-if="year != '2022'">6</option>
+                  <option value="07" v-if="year != '2022'">7</option>
+                  <option value="08" v-if="year != '2022'">8</option>
+                  <option value="09" v-if="year != '2022'">9</option>
                   <option value="10">10</option>
                   <option value="11">11</option>
                   <option value="12">12</option>
@@ -47,7 +47,7 @@
           </div>
           <div class="select_wrap">
             <p>取引先情報CSV出力</p>
-            <a @click="downloadInovice" class="btn_blue">ダウンロード</a>
+            <a @click="downloadWithTransaction" class="btn_blue">ダウンロード</a>
           </div>
         </form>
       </div>
@@ -71,6 +71,14 @@ export default {
         time = this.year + '/' + this.month
         let newWindow = window.open();
         newWindow.location = 'https://' + window.location.hostname + `/admin/download_invoice_data?year=${this.year}&month=${this.month}`;
+      } catch (error) {
+      }
+    },
+    async downloadWithTransaction() {
+      try {
+        time = this.year + '/' + this.month
+        let newWindow = window.open();
+        newWindow.location = 'https://' + window.location.hostname + `/admin/download_with_transaction_data?year=${this.year}&month=${this.month}`;
       } catch (error) {
       }
     }

@@ -64,3 +64,4 @@ Route::get('/download_csv_for_answers', 'CommonController@downloadCSVForAnswers'
 Route::get('/download_contact_csv', 'CommonController@downloadContactCSV');
 Route::get('/download_consultants_csv', 'CommonController@downloadConsultantsCSV');
 Route::get('/download_invoice_data', 'CommonController@downloadInvoiceData');
+Route::get('/download_with_transaction_data', 'CommonController@downloadWithTransactionData');

@@ -6,10 +6,10 @@
           <ul>
             <li><router-link :to="{ name: 'admin.dashboard' }">HOME</router-link></li>
             <li><router-link :to="{ name: 'admin.register' }">支援機関管理一覧</router-link></li>
-            <li><span>AA株式会社 回答履歴</span></li>
+            <li><span>{{ user ? user.com_name : '' }} 回答履歴</span></li>
           </ul>
         </div>
-        <h2 class="h_style03"><span>AA株式会社 回答履歴一覧</span></h2>
+        <h2 class="h_style03"><span>{{ user ? user.com_name : '' }} 回答履歴一覧</span></h2>
         <form class="graph_form mt10">
           <div class="select_wrap">
             <p>回答履歴CSV出力</p>
@@ -114,7 +114,8 @@ export default {
       to: {
         year: null,
         month: null
-      }
+      },
+      user: null
     }
   },
   methods: {
@@ -123,6 +124,7 @@ export default {
         const { data } = await axios.post('/admin/get_register_history', {
           id: this.$route.query.user_id
         })
+        this.user = data.user
         this.temp = data.histories
         this.histories = this.temp.filter((item, index) => {
           return index < 10

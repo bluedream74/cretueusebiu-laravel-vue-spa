@@ -37,9 +37,10 @@ class CommonController extends BaseController
 
     public function getRegisterHistory(Request $request) {
       $histories = ConsultantAnswer::where('user_id', $request->input('id'))->with('consultant')->get();
-
+      $user = User::where('id', $request->input('id'))->first();
       return response()->json([
-        'histories' => $histories
+        'histories' => $histories,
+        'user' => $user
       ]);
     }
 
@@ -325,7 +326,7 @@ class CommonController extends BaseController
       ];
 
       $temp = [
-        ['ID', '公開・非公開', '登録日時', '相談内容', '会社名', '業種', '会社所在地', '従業員規模', '年商', '電話番号', 'メールアドレス', '担当名', '役職', '投資予定額', '相談内容概略', '相談内容詳細', '掲載期限']
+        ['ID', '公開・非公開', '登録日時', '相談内容', '会社名', '業種', '会社所在地', '従業員規模', '年商', '電話番号', 'FAX', 'メールアドレス', '担当名', '役職', '部署名', '投資予定額', '相談内容概略', '相談内容詳細', '掲載期限']
       ];
 
       foreach($targets as $consultant_id) {
@@ -805,6 +806,39 @@ class CommonController extends BaseController
       }
       fclose($stream);
       $stream = fopen('../storage/請求情報CSV.csv', 'r');
+      header("Content-Type: application/octet-stream");
+
+      $now = new Carbon();
+      $filename = 'Contact-' . $now->format('Ymdhis') . '.csv';
+      header("Content-Disposition: attachment; filename=" . $filename);
+      while (!feof($stream)) {
+        $content = fread($stream, 1024);
+        echo mb_convert_encoding($content, 'SJIS', 'UTF-8');
+      }
+      fclose($stream);
+    }
+
+    public function downloadWithTransactionData(Request $request) {
+      $data = $request->all();
+      $users = User::whereYear('created_at', '=', $data['year'])->whereMonth('created_at', $data['month'])->get();
+
+      $temp = [
+        ['取引先コード', '名前（通称）', 'ショートカット1', 'ショートカット2', '正式名称（帳票出力時に使用される名称）', 'カナ名称', '敬称', '事業所種別', '地域', '郵便番号', '都道府県', '市区町村・番地', '建物名・部屋番号など', '電話番号', '営業担当者名', '営業担当者メールアドレス', '請求書送付方法', '銀行名', '銀行名（カナ）', '銀行番号', '支店名', '支店名（カナ）', '支店番号', '口座種別', '口座番号', '受取人名', '受取人名（カナ）', '入力候補']
+      ];
+
+      foreach($users as $user) {
+        array_push($temp, [
+          '', $user->com_name, '', '', $user->com_name, $user->com_huri_name, '', $user->is_personal == 1 ? '個人事業主' : '法人', '国内', $user->zipcode, $user->prefecture, $user->city, $user->building, $user->telephone, $user->tanto_name, $user->email, '', '', '', '', '', '', '', '', '', '', '', '使用する'
+        ]);
+      }
+
+      header('Content-Type: text/plain;charset=UTF-8');
+      $stream = fopen('../storage/取引先情報CSV.csv', 'w');
+      foreach ($temp as $csvRecord) {
+        fputcsv($stream, $csvRecord);
+      }
+      fclose($stream);
+      $stream = fopen('../storage/取引先情報CSV.csv', 'r');
       header("Content-Type: application/octet-stream");
 
       $now = new Carbon();
