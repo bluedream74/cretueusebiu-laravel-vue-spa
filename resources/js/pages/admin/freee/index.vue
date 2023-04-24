@@ -66,21 +66,16 @@ export default {
     }
   },
   methods: {
-    async downloadInovice() {
-      try {
+    downloadInovice() {
         time = this.year + '/' + this.month
         let newWindow = window.open();
         newWindow.location = 'https://' + window.location.hostname + `/admin/download_invoice_data?year=${this.year}&month=${this.month}`;
-      } catch (error) {
-      }
+    
     },
-    async downloadWithTransaction() {
-      try {
+    downloadWithTransaction() {
         time = this.year + '/' + this.month
         let newWindow = window.open();
         newWindow.location = 'https://' + window.location.hostname + `/admin/download_with_transaction_data?year=${this.year}&month=${this.month}`;
-      } catch (error) {
-      }
     }
   }
 }
