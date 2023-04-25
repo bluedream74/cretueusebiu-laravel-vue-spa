@@ -244,19 +244,19 @@ export default {
 						return false
 					}
 
-					if (available_amounts.includes(item.amount)) {
+					if (available_amounts.includes(item.amount) || item.amount == null) {
 						flag1 = true
 					} else {
 						return false
 					}
 
-					if (available_jobs.includes(item.job)) {
+					if (available_jobs.includes(item.job) || item.job == null) {
 						flag1 = true
 					} else {
 						return false
 					}
 
-					if (available_prices.includes(item.price)) {
+					if (available_prices.includes(item.price) || item.price == null) {
 						flag1 = true
 					} else {
 						return false
