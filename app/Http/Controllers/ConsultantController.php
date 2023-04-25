@@ -28,6 +28,7 @@ use Carbon\Carbon;
 use App\Jobs\EmailVerification;
 use App\Jobs\ConsultantEmailJob;
 use App\Jobs\ContactFinishEmailJob;
+use App\Jobs\ContactEmailJob;
 use App\Jobs\PasswordReset;
 use App\Jobs\AnswerEmailJob;
 use App\Jobs\AnswerForConsEmailJob;
@@ -200,6 +201,7 @@ class ConsultantController extends Controller
     ]);
 
     try {
+      ContactEmailJob::dispatch($request->input('content'), $request->input('email'), $request->input('name'));
       ContactFinishEmailJob::dispatch($contact);
     } catch (Exception $e) {
       return false;
