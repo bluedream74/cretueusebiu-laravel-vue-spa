@@ -23,8 +23,8 @@
 									<dl><dt>都道府県</dt><dd>{{ item.prefecture }}</dd></dl>
 									<dl><dt>業種</dt><dd>{{ JOBS[item.job] }}</dd></dl>
 									<dl><dt>年商</dt><dd>{{ PRICES[item.income] }}</dd></dl>
-									<dl><dt>従業員規模</dt><dd>{{ AMOUNTS[item.amount] }}</dd></dl>
-									<dl><dt>投資予算額</dt><dd>{{ SUPPORT_PRICES[item.price] }}</dd></dl>
+									<dl><dt>従業員規模</dt><dd>{{ item.amount != null ? AMOUNTS[item.amount] : '未定' }}</dd></dl>
+									<dl><dt>投資予算額</dt><dd>{{ item.price != null ? SUPPORT_PRICES[item.price] : '未定' }}</dd></dl>
 									<dl class="overview"><dt>概要</dt><dd>{{ item.message_title }}</dd></dl>
 								</div>
 								<div class="common_btn2 arrow">
