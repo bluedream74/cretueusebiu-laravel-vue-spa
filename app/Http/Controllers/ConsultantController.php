@@ -201,7 +201,7 @@ class ConsultantController extends Controller
     ]);
 
     try {
-      ContactEmailJob::dispatch($request->input('content'), $request->input('email'), $request->input('name'));
+      ContactEmailJob::dispatch($request->input('content'), $request->input('email'), $request->input('name'), $request->input('huri_name'), $request->input('telephone'), $request->input('fax'));
       ContactFinishEmailJob::dispatch($contact);
     } catch (Exception $e) {
       return false;

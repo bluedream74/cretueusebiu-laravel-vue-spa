@@ -18,6 +18,9 @@ class ContactEmailJob implements ShouldQueue
     private $content;
     private $email;
     private $name;
+    private $huri_name;
+    private $telephone;
+    private $fax;
 
     /**
      * Create a new job instance.
@@ -27,12 +30,18 @@ class ContactEmailJob implements ShouldQueue
     public function __construct(
         $content,
         $email,
-        $name
+        $name,
+        $huri_name,
+        $telephone,
+        $fax
     )
     {
         $this->content = $content;
         $this->email = $email;
         $this->name = $name;
+        $this->huri_name = $huri_name;
+        $this->telephone = $telephone;
+        $this->fax = $fax;
     }
 
     /**

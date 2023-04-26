@@ -15,16 +15,22 @@ class ContactEmail extends Mailable
     private $content;
     private $email;
     private $name;
+    private $huri_name;
+    private $telephone;
+    private $fax;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($content, $email, $name)
+    public function __construct($content, $email, $name, $huri_name, $telephone, $fax)
     {
         $this->content = $content;
         $this->email = $email;
         $this->name = $name;
+        $this->huri_name = $huri_name;
+        $this->telephone = $telephone;
+        $this->fax = $fax;
     }
 
     /**
@@ -35,22 +41,30 @@ class ContactEmail extends Mailable
     public function build()
     {
         return $this->from(['address' => $this->email, 'name' => $this->name])
-                    ->subject('NIZIMARI　問い合わせ')
+                    ->subject('【お問い合わせ】ホームページより受付')
                     ->view('emails.contact')
                     ->with([
                         'content' => $this->content,
-                        'name' => $this->name
+                        'name' => $this->name,
+                        'huri_name' => $this->huri_name,
+                        'telephone' => $this->telephone,
+                        'fax' => $this->fax,
+                        'email' => $this->email
                     ]);
     }
 
     public function render()
     {
-        return $this->from(['address' => $this->email, 'name' => $this->nam])
-                    ->subject('NIZIMARI　問い合わせ')
+        return $this->from(['address' => $this->email, 'name' => $this->name])
+                    ->subject('【お問い合わせ】ホームページより受付')
                     ->view('emails.contact')
                     ->with([
-                      'content' => $this->content,
-                      'name' => $this->name
+                        'content' => $this->content,
+                        'name' => $this->name,
+                        'huri_name' => $this->huri_name,
+                        'telephone' => $this->telephone,
+                        'fax' => $this->fax,
+                        'email' => $this->email
                     ]);
     }
 }
