@@ -40,7 +40,7 @@ class ContactEmail extends Mailable
      */
     public function build()
     {
-        return $this->from(['address' => $this->email, 'name' => $this->name])
+        return $this->from(['address' => 'info@hojyokin-katsuyou.com', 'name' => 'HOZYOKIN'])
                     ->subject('【お問い合わせ】ホームページより受付')
                     ->view('emails.contact')
                     ->with([
@@ -55,7 +55,7 @@ class ContactEmail extends Mailable
 
     public function render()
     {
-        return $this->from(['address' => $this->email, 'name' => $this->name])
+        return $this->from(['address' => 'info@hojyokin-katsuyou.com', 'name' => 'HOZYOKIN'])
                     ->subject('【お問い合わせ】ホームページより受付')
                     ->view('emails.contact')
                     ->with([
