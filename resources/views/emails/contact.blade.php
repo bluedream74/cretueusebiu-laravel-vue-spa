@@ -6,7 +6,7 @@
 	<div class="col-md-12 col-sm-12 notification-title">
 		下記のとおり、お問い合わせがありました。<br/>
 		<br/>
-		送信日時：{{ date_format($contact->created_at, 'Y/m/d H:i:s') }}<br/>
+		送信日時：{{ date('Y/m/d H:i:s') }}<br/>
 		―――――――――――――――――――――――――――――――――――<br/>
 		■お名前　　　　　：{{$name}}<br/>
 		■フリガナ　　　　：{{$huri_name}}<br/>
