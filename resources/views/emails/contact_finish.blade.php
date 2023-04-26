@@ -10,7 +10,7 @@
     お送りいただきました内容は以下になります。<br/>
     <br/>
     送信日時：{{ date_format($contact->created_at, 'Y/m/d H:i:s') }}<br/>
-    ―――――――――――――――――――――――――――――――――――
+    ―――――――――――――――――――――――――――――――――――<br/>
     ■お名前　　　　　：{{ $contact->name }}<br/>
     ■フリガナ　　　　：{{ $contact->huri_name }}<br/>
     ■メールアドレス　：{{ $contact->email }}<br/>
