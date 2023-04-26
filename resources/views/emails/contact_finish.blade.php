@@ -26,10 +26,10 @@
     <br/>
     **********************************************************************<br/>
     <br/><br/>
-    補助金活用.COM　株式会社八咲
-    eMAIL:info@hojyokin-katsuyou.com
-    URL:http://hojyokin-katsuyou.com/
-
+    補助金活用.COM　株式会社八咲<br/>
+    eMAIL:info@hojyokin-katsuyou.com<br/>
+    URL:http://hojyokin-katsuyou.com/<br/>
+    <br/>
     **********************************************************************
 	</div>
 </div>
