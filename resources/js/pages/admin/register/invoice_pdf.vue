@@ -6,7 +6,7 @@
             :enable-download="true"
             :preview-modal="true"
             :paginate-elements-by-height="1400"
-            filename="領収書"
+            filename="御請求書"
             :pdf-quality="2"
             :manual-pagination="false"
             pdf-format="a4"
