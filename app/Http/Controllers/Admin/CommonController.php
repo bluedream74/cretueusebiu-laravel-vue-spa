@@ -799,7 +799,7 @@ class CommonController extends BaseController
       ];
       foreach($users as $user) {
         // Koukokuのdateは'YYYY/MM/DD'の形式ですけど$data['year']と$data['month']に該当するやつを取得
-        $koukoku = Koukoku::where('user_id', $user->id)->where('date', $data['year'] . $data['month'])->first();
+        $koukoku = Koukoku::where('user_id', $user->id)->where('date', $data['year'] .'年'. $data['month'].'月')->first();
         $current_end_date = Carbon::createFromDate($data['year'], $data['month'], 1)->endOfMonth()->format('Y/m/d');
         $next_end_date = Carbon::createFromDate($data['year'], $data['month'], 1)->addMonth()->endOfMonth()->format('Y/m/d');
         $kakins = ConsultantKakin::where('user_id', $user->id)->whereYear('created_at', '=', $data['year'])->whereMonth('created_at', $data['month'])->get();
