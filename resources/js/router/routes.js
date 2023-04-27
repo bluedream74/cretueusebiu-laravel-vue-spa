@@ -21,6 +21,7 @@ export default [
 
   // 問い合わせ
   { path: '/contact', name: 'contact', component: page('contact/index.vue') },
+  { path: '/about', name: 'about', component: page('about.vue') },
   { path: '/contact/check', name: 'contact.check', component: page('contact/check.vue') },
   { path: '/contact/thanks', name: 'contact.thanks', component: page('contact/thanks.vue') },
 
