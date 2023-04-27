@@ -42,7 +42,7 @@
 									</ul>
 								</dd></dl>
 								<dl><dt>相談内容概略</dt><dd>{{ consultant.message_title }}</dd></dl>
-								<dl><dt>相談内容詳細</dt><dd>{{ consultant.message_description }}</dd></dl>
+								<dl><dt>相談内容詳細</dt><dd>{{ consultant.message_content }}</dd></dl>
 								<dl><dt>回答</dt><dd>
 									<div class="form_el">{{ !!calcAnswer() ? calcAnswer().answer : '' }}</div>
 								</dd></dl>
