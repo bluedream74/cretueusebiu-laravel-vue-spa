@@ -18,7 +18,7 @@ class BasicAuthMiddleware
     {
         $url = $request->url();
 
-        if (Str::startsWith($url, '/admin')) {
+        if (str_contains($url, '/admin')) {
             $username = $request->getUser();
             $password = $request->getPassword();
 
