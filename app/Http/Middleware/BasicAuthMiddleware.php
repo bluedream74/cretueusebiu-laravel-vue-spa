@@ -15,7 +15,8 @@ class BasicAuthMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        // URLが/adminで始まる場合のみBasic認証を実行
+    if (strpos($request->url(), '/admin') === 0) {
         $username = $request->getUser();
         $password = $request->getPassword();
 
@@ -27,5 +28,8 @@ class BasicAuthMiddleware
             header('WWW-Authenticate: Basic realm="Sample Private Page"'),
             header('Content-Type: text/plain; charset=utf-8')
         ]);
+    }
+
+    return $next($request);
     }
 }
