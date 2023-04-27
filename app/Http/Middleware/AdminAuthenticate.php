@@ -9,14 +9,14 @@ class AdminAuthenticate
 {
     public function handle($request, Closure $next)
     {
-        if (!Auth::guard('admin')->check()) {
-            return redirect("/admin/login");
-        }
-
         $username = $request->getUser();
         $password = $request->getPassword();
 
-        if ($username == 'dd' && $password == 'test') {
+        if ($username == 'ID：admin_hojyokin' && $password == 'zM8kafZ3') {
+            if (!Auth::guard('admin')->check()) {
+                return redirect("/admin/login");
+            }
+            
             return $next($request);
         }
 
