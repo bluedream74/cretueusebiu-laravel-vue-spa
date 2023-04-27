@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Str;
 
 class BasicAuthMiddleware
 {
@@ -17,7 +18,7 @@ class BasicAuthMiddleware
     {
         $url = $request->url();
 
-        if (starts_with($url, '/admin')) {
+        if (Str::startsWith($url, '/admin')) {
             $username = $request->getUser();
             $password = $request->getPassword();
 
