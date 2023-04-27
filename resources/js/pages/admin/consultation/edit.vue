@@ -167,7 +167,7 @@
             <dl>
               <dt>掲載期限<span>必須</span></dt>
               <dd>
-                <p>{{ consultant.expired_at | dateFormat }}</p>
+                <datepicker v-model="consultant.expired_at" :language="ja" format="yyyy/MM/dd"></datepicker>
               </dd>
             </dl>
             <div class="submit_wrap">
@@ -180,6 +180,8 @@
   </div>
 </template>
 <script>
+import Datepicker from 'vuejs-datepicker';
+import {ja} from 'vuejs-datepicker/dist/locale'
 import moment from 'moment'
 var postal_code = require('japan-postal-code')
 import { JOBS, SYSTEM_OTHER, SYSTEM_MISS, SYSTEM_CONFIRM, AMOUNTS, PRICES, PREFECTURES, SUPPORT_PRICES } from '../../../const'
@@ -201,7 +203,11 @@ export default {
       system_confirms: [],
 			system_misss: [],
 			system_others: [],
+      ja: ja
     }
+  },
+  components: {
+    Datepicker
   },
   mounted() {
     this.init()
@@ -213,6 +219,7 @@ export default {
           id: this.$route.query.id
         })
         this.consultant = data.consultant
+        this.consultant.expired_at = !!data.consultant.expired_at ? moment(data.consultant.expired_at, 'YYYY-MM-DD HH:mm:ss').format('YYYY/MM/DD') : null
         this.system_confirms = data.consultant.confirms.map(item => {
           return item.confirm_id
         })
