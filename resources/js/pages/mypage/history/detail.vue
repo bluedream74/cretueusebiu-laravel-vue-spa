@@ -28,6 +28,8 @@
 							<div class="company_data">
 								<dl><dt>業種</dt><dd>{{ JOBS[consultant.job] }}</dd></dl>
 								<dl><dt>会社所在地</dt><dd>〒{{ consultant.zipcode }} {{ consultant.prefecture }}　{{ consultant.city }}　{{ consultant.building }}</dd></dl>
+								<dl><dt>電話番号</dt><dd>{{ consultant.telephone }}</dd></dl>
+								<dl><dt>メールアドレス</dt><dd>{{ consultant.email }}</dd></dl>
 								<dl><dt>従業員規模</dt><dd>{{ AMOUNTS[consultant.amount] }}</dd></dl>
 								<dl><dt>年商</dt><dd>{{ PRICES[consultant.income] }}</dd></dl>
 								<dl><dt>担当者氏名</dt><dd>{{ consultant.tanto_name }}</dd></dl>
