@@ -787,16 +787,30 @@ class CommonController extends BaseController
 
     public function downloadInvoiceData(Request $request) {
       $data = $request->all();
-      $kakins = ConsultantKakin::whereYear('created_at', '=', $data['year'])->whereMonth('created_at', $data['month'])->get();
-
+      $users = User::all();
       $temp = [
-        ['相談ID', 'ユーザーID']
+        ['収支区分', '管理番号', '発生日', '決済期日', '取引先', '取引先コード', '勘定科目', '税区分', '金額', '税計算区分', '税額', '備考', '品目', '部門', 'メモタグ（複数指定可、カンマ区切り）', '決済日', '決済口座', '決済金額', 'セグメント1', 'セグメント2', 'セグメント3']
       ];
-
-      foreach($kakins as $kakin) {
-        array_push($temp, [
-          $kakin->consultant_id, $kakin->user_id
-        ]);
+      foreach($users as $user) {
+        // Koukokuのdateは'YYYY/MM/DD'の形式ですけど$data['year']と$data['month']に該当するやつを取得
+        $koukoku = Koukoku::where('user_id', $user->id)->where('date', 'like', $data['year'] . '/' . $data['month'] . '%')->first();
+        $current_end_date = Carbon::createFromDate($kakins[0]->created_at->year, $kakins[0]->created_at->month, 1)->endOfMonth()->format('Y/m/d');
+        $next_end_date = Carbon::createFromDate($kakins[0]->created_at->year, $kakins[0]->created_at->month, $data['end_date'])->addMonth()->endOfMonth()->format('Y/m/d');
+        $kakins = ConsultantKakin::where('user_id', $user->id)->whereYear('created_at', '=', $data['year'])->whereMonth('created_at', $data['month'])->get();
+        $total = 0;
+        foreach($kakins as $kakin) {
+          $total += $kakin->price;
+        }
+        if (count($kakins) > 0) {
+          array_push($temp, [
+            '収入', '', $current_end_date, $next_end_date, $user->com_name, $user->kikan_id, '売上高', '課税売上10%', $total * 1.1, '税込', $total * 0.1, $data['year'].'年'.$data['month'].'月分、開封回数'.count($kakins).'回、システム利用料', 'Webシステム収入', 'W'.$data['year'].'002（補助金支援.COM、マッチング）', '', '', '', '', '', ''
+          ]);
+        }
+        if (!is_null($koukoku)) {
+          array_push($temp, [
+            '収入', '', $current_end_date, $next_end_date, $user->com_name, $user->kikan_id, '売上高', '課税売上10%', $koukoku->price * 1.1, '税込', $koukoku->price * 0.1, $data['year'].'年'.$data['month'].'月分、広告掲載費', 'Webシステム収入', 'W'.$data['year'].'003（補助金支援.COM、広告）', '', '', '', '', '', ''
+          ]);
+        }
       }
 
       header('Content-Type: text/plain;charset=UTF-8');
