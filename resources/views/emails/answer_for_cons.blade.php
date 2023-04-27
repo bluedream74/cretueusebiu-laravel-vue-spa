@@ -48,18 +48,17 @@
 	<div class="col-md-12 col-sm-12 notification-title">
         {{ $consultant->com_name }} 様<br/>
         <br/>
-        このたびは＜補助金活用.COM＞の事業者相談へのご回答ありがとうございます。<br/>
-        入力頂いた内容にて、事業者に相談への回答を送信（応募）しました。<br/>
-        本機能でのメール送信は初回のみのご利用となります。<br/>
-        以降の事業者様との連絡・相談につきましては、本メール内に記載の連絡先電話番号をご利用ください。<br/>
-        なお送信済みの回答内容及び、連絡先電話番号につきましてはマイページ内の「過去の回答」一覧からもご確認いただけます。<br/>
+        ＜補助金活用.COM＞にご相談いただきました下記の事業者相談につきまして、<br/>
+        条件にマッチした認定支援機関からの回答（応募）がありました。<br/>
         <br/>
-        送信日時：{{ date_format(date_create($answer->created_at), 'Y/m/d H:i') }}<br/>
+        <br/>
+        相談登録日時：{{date_format(date_create($consultant->created_at), 'Y/m/d H:i')}}<br/>
+        回答送信日時：{{date_format(date_create($answer->created_at), 'Y/m/d H:i')}}<br/>
         ―――――――――――――――――――――――――――――――――――<br/>
-        ■相談者会社名　　　　：{{ $user->com_name }}<br/>
-        ■電話番号　　　　　　：{{ $user->telephone }}<br/>
-        ■メールアドレス　　　：{{ $user->email }}<br/>
-        ■担当者氏名　　　　　：{{ $user->tanto_name }}<br/>
+        ■相談者会社名　　　　：{{ $consultant->com_name }}<br/>
+        ■電話番号　　　　　　：{{$consultant->telephone}}<br/>
+        ■メールアドレス　　　：{{$consultant->email}}<br/>
+        ■担当者氏名　　　　　：{{$consultant->tanto_name}}<br/>
         ■相談内容　　　　　　：<br/>
         【使いたい補助金や制度が決まっている方】<br/>
         @foreach($consultant->confirms as $confirm)
@@ -78,9 +77,7 @@
         {{ $consultant->message_title }}<br/>
         ■相談内容詳細　　　　：<br/>
         {{ $consultant->message_content }}<br/>
-        @if(!is_null($consultant->expire_date))
-        ■掲載期限　　　　　　：{{ date_format($consultant->expire_date, 'Y/m/d') }}<br/>
-        @endif
+        ■掲載期限　　　　　　：{{date_format($consultant->expire_date, 'Y/m/d')}}<br/>
         <br/>
         ■回答者会社名　　　　：{{ $user->com_name }}<br/>
         ■フリガナ　　　　　　：{{ $user->com_huri_name }}<br/>
@@ -91,13 +88,18 @@
         {{ $answer->answer }}<br/>
         <br/>
         <br/>
+        <br/>
+        本機能でのメール送信は初回のみとなります。<br/>
+        以降の支援機関との連絡・相談につきましては、本メール内に記載の連絡先電話番号をご利用ください。<br/>
+        <br/>
+        <br/>
         **********************************************************************<br/>
         <br/>
         補助金活用.COM　株式会社八咲<br/>
         eMAIL:info@hojyokin-katsuyou.com<br/>
         URL:https://hojyokin-katsuyou.com/<br/>
         <br/>
-        **********************************************************************<br/>
+        **********************************************************************
 	</div>
 </div>
 @endsection

@@ -35,7 +35,7 @@ class AnswerForConsEmail extends Mailable
     public function build()
     {
         return $this->from(['address' => 'info@hojyokin-katsuyou.com', 'name' => 'HOZYOKIN'])
-                    ->subject('【補助金活用.COM】事業者相談回答が完了しました')
+                    ->subject('【補助金活用.COM】支援機関からの回答（応募）がありました。')
                     ->view('emails.answer_for_cons')
                     ->with([
                         'user' => $this->user,
@@ -47,7 +47,7 @@ class AnswerForConsEmail extends Mailable
     public function render()
     {
         return $this->from(['address' => 'info@hojyokin-katsuyou.com', 'name' => 'HOZYOKIN'])
-                    ->subject('【補助金活用.COM】事業者相談回答が完了しました')
+                    ->subject('【補助金活用.COM】支援機関からの回答（応募）がありました。')
                     ->view('emails.answer_for_cons')
                     ->with([
                         'user' => $this->user,
