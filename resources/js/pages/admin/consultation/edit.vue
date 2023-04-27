@@ -130,13 +130,13 @@
               </dd>
             </dl>
             <dl>
-              <dt>部署名<span>必須</span></dt>
+              <dt>部署名</dt>
               <dd>
                 <input type="text" v-model="consultant.department_name">
               </dd>
             </dl>
             <dl>
-              <dt>役職<span>必須</span></dt>
+              <dt>役職</dt>
               <dd>
                 <input type="text" v-model="consultant.role_name">
               </dd>
@@ -281,18 +281,8 @@ export default {
 				return
 			}
 
-      if (!this.consultant.role_name || this.consultant.role_name == '') {
-				this.$swal('', '役職を入力してください')
-				return
-			}
-
 			if (!this.consultant.tanto_name || this.consultant.tanto_name == '') {
 				this.$swal('', '担当者氏名を入力してください')
-				return
-			}
-
-      if (!this.consultant.department_name || this.consultant.department_name == '') {
-				this.$swal('', '部署名を入力してください')
 				return
 			}
 
