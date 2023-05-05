@@ -37,7 +37,7 @@
 									</div></dd>
 								</dl>
 								<dl class="required">
-									<dt>会社名<i>必須</i></dt>
+									<dt>会社名（又は屋号）<i>必須</i></dt>
 									<dd><div class="form_el">{{ com_name }}</div></dd>
 								</dl>
 								<dl class="required">

@@ -6,7 +6,7 @@
             :enable-download="true"
             :preview-modal="true"
             :paginate-elements-by-height="1400"
-            filename="領収書"
+            filename="御請求書"
             :pdf-quality="2"
             :manual-pagination="false"
             pdf-format="a4"
@@ -40,7 +40,7 @@
                             </tr>
                         </table>
                         <div class="cam_area fix">
-                            <div class="compnay_address"><img src="/admin/img/cp_seals.png"></div>
+                            <div class="compnay_address"><img src="/img/cp_seals.png"></div>
                         </div>
                     </div>
                 </div>

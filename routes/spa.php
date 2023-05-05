@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'basicauth'], function() {
   // ここに対象のページを記述
   // 例）
-  Route::get('{path}', 'SpaController')->where('path', '(.*)');
+  Route::get('{path}', 'SpaController@index')->where('path', '(.*)');
 });

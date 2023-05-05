@@ -698,7 +698,9 @@ select {
 }
 form input[type="text"],
 form textarea,
-.table_wrap input[type="text"] {
+.table_wrap input[type="text"],
+.edit_form input[type="text"],
+.edit_form textarea{
 	background: #fff;
 	font-size: 1rem;
 	border: 1px solid #b5b5b5;
@@ -707,11 +709,13 @@ form textarea,
 	box-sizing: border-box;
 	width: 100%;
 }
-form .form_btn_blue {
+form .form_btn_blue,
+.edit_form .form_btn_blue{
 	margin: 0 auto;
 	text-align: center;
 }
-form .form_btn_blue>span {
+form .form_btn_blue>span,
+.edit_form .form_btn_blue > span {
 	display: inline-block;
 	position: relative;
 	z-index: 5;
@@ -719,7 +723,8 @@ form .form_btn_blue>span {
 	border-radius: 4px;
 	transition: background .4s;
 }
-form .form_btn_blue input {
+form .form_btn_blue input,
+.edit_form .form_btn_blue input{
 	padding: 10px 14px;
 	width: 230px;
 	border-radius: 4px;
@@ -733,13 +738,16 @@ form .form_btn_blue input {
 	z-index: 5;
 	cursor: pointer;
 }
-form .form_btn_blue>span:hover {
+form .form_btn_blue>span:hover,
+.edit_form .form_btn_blue>span:hover{
 	background: #fff;
 }
-form .form_btn_blue span:hover input {
+form .form_btn_blue span:hover input,
+.edit_form .form_btn_blue span:hover input{
 	color: #0072ce;
 }
-form .ico_login>span:before {
+form .ico_login>span:before,
+.edit_form .ico_login>span:before{
 	position: absolute;
 	display: inline-block;
 	content: "";
@@ -752,13 +760,16 @@ form .ico_login>span:before {
 	margin: auto;
 	transition: background .4s;
 }
-form .ico_login>span:hover:before {
+form .ico_login>span:hover:before,
+.edit_form .ico_login>span:hover:before{
 	background: url(../img/ico_login_blue.png);
 }
-form .cancel_btn {
+form .cancel_btn,
+.edit_form .cancel_btn{
 	text-align: center;
 }
-form .cancel_btn button {
+form .cancel_btn button,
+.edit_form .cancel_btn button {
 	font-size: 0.875rem;
 	font-weight: bold;
 	padding: 10px 14px;
@@ -770,7 +781,8 @@ form .cancel_btn button {
 	border: 1px solid #7d7d7d;
 	background: #dcdcdc;
 }
-form .cancel_btn button:hover {
+form .cancel_btn button:hover,
+.edit_form .cancel_btn button:hover{
 	background: #fff;
 }
 form .wrap {

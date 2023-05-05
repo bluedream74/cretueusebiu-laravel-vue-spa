@@ -79,7 +79,7 @@
     <section class="consultation_wrap">
       <div class="sitewrap">
         <h2 class="tit action ups"><b>ただいま、<br class="display_sp">掲載中のご相談</b></h2>
-        <p class="sub_tit action ups delay_2"><span>現在、500件以上の<br class="display_sp">ご相談があります</span></p>
+        <p class="sub_tit action ups delay_2"><span>掲載された内容は、<br class="display_sp">支援機関と随時マッチング</span></p>
         <div class="slider action holizon_open">
           <div class="items" v-for="(item, index) in consultants" :key="index">
             <p class="pref">都道府県：{{ item.prefecture }}</p>
@@ -99,7 +99,7 @@
     </section>
     <section class="add_wrap">
       <div class="sitewrap">
-        <h2 class="sub_tit action ups"><span>20,000以上の認定支援機関が<br class="display_sp">登録しています</span></h2>
+        <h2 class="sub_tit action ups"><span>税務、金融・財務の豊富な専門的知識と、<br class="display_sp">実務経験をもつ多くの支援機関が登録しています。</span></h2>
         <p class="add_tit action ups delay_2">おすすめの認定支援機関</p>
         <div class="list action feders delay_set">
           <a :href="item.link" target="_blank" v-for="(item, index) in banners" :key="index"><img :src="item.image_url" alt="広告アドのバナー"></a>

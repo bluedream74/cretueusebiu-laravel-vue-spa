@@ -50,7 +50,7 @@
 									</div></dd>
 								</dl>
 								<dl class="required">
-									<dt>会社名<i>必須</i></dt>
+									<dt>会社名（又は屋号）<i>必須</i></dt>
 									<dd><div class="form_el"><input v-model="com_name" type="text" name="companyName" required placeholder="株式会社AA"></div></dd>
 								</dl>
 								<dl class="required">
@@ -101,7 +101,7 @@
 								</dl>
 								<dl class="required">
 									<dt>電話番号<i>必須</i></dt>
-									<dd><div class="form_el"><input v-model="telephone" type="tel" name="tel" required placeholder="※桁数は11桁となります。" /></div></dd>
+									<dd><div class="form_el"><input v-model="telephone" type="tel" name="tel" required placeholder=" " /></div></dd>
 								</dl>
 								<dl class="">
 									<dt>FAX</dt>

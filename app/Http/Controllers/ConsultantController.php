@@ -156,6 +156,12 @@ class ConsultantController extends Controller
     $user = $request->user();
     $consultant = Consultant::where('id', $request->input('id'))->first();
 
+    // return response()->json([
+    //   'consultant' => $consultant,
+    //   'user' => $user,
+    //   'answer' => $answer
+    // ]);
+
     AnswerEmailJob::dispatch($user, $answer, $consultant);
     AnswerForConsEmailJob::dispatch($user, $answer, $consultant);
 

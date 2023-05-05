@@ -469,18 +469,24 @@ main {
 .home .sub_tit span{
 	position:relative;
 	display:inline-block;
+	padding:0 10px;
 }
 .home .sub_tit span:before,
 .home .sub_tit span:after{
 	position:absolute;
 	display:inline-block;
-	content:"\005C";
+	content:"";
+	width:3px;
+	top:0;
+	bottom:0;
+	background:#222222;
 	left:-20px;
+	transform:skewX(12.5deg);
 }
 .home .sub_tit span:after{
-	content:"\002F";
 	left:auto;
 	right:-20px;
+	transform:skewX(-12.5deg);
 }
 @media screen and (max-width:768px) {
 	.home .tit{
@@ -497,13 +503,14 @@ main {
 	}
 	.home .sub_tit span:before,
 	.home .sub_tit span:after{
-		left:-10px;
-		top:50%;
-		transform:translateY(-50%);
+		left:-5px;
+		width:2px;
+		top:10%;
+		bottom:10%;
 	}
 	.home .sub_tit span:after{
 		left:auto;
-		right:-10px;
+		right:-5px;
 	}
 }
 .home .worry_wrap{
@@ -1080,6 +1087,11 @@ main {
 }
 .home .add_wrap .sub_tit{
 	color:#fff;
+	font-size:2.25rem;
+}
+.home .add_wrap .sub_tit span:before,
+.home .add_wrap .sub_tit span:after{
+	background:#fff;
 }
 .home .add_wrap .add_tit{
 	text-align:center;
@@ -1096,10 +1108,17 @@ main {
 }
 .home .add_wrap .list a{
 	max-width: 352px;
+	display:flex;
+	align-items:center;
+	height:0;
+	box-sizing:content-box;
+	padding-bottom:16.75%;
 	width:32%;
 	margin-bottom:20px;
 	margin-right: 2%;
 	transition:transform .4s;
+	position:relative;
+	background:#fff;
 }
 .home .add_wrap .list a:hover{
 	transform:translateY(-5px);
@@ -1109,6 +1128,13 @@ main {
 }
 .home .add_wrap .list a img{
 	max-width:100%;
+	max-height:100%;
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	margin:auto;
 }
 @media screen and (max-width:768px) {
 	.home .add_wrap{
@@ -1116,6 +1142,22 @@ main {
 	}
 	.home .add_wrap:before{
 		border-width: 28px 16.5px 0 16.5px;
+	}
+	.home .add_wrap .sub_tit{
+		font-size:1.125rem;
+	}
+	.home .add_wrap .sub_tit br{
+		display:none;
+	}
+	.home .add_wrap .sub_tit span{
+		padding:0 5px;
+		text-align:left;
+	}
+	.home .add_wrap .sub_tit span:before{
+		transform:skewX(7.5deg)
+	}
+	.home .add_wrap .sub_tit span:after{
+		transform:skewX(-7.5deg)
 	}
 	.home .add_wrap .add_tit{
 		font-size:1.25rem;
@@ -1126,6 +1168,7 @@ main {
 	}
 	.home .add_wrap .list a{
 		width:49%;
+		padding-bottom:25.75%;
 		margin-bottom:10px;
 		margin-right: 0;
 	}
